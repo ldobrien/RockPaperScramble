@@ -1,3 +1,4 @@
+
 import React from 'react';
 import Arena from './Arena';
 
@@ -14,5 +15,5 @@ const Canvas = () => {
     </svg>
   );
 };
-
 export default Canvas;
+
