@@ -1,34 +1,19 @@
 import React from 'react';
-import AppActions from '../actions/AppActions.js';
+import PropTypes from 'prop-types';
 
-class Circle extends React.Component {
-	constructor() {
-		super();
-		// this.circleposx = this.circleposx.bind(this);
-		this.circlepos = this.circlepos.bind(this);
-	}
+const Circle = (props) => {
+	const circleStyle = {
+    fill: 'pink',
+  };
+  return (
+    <circle
+      style={circleStyle}
+      x={props.x}
+      y={props.y}
+      r={20}
+    />
+  );
+};
 
-	circlepos() {
-		const {posX} = this.props;
-		AppActions.setPosn(posX, 0);
-	}
-
-	// circlepos() {
-	// 	const {posX} = this.props;
-	// 	const {posY} = this.props;
-	// 	AppActions.setPosn(posX, posY);
-	// }
-
-	render() {
-		const {posX} = this.props;
-		const {posY} = this.props;
-
-		return (
-			<div>
-				posx = {this.circlepos}>
-			</div>
-			);
-	}
-}
 
 export default Circle;
