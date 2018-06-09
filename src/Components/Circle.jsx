@@ -8,11 +8,18 @@ const Circle = (props) => {
   return (
     <circle
       style={circleStyle}
-      x={props.x}
-      y={props.y}
+      cx={props.position.x}
+      cy={props.position.y}
       r={20}
     />
   );
+};
+
+Circle.propTypes = {
+  position: PropTypes.shape({
+    x: PropTypes.number.isRequired,
+    y: PropTypes.number.isRequired
+  }).isRequired,
 };
 
 

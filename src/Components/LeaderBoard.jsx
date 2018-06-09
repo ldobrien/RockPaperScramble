@@ -6,15 +6,15 @@ import Rank from "./Rank";
 const Leaderboard = (props) => {
   const style = {
     fill: 'transparent',
-    stroke: 'black',
-    strokeDasharray: '15',   //container it lives in
+    stroke: 'blue',
+    strokeDasharray: '14',   //container it lives in
   };
 
   //what it will look like
   const leaderboardTitle = {
     fontFamily: 'Times New Roman, Arial',
     fontSize: 50,
-    fill: '#88da85',
+    fill: '#ffe6ff',
     cursor: 'default',
   };
 
