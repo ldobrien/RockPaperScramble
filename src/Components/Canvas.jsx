@@ -13,21 +13,19 @@ const Canvas = (props) => {
       onMouseMove={props.trackMouse}
       viewBox={viewBox}
     >
-      <Arena />
-      <Circle position={props.x, props.y}/>
+      <Arena rotation={props.angle}/>
+      <Circle />
 
     </svg>
   );
 };
-export default Canvas;
 
-<<<<<<< HEAD
 Canvas.propTypes = {
-  x: PropTypes.number.isRequired,
-  y: PropTypes.number.isRequired,
+  angle: PropTypes.number.isRequired,
+  // x: PropTypes.number.isRequired,
+  // y: PropTypes.number.isRequired,
   trackMouse: PropTypes.func.isRequired,
 };
 
 export default Canvas;
-=======
->>>>>>> 31c40d69e0b60f577cf3b93202918eb41c64d370
+

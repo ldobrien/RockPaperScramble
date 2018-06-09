@@ -2,9 +2,10 @@ import { MOVE_OBJECTS } from '../actions';
 import moveObjects from './moveObjects';
 
 const initialState = {
-  direction: "UP",
-  x: 0,
-  y: 0,
+	angle: 45,
+  // direction: "UP",
+  // x: 0,
+  // y: 0,
 };
 
 function reducer(state = initialState, action) {

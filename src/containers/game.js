@@ -4,8 +4,9 @@ import App from '../App';
 import { moveObjects } from '../actions/index';
 
 const mapStateToProps = state => ({
-  x: state.x,
-  y: state.y,
+	angle: state.angle,
+  // x: state.x,
+  // y: state.y,
 });
 
 const mapDispatchToProps = dispatch => ({

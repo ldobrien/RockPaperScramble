@@ -20,8 +20,9 @@ class App extends Component {
   render() {
     return (
       <Canvas 
-      	x={this.props.x}
-      	y={this.props.y}
+      	angle={this.props.angle}
+      	// x={this.props.x}
+      	// y={this.props.y}
       	trackMouse={event => (this.trackMouse(event))}
       />
     );
@@ -29,15 +30,13 @@ class App extends Component {
 }
 
 App.propTypes = {
-  x: PropTypes.number.isRequired,
-  y: PropTypes.number.isRequired,
+  angle: PropTypes.number.isRequired,
+  // x: PropTypes.number.isRequired,
+  // y: PropTypes.number.isRequired,
   moveObjects: PropTypes.func.isRequired,
 };
 
 export default App;
-
-
-
 
 
 
@@ -48,7 +47,7 @@ export default App;
 //     super(props)
 //     this.handleKeyDown = this.handleKeyDown.bind(this)
 //     this.state = {
-//       cursor: 0,
+//       Circle: 0,
 //       result: []
 //     }
 //   }
@@ -60,7 +59,7 @@ export default App;
 //       this.setState( prevState => ({
 //         Circle: prevState.Circle - 1
 //       }))
-//     } else if (e.keyCode === 40 && cursor < result.length - 1) {
+//     } else if (e.keyCode === 40 && Circle < result.length - 1) {
 //       this.setState( prevState => ({
 //         Circle: prevState.Circle + 1
 //       }))
