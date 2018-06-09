@@ -2,7 +2,8 @@ import AppDispatcher from '../dispatcher/AppDispatcher.js';
 import {EventEmitter} from 'events';
 
 const CHANGE_EVENT = 'change';  // ALWAYS IN THE CODE
-let _counter = 0;
+let posx = 0;
+let posy = 0;
 
 class AppStore extends EventEmitter {
 	emitChange() { // NEED THIS - notifies app to update view
@@ -14,8 +15,11 @@ class AppStore extends EventEmitter {
 	removeChangeListener( callback) { // NEED THIS
 		this.removeListener(CHANGE_EVENT, callback);
 	}
-	getCounterNum() { // returns the counter number
-		return _counter;
+	getposx() { // returns the counter number
+		return posx;
+	}
+	getposy() { // returns the counter number
+		return posy;
 	}
 }
 
@@ -24,8 +28,9 @@ export default _appStore;
 
 _appStore.dispatchToken = AppDispatcher.register( action => {
 	switch(action.actionType) {
-		case 'setCounter':
-			_counter = action.num;
+		case 'setposn':
+			posx = action.posx;
+			posy = action.posy;
 			_appStore.emitChange(); // updates view
 			break;
 		default:
