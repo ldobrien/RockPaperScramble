@@ -1,10 +1,11 @@
 import AppDispatcher from '../dispatcher/AppDispatcher.js';
 
 const AppActions = {
-	setCounter: function(num) {
+	setposn: function(posx, posy) {
 		AppDispatcher.dispatch( {
-			actionType: 'setCounter',
-			num: num
+			actionType: 'setPosn',
+			posx: posx,
+			posy: posy
 		});
 	}
 };
