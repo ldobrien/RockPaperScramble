@@ -8,6 +8,9 @@ class App extends Component {
 	componentDidMount() {
     const self = this;
     setInterval(() => {
+        self.props.rotateObjects(self.canvasMousePosition);
+    }, 10);
+    setInterval(() => {
         self.props.moveObjects(self.canvasMousePosition);
     }, 10);
   }
@@ -21,8 +24,8 @@ class App extends Component {
     return (
       <Canvas 
       	angle={this.props.angle}
-      	// x={this.props.x}
-      	// y={this.props.y}
+      	x={this.props.x}
+      	y={this.props.y}
       	trackMouse={event => (this.trackMouse(event))}
       />
     );
@@ -31,8 +34,9 @@ class App extends Component {
 
 App.propTypes = {
   angle: PropTypes.number.isRequired,
-  // x: PropTypes.number.isRequired,
-  // y: PropTypes.number.isRequired,
+  x: PropTypes.number.isRequired,
+  y: PropTypes.number.isRequired,
+  rotateObjects: PropTypes.func.isRequired,
   moveObjects: PropTypes.func.isRequired,
 };
 

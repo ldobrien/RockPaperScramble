@@ -14,7 +14,7 @@ const Canvas = (props) => {
       viewBox={viewBox}
     >
       <Arena rotation={props.angle}/>
-      <Circle />
+      <Circle cx={props.x} cy={props.y}/>
 
     </svg>
   );
@@ -22,8 +22,8 @@ const Canvas = (props) => {
 
 Canvas.propTypes = {
   angle: PropTypes.number.isRequired,
-  // x: PropTypes.number.isRequired,
-  // y: PropTypes.number.isRequired,
+  x: PropTypes.number.isRequired,
+  y: PropTypes.number.isRequired,
   trackMouse: PropTypes.func.isRequired,
 };
 

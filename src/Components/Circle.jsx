@@ -1,17 +1,19 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
-const Circle = () => {
+const Circle = (props) => {
 	const circleStyle = {
     fill: 'pink',
   };
   return (
     <circle
       style={circleStyle}
-      // x={arenaWidth / -2}
-      // y={gameHeight / -2}
-      r={10}
+      x={props.x}
+      y={props.y}
+      r={20}
     />
   );
-}
+};
+
 
 export default Circle;
