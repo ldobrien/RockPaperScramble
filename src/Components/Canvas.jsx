@@ -14,7 +14,7 @@ const Canvas = (props) => {
       viewBox={viewBox}
     >
       <Arena rotation={props.angle}/>
-      <Circle cx={props.x} cy={props.y}/>
+      <Circle x={props.x} y={props.y}/>
 
     </svg>
   );

@@ -17,6 +17,7 @@ const mapDispatchToProps = dispatch => ({
   moveObjects: (mousePosition) => {
     dispatch(moveObjects(mousePosition));
   },
+
 });
 
 // const mapDispatchToProps = dispatch => ({

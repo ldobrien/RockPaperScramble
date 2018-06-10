@@ -6,8 +6,8 @@ import moveObjects from './moveObjects';
 const initialState = {
 	angle: 45,
   // direction: "UP",
-  x: 200,
-  y: 200,
+  x: 20, // WANT THIS TO BE MOUSE POSN??
+  y: 20,
 };
 
 function reducer(state = initialState, action) {

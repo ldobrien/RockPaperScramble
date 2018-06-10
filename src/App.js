@@ -9,18 +9,30 @@ class App extends Component {
     const self = this;
     setInterval(() => {
         self.props.rotateObjects(self.canvasMousePosition);
-    }, 10);
-    setInterval(() => {
         self.props.moveObjects(self.canvasMousePosition);
     }, 10);
+    // setInterval(() => {
+    //     self.props.moveObjects(self.canvasMousePosition);
+    // }, 10);
   }
 
 
   trackMouse(event) {
     this.canvasMousePosition = getCanvasPosition(event);
+    // this.props.x = this.canvasMousePosition.x;
+    // this.setState
   }
 
+  // _onChange(event) {
+  //  this.canvasMousePosition = getCanvasPosition(event);
+  //   this.setState({
+  //     x: this.canvasMousePosition.x,
+  //     y: this.canvasMousePosition.y,
+  //   });
+  // }
+
   render() {
+  	// <h1>PROPS: {this.props.x}</h1>
     return (
       <Canvas 
       	angle={this.props.angle}
