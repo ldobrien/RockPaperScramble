@@ -6,7 +6,12 @@ import PropTypes from 'prop-types';
 
 const Canvas = (props) => {
   const viewBox = [window.innerWidth / -2, window.innerHeight / -2, window.innerWidth, window.innerHeight];
+      // circles is the array of circle objects
+    const { circles } = this.props.ememies;
   return (
+    {circles.map((circle) => {
+            return <Circle circle={circle} />;
+        })}
     <svg
       id="RockPaperScramble"
       // preserveAspectRatio="xMaxYMax none"

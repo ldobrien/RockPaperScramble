@@ -9,8 +9,7 @@ const initialState = {
     x: 200,
     y: 200,
     r: 10,
-    // enemies: []
-
+    enemies: [],
 };
 
 function reducer(state = initialState, action) {

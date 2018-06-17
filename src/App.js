@@ -29,8 +29,8 @@ class App extends Component {
         	y={this.props.y}
           r={this.props.r}
         	trackMouse={event => (this.trackMouse(event))}
+          
         />
-
       </div>
     );
   }
@@ -45,54 +45,3 @@ App.propTypes = {
 };
 
 export default App;
-
-
-
-
-
-// export default class Example extends Component {
-//   constructor(props) {
-//     super(props)
-//     this.handleKeyDown = this.handleKeyDown.bind(this)
-//     this.state = {
-//       Circle: 0,
-//       result: []
-//     }
-//   }
-
-//   handleKeyDown(e) {
-//     const { Circle, result } = this.state
-//     // arrow up/down button should select next/previous list element
-//     if (e.keyCode === 38 && Circle > 0) {
-//       this.setState( prevState => ({
-//         Circle: prevState.Circle - 1
-//       }))
-//     } else if (e.keyCode === 40 && Circle < result.length - 1) {
-//       this.setState( prevState => ({
-//         Circle: prevState.Circle + 1
-//       }))
-//     }
-//   }
-
-//   render() {
-//     const { Circle } = this.state
-
-//     return (
-//       <Container>
-//         <Input onKeyDown={ this.handleKeyDown }/>
-//         <List>
-//           {
-//             result.map((item, i) => (
-//               <List.Item
-//                 key={ item._id }
-//                 className={Circle === i ? 'active' : null}
-//               >
-//                 <span>{ item.title }</span>
-//               </List.Item>
-//             ))
-//           }
-//         </List>
-//       </Container>
-//     )
-//   }
-// }
