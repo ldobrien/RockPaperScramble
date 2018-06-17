@@ -22,12 +22,16 @@ class App extends Component {
 
   render() {
     return (
-      <Canvas 
-      	angle={this.props.angle}
-      	x={this.props.x}
-      	y={this.props.y}
-      	trackMouse={event => (this.trackMouse(event))}
-      />
+      <div>
+        <Canvas 
+        	angle={this.props.angle}
+        	x={this.props.x}
+        	y={this.props.y}
+          r={this.props.r}
+        	trackMouse={event => (this.trackMouse(event))}
+        />
+
+      </div>
     );
   }
 }

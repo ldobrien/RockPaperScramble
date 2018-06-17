@@ -10,7 +10,7 @@ const Circle = (props) => {
       style={circleStyle}
       cx={props.position.x}
       cy={props.position.y}
-      r={20}
+      r={props.radius.r}
     />
   );
 };
