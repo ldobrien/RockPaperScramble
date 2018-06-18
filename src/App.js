@@ -7,14 +7,13 @@ import Circle from './Components/Circle';
 class App extends Component {
 	componentDidMount() {
     const self = this;
-    setInterval(() => {
-        self.props.rotateObjects(self.canvasMousePosition);
-    }, 10);
+    // setInterval(() => {
+    //     self.props.rotateObjects(self.canvasMousePosition);
+    // }, 10);
     setInterval(() => {
         self.props.moveObjects(self.canvasMousePosition);
     }, 10);
   }
-
 
   trackMouse(event) {
     this.canvasMousePosition = getCanvasPosition(event);
@@ -29,8 +28,8 @@ class App extends Component {
         	y={this.props.y}
           r={this.props.r}
         	trackMouse={event => (this.trackMouse(event))}
-          
         />
+
       </div>
     );
   }

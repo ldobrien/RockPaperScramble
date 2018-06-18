@@ -6,12 +6,12 @@ const Arena = (props) => {
   const arenaStyle = {
     fill: '#30abef',
   };
-  const arenaWidth = 600;
-  const gameHeight = 600;
-  const transform = `rotate(${props.rotation}, 0, 0)`;
+  const arenaWidth = 10000;
+  const gameHeight = 1000;
+  // const transform = `rotate(${props.rotation}, 0, 0)`;
   const transform2 = `position(${props.position}, 0, 0)`
   return (
-    <g transform={transform}>
+    // <g transform={transform}>
     <rect
       style={arenaStyle}
       x={arenaWidth / -2}
@@ -19,7 +19,7 @@ const Arena = (props) => {
       width={arenaWidth}
       height={gameHeight}
     />
-    </g>
+    // </g>
   );
 };
 
