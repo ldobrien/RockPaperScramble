@@ -9,6 +9,8 @@ const mapStateToProps = state => ({
   x: state.x,
   y: state.y,
   r: state.r,
+  // width: state.wide,
+  // height: state.high,
 });
 
 const mapDispatchToProps = dispatch => ({

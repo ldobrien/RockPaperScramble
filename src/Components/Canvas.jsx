@@ -3,17 +3,11 @@ import React from 'react';
 import Arena from './Arena';
 import Circle from './Circle';
 import PropTypes from 'prop-types';
-
-const Canvas = (props) => {
   const opponents = 50;
   const width = window.innerWidth;
   const height = window.innerHeight;
-  const viewBox = [width / -2, height / -2, width, height];
-    // circles is the array of circle objects
-    console.log(props);
-    const circles = [];
-
-    function addOpponents(){
+const circles = [];
+function addOpponents(){
       for(var i = 0; i < 50; i++){
         circles.push({position:{
           x:Math.random() * (2*width) - width, 
@@ -21,12 +15,16 @@ const Canvas = (props) => {
           r:15})
       }
     }
-    addOpponents();
+
+addOpponents();
+
+const Canvas = (props) => {
+
+  const viewBox = [width / -2, height / -2, width, height];
+    // circles is the array of circle objects
+    console.log(props);
     
   return (
-    // {circles.map((circle) => {
-    //         return <Circle circle={circle} />;
-    //     })}
     <svg
       id="RockPaperScramble"
       // preserveAspectRatio="xMaxYMax none"

@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 
 const Circle = (props) => {
 	const circleStyle = {
-    fill: 'pink',
+    fill: '#9400d3',
   };
   return (
     <circle

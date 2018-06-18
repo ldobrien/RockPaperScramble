@@ -6,10 +6,12 @@ import moveObjects from './moveObjects';
 const initialState = {
 	angle: 45,
   // direction: "UP",
-    x: 200,
-    y: 200,
+    x: 0,
+    y: 0,
     r: 10,
-    enemies: [],
+    // wide: 100,
+    // high: 100,
+    // enemies: [],
 };
 
 function reducer(state = initialState, action) {

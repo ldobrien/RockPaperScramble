@@ -28,6 +28,8 @@ class App extends Component {
         	y={this.props.y}
           r={this.props.r}
         	trackMouse={event => (this.trackMouse(event))}
+          // width={this.props.width}
+          // height={this.props.height}
         />
 
       </div>
