@@ -1,45 +1,23 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-function Opponent(x, y, r) {
-	const circleStyle = {
-    fill: 'pink',
+function Opponents = (props) => {
+  const enemystyle = {
+    fill: "yellow"
+    // transition: 5s
   };
-  return (
-    <circle
-      style={circleStyle}
-      cx={props.position.x}
-      cy={props.position.y}
-      r={props.radius.r}
-    />
-  );
-};
-    componentDidUpdate() {
-        const { size, playerPosition, info: { top, left }} = this.props;
-        
-        if ( playerPosition.left < (left + size) && 
-             playerPosition.top  < (top + size)  &&
-            (playerPosition.left + size) > left &&
-            (playerPosition.top  + size) > top) {
-            
-            this.props.onCollide()
-        }
-    }
-
-    render() {
-        const { size, info: { top, left }} = this.props;
-        
-        return (
-            <Square 
-                size={size}
-                position={{ top, left }}
-                color='firebrick' />
-        );
-    }
+  return {circles.map((circle)=>{return <Circle position={circle.position} radius={{r:circle.r}} />;})}
 }
 
 
-
+function addOpponents(){
+    for(var i = 0; i < 50; i++){
+      circles.push({position:{
+        x:Math.random() * (2*width) - width, 
+        y:Math.random() * (2*height) - height},
+        r:15})
+    }
+  }
 
 
 Circle.propTypes = {

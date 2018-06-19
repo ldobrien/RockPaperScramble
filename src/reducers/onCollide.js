@@ -1,15 +1,26 @@
-function onCollide(state, action, radius1, radius2) {
+import circles from '../Components/Canvas.jsx';
+
+function onCollide(state, action) {
+  if (!action.mousePosition) return state;
   // if (!action.collide) return state;
   // const { x, y } = action.mousePosition;
+   const { x, y } = action.mousePosition;
+   const currx = {x};
+  // console.log(vx);
+  // const r = radius1 + radius2;
 
-  const r = radius1 + radius2;
-  // const cx = x;
-  // const cy = y;
-  // const angle = calculateAngle(0, 0, x, y);
+  // console.log(circles.length);
+  for(var i = 0; i < circles.length; i++){
+    // console.log(circles[i]);
+    // if(circles[i].x === currx){
+    //   console.log("HIT");
+    //   //
+    // }
+  }
   return {
     ...state,
-    r,
+    // r,
   };
 }
 
-export default moveObjects;
+export default onCollide;

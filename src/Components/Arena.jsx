@@ -24,7 +24,7 @@ const Arena = (props) => {
 };
 
 Arena.propTypes = {
-  rotation: PropTypes.number.isRequired,
+  // rotation: PropTypes.number.isRequired,
   position: PropTypes.number.isRequired,
 };
 

@@ -3,7 +3,8 @@ import PropTypes from 'prop-types';
 
 const Circle = (props) => {
 	const circleStyle = {
-    fill: '#9400d3',
+    fill: 'red',
+    // animation-delay: 2s;
   };
   return (
     <circle
