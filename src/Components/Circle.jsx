@@ -3,14 +3,15 @@ import PropTypes from 'prop-types';
 
 const Circle = (props) => {
 	const circleStyle = {
-    fill: 'pink',
+    fill: 'red',
+    // animation-delay: 2s;
   };
   return (
     <circle
       style={circleStyle}
       cx={props.position.x}
       cy={props.position.y}
-      r={20}
+      r={props.radius.r}
     />
   );
 };

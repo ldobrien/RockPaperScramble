@@ -4,14 +4,14 @@ import { pathFromBezierCurve } from '../utils/formulas';
 
 const Arena = (props) => {
   const arenaStyle = {
-    fill: '#30abef',
+    fill: '#00ced1',
   };
-  const arenaWidth = 100;
-  const gameHeight = 100;
-  const transform = `rotate(${props.rotation}, 0, 0)`;
+  const arenaWidth = 10000;
+  const gameHeight = 1000;
+  // const transform = `rotate(${props.rotation}, 0, 0)`;
   const transform2 = `position(${props.position}, 0, 0)`
   return (
-    <g transform={transform}>
+    // <g transform={transform}>
     <rect
       style={arenaStyle}
       x={arenaWidth / -2}
@@ -19,12 +19,12 @@ const Arena = (props) => {
       width={arenaWidth}
       height={gameHeight}
     />
-    </g>
+    // </g>
   );
 };
 
 Arena.propTypes = {
-  rotation: PropTypes.number.isRequired,
+  // rotation: PropTypes.number.isRequired,
   position: PropTypes.number.isRequired,
 };
 
