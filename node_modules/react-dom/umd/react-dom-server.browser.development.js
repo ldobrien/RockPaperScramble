@@ -1,4 +1,4 @@
-/** @license React v16.4.0
+/** @license React v16.4.1
  * react-dom-server.browser.development.js
  *
  * Copyright (c) 2013-present, Facebook, Inc.
@@ -74,7 +74,7 @@ var invariant_1 = invariant;
 
 // TODO: this is special because it gets imported during build.
 
-var ReactVersion = '16.4.0';
+var ReactVersion = '16.4.1';
 
 var ReactInternals = React.__SECRET_INTERNALS_DO_NOT_USE_OR_YOU_WILL_BE_FIRED;
 
@@ -453,9 +453,6 @@ var warnAboutDeprecatedLifecycles = false;
 
 
 // Gather advanced timing metrics for Profiler subtrees.
-
-
-// Fires getDerivedStateFromProps for state *or* props changes
 
 
 // Only used in www builds.
@@ -2630,6 +2627,8 @@ function resolve(child, context) {
 }
 
 var ReactDOMServerRenderer = function () {
+  // DEV-only
+
   function ReactDOMServerRenderer(children, makeStaticMarkup) {
     _classCallCheck(this, ReactDOMServerRenderer);
 
@@ -2655,33 +2654,65 @@ var ReactDOMServerRenderer = function () {
     this.makeStaticMarkup = makeStaticMarkup;
 
     // Context (new API)
-    this.providerStack = []; // Stack of provider objects
-    this.providerIndex = -1;
+    this.contextIndex = -1;
+    this.contextStack = [];
+    this.contextValueStack = [];
+    {
+      this.contextProviderStack = [];
+    }
   }
+
+  /**
+   * Note: We use just two stacks regardless of how many context providers you have.
+   * Providers are always popped in the reverse order to how they were pushed
+   * so we always know on the way down which provider you'll encounter next on the way up.
+   * On the way down, we push the current provider, and its context value *before*
+   * we mutated it, onto the stacks. Therefore, on the way up, we always know which
+   * provider needs to be "restored" to which value.
+   * https://github.com/facebook/react/pull/12985#issuecomment-396301248
+   */
+
   // TODO: type this more strictly:
 
 
   ReactDOMServerRenderer.prototype.pushProvider = function pushProvider(provider) {
-    this.providerIndex += 1;
-    this.providerStack[this.providerIndex] = provider;
+    var index = ++this.contextIndex;
     var context = provider.type._context;
+    var previousValue = context._currentValue;
+
+    // Remember which value to restore this context to on our way up.
+    this.contextStack[index] = context;
+    this.contextValueStack[index] = previousValue;
+    {
+      // Only used for push/pop mismatch warnings.
+      this.contextProviderStack[index] = provider;
+    }
+
+    // Mutate the current value.
     context._currentValue = provider.props.value;
   };
 
   ReactDOMServerRenderer.prototype.popProvider = function popProvider(provider) {
+    var index = this.contextIndex;
     {
-      !(this.providerIndex > -1 && provider === this.providerStack[this.providerIndex]) ? warning_1(false, 'Unexpected pop.') : void 0;
+      !(index > -1 && provider === this.contextProviderStack[index]) ? warning_1(false, 'Unexpected pop.') : void 0;
     }
-    this.providerStack[this.providerIndex] = null;
-    this.providerIndex -= 1;
-    var context = provider.type._context;
-    if (this.providerIndex < 0) {
-      context._currentValue = context._defaultValue;
-    } else {
-      // We assume this type is correct because of the index check above.
-      var previousProvider = this.providerStack[this.providerIndex];
-      context._currentValue = previousProvider.props.value;
+
+    var context = this.contextStack[index];
+    var previousValue = this.contextValueStack[index];
+
+    // "Hide" these null assignments from Flow by using `any`
+    // because conceptually they are deletions--as long as we
+    // promise to never access values beyond `this.contextIndex`.
+    this.contextStack[index] = null;
+    this.contextValueStack[index] = null;
+    {
+      this.contextProviderStack[index] = null;
     }
+    this.contextIndex--;
+
+    // Restore to the previous value we stored as we were walking down.
+    context._currentValue = previousValue;
   };
 
   ReactDOMServerRenderer.prototype.read = function read(bytes) {
