@@ -5,12 +5,12 @@ const Title = () => {
   const textStyle = {
     fontFamily: '"Joti One", cursive',
     fontSize: 60,
-    fill: '#cbca62',
+    fill: '#4dd0e1',
   };
 
   const RockPaperLine = {
     initialAxis: {
-      x: 0,
+      x: -400,
       y: -400,
     },
     initialControlPoint: {
@@ -30,7 +30,7 @@ const Title = () => {
   const ScrambleLine = {
     ...RockPaperLine,
     initialAxis: {
-      x: 0,
+      x: -350,
       y: -300,
     },
     initialControlPoint: {

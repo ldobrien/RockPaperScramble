@@ -4,7 +4,7 @@ import { pathFromBezierCurve } from '../utils/formulas';
 
 const Arena = (props) => {
   const arenaStyle = {
-    fill: '#00ced1',
+    fill: '#e1bee7',
   };
   const arenaWidth = 4000;
   const gameHeight = 1200;

@@ -2,7 +2,6 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styled, { keyframes } from 'styled-components';
 import FlyingObjectBase from './FlyingObjectBase';
-import FlyingObjectTop from './FlyingObjectTop';
 import { gameHeight } from '../utils/constants';
 
 const moveVertically = keyframes`
@@ -21,7 +20,6 @@ const Move = styled.g`
 const FlyingObject = props => (
   <Move>
     <FlyingObjectBase position={props.position} />
-    <FlyingObjectTop position={props.position} />
   </Move>
 );
 

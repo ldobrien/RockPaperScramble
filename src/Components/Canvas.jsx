@@ -47,7 +47,7 @@ const Canvas = (props) => {
     </defs>
       
      <Arena/> 
-    {circles.map((circle)=>{return <Circle position={circle.position} radius={{r:circle.r}} />;})}
+
      <Circle position={{x: props.x, y: props.y}} radius={{r: props.r}}/>
      <CurrentScore score={15}/>
       <Heart position={{x: -600, y: 35}} />
