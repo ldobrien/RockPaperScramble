@@ -64,12 +64,15 @@ const Canvas = (props) => {
 
       { props.gameState.started &&
         <g>
-          <FlyingObject position={{x: 0, y: 0}}/>
-          <FlyingObject position={{x: 30, y: -30}}/>
-          <FlyingObject position={{x: -150, y: -300}}/>
-          <FlyingObject position={{x: 150, y: -300}}/>
+
         </g>
       }
+      {props.gameState.flyingObjects.map(flyingObject => (
+        <FlyingObject
+          key={flyingObject.id}
+          position={flyingObject.position}
+        />
+      ))}
     </svg>
   );
 };
@@ -81,10 +84,18 @@ Canvas.propTypes = {
     started: PropTypes.bool.isRequired,
     kills: PropTypes.number.isRequired,
     lives: PropTypes.number.isRequired,
+  flyingObjects: PropTypes.arrayOf(PropTypes.shape({
+      position: PropTypes.shape({
+        x: PropTypes.number.isRequired,
+        y: PropTypes.number.isRequired
+      }).isRequired,
+      id: PropTypes.number.isRequired,
+    })).isRequired,
   }).isRequired,
   trackMouse: PropTypes.func.isRequired,
   startGame: PropTypes.func.isRequired,
 };
+
 
 
 export default Canvas;
