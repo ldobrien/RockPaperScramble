@@ -1,4 +1,4 @@
-/** @license React v16.4.0
+/** @license React v16.4.1
  * react.development.js
  *
  * Copyright (c) 2013-present, Facebook, Inc.
@@ -24,7 +24,7 @@ var checkPropTypes = require('prop-types/checkPropTypes');
 
 // TODO: this is special because it gets imported during build.
 
-var ReactVersion = '16.4.0';
+var ReactVersion = '16.4.1';
 
 // The Symbol used to tag the ReactElement-like types. If there is no native Symbol
 // nor polyfill, then a plain number is used for performance.
@@ -86,9 +86,6 @@ var enableSuspense = false;
 
 
 // Gather advanced timing metrics for Profiler subtrees.
-
-
-// Fires getDerivedStateFromProps for state *or* props changes
 
 
 // Only used in www builds.
@@ -887,7 +884,7 @@ function forEachSingleChild(bookKeeping, child, name) {
 /**
  * Iterates through children that are typically specified as `props.children`.
  *
- * See https://reactjs.org/docs/react-api.html#react.children.foreach
+ * See https://reactjs.org/docs/react-api.html#reactchildrenforeach
  *
  * The provided forEachFunc(child, index) will be called for each
  * leaf child.
@@ -939,7 +936,7 @@ function mapIntoWithKeyPrefixInternal(children, array, prefix, func, context) {
 /**
  * Maps children that are typically specified as `props.children`.
  *
- * See https://reactjs.org/docs/react-api.html#react.children.map
+ * See https://reactjs.org/docs/react-api.html#reactchildrenmap
  *
  * The provided mapFunction(child, key, index) will be called for each
  * leaf child.
@@ -962,7 +959,7 @@ function mapChildren(children, func, context) {
  * Count the number of children that are typically specified as
  * `props.children`.
  *
- * See https://reactjs.org/docs/react-api.html#react.children.count
+ * See https://reactjs.org/docs/react-api.html#reactchildrencount
  *
  * @param {?*} children Children tree container.
  * @return {number} The number of children.
@@ -975,7 +972,7 @@ function countChildren(children) {
  * Flatten a children object (typically specified as `props.children`) and
  * return an array with appropriately re-keyed children.
  *
- * See https://reactjs.org/docs/react-api.html#react.children.toarray
+ * See https://reactjs.org/docs/react-api.html#reactchildrentoarray
  */
 function toArray(children) {
   var result = [];
@@ -987,7 +984,7 @@ function toArray(children) {
  * Returns the first child in a collection of children and verifies that there
  * is only one child in the collection.
  *
- * See https://reactjs.org/docs/react-api.html#react.children.only
+ * See https://reactjs.org/docs/react-api.html#reactchildrenonly
  *
  * The current implementation of this function assumes that a single child gets
  * passed without a wrapper, but the purpose of this helper function is to
@@ -1130,10 +1127,16 @@ var getStackAddendum = function () {};
       return '#text';
     } else if (typeof element.type === 'string') {
       return element.type;
-    } else if (element.type === REACT_FRAGMENT_TYPE) {
+    }
+
+    var type = element.type;
+    if (type === REACT_FRAGMENT_TYPE) {
       return 'React.Fragment';
+    } else if (typeof type === 'object' && type !== null && type.$$typeof === REACT_FORWARD_REF_TYPE) {
+      var functionName = type.render.displayName || type.render.name || '';
+      return functionName !== '' ? 'ForwardRef(' + functionName + ')' : 'ForwardRef';
     } else {
-      return element.type.displayName || element.type.name || 'Unknown';
+      return type.displayName || type.name || 'Unknown';
     }
   };
 
@@ -1277,22 +1280,31 @@ function validateChildKeys(node, parentType) {
  * @param {ReactElement} element
  */
 function validatePropTypes(element) {
-  var componentClass = element.type;
-  if (typeof componentClass !== 'function') {
+  var type = element.type;
+  var name = void 0,
+      propTypes = void 0;
+  if (typeof type === 'function') {
+    // Class or functional component
+    name = type.displayName || type.name;
+    propTypes = type.propTypes;
+  } else if (typeof type === 'object' && type !== null && type.$$typeof === REACT_FORWARD_REF_TYPE) {
+    // ForwardRef
+    var functionName = type.render.displayName || type.render.name || '';
+    name = functionName !== '' ? 'ForwardRef(' + functionName + ')' : 'ForwardRef';
+    propTypes = type.propTypes;
+  } else {
     return;
   }
-  var name = componentClass.displayName || componentClass.name;
-  var propTypes = componentClass.propTypes;
   if (propTypes) {
     currentlyValidatingElement = element;
     checkPropTypes(propTypes, element.props, 'prop', name, getStackAddendum);
     currentlyValidatingElement = null;
-  } else if (componentClass.PropTypes !== undefined && !propTypesMisspellWarningShown) {
+  } else if (type.PropTypes !== undefined && !propTypesMisspellWarningShown) {
     propTypesMisspellWarningShown = true;
     warning(false, 'Component %s declared `PropTypes` instead of `propTypes`. Did you misspell the property assignment?', name || 'Unknown');
   }
-  if (typeof componentClass.getDefaultProps === 'function') {
-    !componentClass.getDefaultProps.isReactClassApproved ? warning(false, 'getDefaultProps is only used on classic React.createClass ' + 'definitions. Use a static property named `defaultProps` instead.') : void 0;
+  if (typeof type.getDefaultProps === 'function') {
+    !type.getDefaultProps.isReactClassApproved ? warning(false, 'getDefaultProps is only used on classic React.createClass ' + 'definitions. Use a static property named `defaultProps` instead.') : void 0;
   }
 }
 
