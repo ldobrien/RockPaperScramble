@@ -5,12 +5,12 @@ const CurrentScore = (props) => {
   const scoreStyle = {
     fontFamily: '"Joti One", cursive',
     fontSize: 80,
-    fill: '#d6d33e',
+    fill: '#ffffba',
   };
 
   return (
     <g filter="url(#shadow)">
-      <text style={scoreStyle} x="300" y="80">
+      <text style={scoreStyle} x="800" y="500">
         {props.score}
       </text>
     </g>

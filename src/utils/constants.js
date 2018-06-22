@@ -1,14 +1,14 @@
 export const gameWidth = 800;
 
-export const createInterval = 10;
+export const createInterval = 100;
 
-export const maxFlyingObjects = 10;
+export const maxFlyingObjects = 300;
 
 // export const flyingObjectsStarterYAxis = -1100;
 
 export const gameHeight = 1200;
 
-export const flyingObjectsStarterYAxis = -500;
+export const flyingObjectsStarterYAxis = -600;
 
 export const flyingObjectsStarterPositions = [
   -500,

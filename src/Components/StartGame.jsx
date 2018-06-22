@@ -20,9 +20,9 @@ const StartGame = (props) => {
   const text = {
     textAnchor: 'middle', // center
     x: 0, // center relative to X axis
-    y: -150, // 150 up
+    y: 200, // 150 up
     style: {
-      fontFamily: '"Joti One", cursive',
+      fontFamily: '"Eater", cursive',
       fontSize: 60,
       fill: '#e3e3e3',
       cursor: 'pointer',

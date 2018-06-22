@@ -11,8 +11,8 @@ const Heart = (props) => {
 
   const leftSide = {
     initialAxis: {
-      x: props.position.x,
-      y: props.position.y,
+      x: -800,
+      y: 500,
     },
     initialControlPoint: {
       x: -20,
@@ -30,8 +30,8 @@ const Heart = (props) => {
 
   const rightSide = {
     initialAxis: {
-      x: props.position.x,
-      y: props.position.y,
+      x: -800,
+      y: 500,
     },
     initialControlPoint: {
       x: 20,

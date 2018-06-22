@@ -16,7 +16,7 @@ export default (state) => {
   if ( ! createNewObject) return state; // no need to create objects now
 
   const id = (new Date()).getTime();
-  const predefinedPosition = Math.floor(Math.random() * (123));
+  const predefinedPosition = Math.floor(Math.random() * (60));
   const flyingObjectPosition = flyingObjectsStarterPositions[predefinedPosition];
   const newFlyingObject = {
     position: {

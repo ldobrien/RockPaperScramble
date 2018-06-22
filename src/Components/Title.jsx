@@ -3,15 +3,43 @@ import { pathFromBezierCurve } from '../utils/formulas';
 
 const Title = () => {
   const textStyle = {
-    fontFamily: '"Joti One", cursive',
-    fontSize: 60,
+    fontFamily: '"Alfa Slab One", cursive',
+    fontSize: 120,
+    fill: '#baffc9',
+  };
+  const scrambleStyle = {
+    fontFamily: '"Eater", cursive',
+    fontSize: 120,
     fill: '#4dd0e1',
   };
+  const paperStyle = {
+    fontFamily: '"Gloria Hallelujah", cursive',
+    fontSize: 120,
+    fill: '#ffdfba',
+  };
 
-  const RockPaperLine = {
+  const RockLine = {
     initialAxis: {
-      x: -400,
-      y: -400,
+      x: -450,
+      y: -450,
+    },
+    initialControlPoint: {
+      x: 100,
+      y: -50,
+    },
+    endingControlPoint: {
+      x: 100,
+      y: -50,
+    },
+    endingAxis: {
+      x: 360,
+      y: 0,
+    },
+  };
+  const PaperLine = {
+    initialAxis: {
+      x: -250,
+      y: -250,
     },
     initialControlPoint: {
       x: 95,
@@ -28,21 +56,21 @@ const Title = () => {
   };
 
   const ScrambleLine = {
-    ...RockPaperLine,
+    ...PaperLine,
     initialAxis: {
-      x: -350,
-      y: -300,
+      x: 0,
+      y: -50,
     },
     initialControlPoint: {
       x: 125,
       y: -90,
     },
     endingControlPoint: {
-      x: 375,
+      x: 450,
       y: -90,
     },
     endingAxis: {
-      x: 500,
+      x: 600,
       y: 0,
     },
   };
@@ -51,8 +79,12 @@ const Title = () => {
     <g filter="url(#shadow)">
       <defs>
         <path
-          id="rpPath"
-          d={pathFromBezierCurve(RockPaperLine)}
+          id="rPath"
+          d={pathFromBezierCurve(RockLine)}
+        />
+        <path
+          id="pPath"
+          d={pathFromBezierCurve(PaperLine)}
         />
         <path
           id="ScramblePath"
@@ -60,11 +92,16 @@ const Title = () => {
         />
       </defs>
       <text {...textStyle}>
-        <textPath xlinkHref="#rpPath">
-          ROCK PAPER
+      <textPath xlinkHref="#rPath">
+      Rock
+      </textPath>
+      </text>
+      <text {...paperStyle}>
+        <textPath xlinkHref="#pPath">
+          PAPER
         </textPath>
       </text>
-      <text {...textStyle}>
+      <text {...scrambleStyle}>
         <textPath xlinkHref="#ScramblePath">
           SCRAMBLE
         </textPath>
