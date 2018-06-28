@@ -1,8 +1,8 @@
 export default (state, initialGameState) => {
   return {
-    state,
+    ...state,
     gameState: {
-      initialGameState,
+      ...initialGameState,
       started: true,
     }
   }

@@ -43,14 +43,14 @@ class DashboardPage extends React.Component {
       }
     });
     xhr.send();
-    const self = this;
+    // const self = this;
 
-    setInterval(() => {
-        self.props.moveObjects(self.canvasMousePosition);
-    }, 10);
-    setInterval(() => {
-        self.props.onCollide(self.canvasMousePosition);
-    }, 1);
+    // setInterval(() => {
+    //     self.props.moveObjects(self.canvasMousePosition);
+    // }, 10);
+    // setInterval(() => {
+    //     self.props.onCollide(self.canvasMousePosition);
+    // }, 1);
 
     window.onresize = () => {
       const cnv = document.getElementById('RockPaperScramble');
@@ -67,10 +67,20 @@ class DashboardPage extends React.Component {
    * Render the component.
    */
   render() {
-    const store = createStore(
-    reducer, /* preloadedState, */
-    window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__(),
-);
+    // export default function configureStore(initialState) {
+    const store = createStore(reducer, /* preloadedState, */
+    window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__(),);
+    if (module.hot) {
+    // Enable Webpack hot module replacement for reducers
+    module.hot.accept('../reducers', () => {
+      const nextRootReducer = require('../reducers/index');
+      store.replaceReducer(nextRootReducer);
+    });
+  }
+//     const store = createStore(
+//     reducer, /* preloadedState, */
+//     window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__(),
+// );
     return (
       <div>
     <Provider store={store}>
@@ -78,8 +88,13 @@ class DashboardPage extends React.Component {
     </Provider>,
           <Dashboard secretData={this.state.secretData} />
         </div>);
-  }
+  // }
 
+
+  
+
+  // return store;
+}
 }
 
 // DashboardPage.propTypes = {

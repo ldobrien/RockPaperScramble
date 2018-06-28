@@ -1,4 +1,6 @@
 import circles from '../Components/Canvas.jsx';
+// import { PropTypes } from 'react'
+import PropTypes from 'prop-types';
 
 function onCollide(state, action) {
   if (!action.mousePosition) return state;
@@ -18,7 +20,7 @@ function onCollide(state, action) {
     // }
   }
   return {
-    state,
+    ...state,
     // r,
   };
 }

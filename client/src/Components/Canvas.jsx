@@ -62,11 +62,6 @@ const Canvas = (props) => {
         </g>
       }
 
-      { props.gameState.started &&
-        <g>
-
-        </g>
-      }
       {props.gameState.flyingObjects.map(flyingObject => (
         <FlyingObject
           key={flyingObject.id}

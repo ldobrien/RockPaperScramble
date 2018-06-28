@@ -26,15 +26,15 @@ export default (state) => {
     createdAt: (new Date()).getTime(),
     id,
   };
-  const stateGameState = state.gameState;
-  const stateGameStateFlyingObjects = state.gameState.flyingObjects;
+  // const stateGameState = state.gameState;
+  // const stateGameStateFlyingObjects = state.gameState.flyingObjects;
 
   return {
-    state,
+    ...state,
     gameState: {
-      stateGameState,
+      ...state.gameState,
       flyingObjects: [
-        stateGameStateFlyingObjects,
+        ...state.gameState.flyingObjects,
         newFlyingObject
       ],
       lastObjectCreatedAt: new Date(),

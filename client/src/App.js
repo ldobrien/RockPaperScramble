@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
+// import { PropTypes } from 'react'
 import { getCanvasPosition } from './utils/formulas';
 import Canvas from './Components/Canvas.jsx';
 import Circle from './Components/Circle.jsx';
@@ -7,7 +8,7 @@ import Circle from './Components/Circle.jsx';
 
 class App extends Component {
 	componentDidMount() {
-
+    const self = this;
 
     setInterval(() => {
         self.props.moveObjects(self.canvasMousePosition);

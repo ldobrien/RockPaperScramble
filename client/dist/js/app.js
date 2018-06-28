@@ -6788,7 +6788,6 @@ var Canvas = function Canvas(props) {
         } }),
       _react2.default.createElement(_Title2.default, null)
     ),
-    props.gameState.started && _react2.default.createElement('g', null),
     props.gameState.flyingObjects.map(function (flyingObject) {
       return _react2.default.createElement(_FlyingObject2.default, {
         key: flyingObject.id,
@@ -10516,6 +10515,8 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+// import { PropTypes } from 'react'
+
 
 var App = function (_Component) {
   _inherits(App, _Component);
@@ -10529,6 +10530,7 @@ var App = function (_Component) {
   _createClass(App, [{
     key: 'componentDidMount',
     value: function componentDidMount() {
+      var self = this;
 
       setInterval(function () {
         self.props.moveObjects(self.canvasMousePosition);
@@ -19544,14 +19546,14 @@ var DashboardPage = function (_React$Component) {
         }
       });
       xhr.send();
-      var self = this;
+      // const self = this;
 
-      setInterval(function () {
-        self.props.moveObjects(self.canvasMousePosition);
-      }, 10);
-      setInterval(function () {
-        self.props.onCollide(self.canvasMousePosition);
-      }, 1);
+      // setInterval(() => {
+      //     self.props.moveObjects(self.canvasMousePosition);
+      // }, 10);
+      // setInterval(() => {
+      //     self.props.onCollide(self.canvasMousePosition);
+      // }, 1);
 
       window.onresize = function () {
         var cnv = document.getElementById('RockPaperScramble');
@@ -19572,8 +19574,20 @@ var DashboardPage = function (_React$Component) {
   }, {
     key: 'render',
     value: function render() {
+      // export default function configureStore(initialState) {
       var store = (0, _redux.createStore)(_reducers2.default, /* preloadedState, */
       window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__());
+      if (false) {
+        // Enable Webpack hot module replacement for reducers
+        module.hot.accept('../reducers', function () {
+          var nextRootReducer = require('../reducers/index');
+          store.replaceReducer(nextRootReducer);
+        });
+      }
+      //     const store = createStore(
+      //     reducer, /* preloadedState, */
+      //     window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__(),
+      // );
       return _react2.default.createElement(
         'div',
         null,
@@ -19585,6 +19599,10 @@ var DashboardPage = function (_React$Component) {
         ',',
         _react2.default.createElement(_Dashboard2.default, { secretData: this.state.secretData })
       );
+      // }
+
+
+      // return store;
     }
   }]);
 
@@ -19993,7 +20011,11 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
 var _constants = __webpack_require__(86);
+
+function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
 
 exports.default = function (state) {
   if (!state.gameState.started) return state; // game not running
@@ -20018,17 +20040,15 @@ exports.default = function (state) {
     createdAt: new Date().getTime(),
     id: id
   };
-  var stateGameState = state.gameState;
-  var stateGameStateFlyingObjects = state.gameState.flyingObjects;
+  // const stateGameState = state.gameState;
+  // const stateGameStateFlyingObjects = state.gameState.flyingObjects;
 
-  return {
-    state: state,
-    gameState: {
-      stateGameState: stateGameState,
-      flyingObjects: [stateGameStateFlyingObjects, newFlyingObject],
+  return _extends({}, state, {
+    gameState: _extends({}, state.gameState, {
+      flyingObjects: [].concat(_toConsumableArray(state.gameState.flyingObjects), [newFlyingObject]),
       lastObjectCreatedAt: new Date()
-    }
-  };
+    })
+  });
 };
 
 /***/ }),
@@ -20110,15 +20130,19 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+// import { easeElastic } from "d3-ease";
+
+
 var _formulas = __webpack_require__(41);
 
 var _createFlyingObjects = __webpack_require__(237);
 
 var _createFlyingObjects2 = _interopRequireDefault(_createFlyingObjects);
 
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+var _react = __webpack_require__(1);
 
-// import { easeElastic } from "d3-ease";
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function moveObjects(state, action) {
   // if (!action.mousePosition) return state;
@@ -20130,16 +20154,15 @@ function moveObjects(state, action) {
       y = _ref.y;
 
   var newState = (0, _createFlyingObjects2.default)(state);
-  var newStateGameState = newState.gameState;
+  // const newStateGameState = newState.gameState;
   var now = new Date().getTime();
   var flyingObjects = newState.gameState.flyingObjects.filter(function (object) {
     return now - object.createdAt < 4000;
   });
   return {
-    gameState: {
-      newStateGameState: newStateGameState,
+    gameState: _extends({}, newState.gameState, {
       flyingObjects: flyingObjects
-    },
+    }),
     x: x,
     y: y
   };
@@ -20158,9 +20181,17 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+// import { PropTypes } from 'react'
+
+
 var _Canvas = __webpack_require__(84);
 
 var _Canvas2 = _interopRequireDefault(_Canvas);
+
+var _propTypes = __webpack_require__(5);
+
+var _propTypes2 = _interopRequireDefault(_propTypes);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -20184,10 +20215,7 @@ function onCollide(state, action) {
     //   //
     // }
   }
-  return {
-    state: state
-    // r,
-  };
+  return _extends({}, state);
 }
 
 exports.default = onCollide;
@@ -20203,14 +20231,14 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
 exports.default = function (state, initialGameState) {
-  return {
-    state: state,
-    gameState: {
-      initialGameState: initialGameState,
+  return _extends({}, state, {
+    gameState: _extends({}, initialGameState, {
       started: true
-    }
-  };
+    })
+  });
 };
 
 /***/ }),

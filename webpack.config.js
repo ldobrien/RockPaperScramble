@@ -1,5 +1,5 @@
 const path = require('path');
-
+const ObjectRestSpreadPlugin = require('@sucrase/webpack-object-rest-spread-plugin');
 
 module.exports = {
   // the entry file for the bundle
@@ -23,6 +23,7 @@ module.exports = {
       }
     }],
   },
+
 
   // start Webpack in a watch mode, so Webpack will rebuild the bundle on changes
   watch: true
