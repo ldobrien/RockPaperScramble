@@ -8,10 +8,9 @@ const Arena = (props) => {
   };
   const arenaWidth = 4000;
   const gameHeight = 1200;
-  // const transform = `rotate(${props.rotation}, 0, 0)`;
-  const transform2 = `position(${props.position}, 0, 0)`
+  // const transform2 = `position(${props.position}, 0, 0)`
   return (
-    // <g transform={transform}>
+    // <g transform2={transform2}>
     <rect
       style={arenaStyle}
       x={arenaWidth / -2}
@@ -24,8 +23,7 @@ const Arena = (props) => {
 };
 
 Arena.propTypes = {
-  // rotation: PropTypes.number.isRequired,
-  position: PropTypes.number.isRequired,
+  // position: PropTypes.number.isRequired,
 };
 
 export default Arena;

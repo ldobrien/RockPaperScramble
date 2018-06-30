@@ -5,6 +5,7 @@ import FlyingObjectBase from './FlyingObjectBase.jsx';
 import { gameHeight } from '../utils/constants';
 import { gameWidth } from '../utils/constants';
 
+
 const moveVertically = keyframes`
   0% {
     transform: translateY(0);

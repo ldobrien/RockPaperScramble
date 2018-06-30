@@ -16,7 +16,7 @@ const initialState = {
   // direction: "UP",
     x: 0,
     y: 0,
-    r: 10,
+    r: 30,
     team: "Rock",
     // circles: [],
     // wide: 100,

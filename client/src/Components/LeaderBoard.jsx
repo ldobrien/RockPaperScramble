@@ -1,13 +1,17 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import Login from './Login';
-import Rank from "./Rank";
+// import Login from './Login';
+import Rank from "./Rank.jsx";
 
 const Leaderboard = (props) => {
   const style = {
     fill: 'transparent',
     stroke: 'blue',
     strokeDasharray: '14',   //container it lives in
+    x: "-1050",
+    y: "-200"
+    // x: "-350",
+    // y: "-600"
   };
 
   //what it will look like
@@ -16,6 +20,9 @@ const Leaderboard = (props) => {
     fontSize: 50,
     fill: '#ffe6ff',
     cursor: 'default',
+    // x:"-150",
+    // y:"-630"
+
   };
 
   let leaderboard = props.leaderboard || [];  //Sorting the top score on top
@@ -40,21 +47,18 @@ const Leaderboard = (props) => {
 
   return (
     <g>
-      <text filter="url(#shadow)" style={leaderboardTitle} x="-150" y="-630">Leaderboard</text>
-      <rect style={style} x="-350" y="-600" width="700" height="330" />
+      <text filter="url(#shadow)" style={leaderboardTitle} x="-900" y="-220">Leaderboard</text>
+      <rect style={style} width="700" height="330" />
+
       //Show leaderboard if currently logged in
       {
         props.currentPlayer && leaderboard.map((player, idx) => {
           const position = {
-            x: -100,
-            y: -530 + (70 * idx)
+            x: -800,
+            y: -130 + (70 * idx)
           };
           return <Rank key={player.rank} player={player} position={position}/>
         })
-      }
-      //If not logged in, show sign-up
-      {
-        ! props.currentPlayer && <Login authenticate={props.authenticate} />
       }
     </g>
   );
@@ -66,7 +70,6 @@ Leaderboard.propTypes = {
     maxScore: PropTypes.number.isRequired,
     name: PropTypes.string.isRequired,
   }),
-  authenticate: PropTypes.func.isRequired,
   leaderboard: PropTypes.arrayOf(PropTypes.shape({
     id: PropTypes.string.isRequired,
     maxScore: PropTypes.number.isRequired,

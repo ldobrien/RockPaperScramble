@@ -27,6 +27,10 @@ export const calculateAngle = (x1, y1, x2, y2) => {
   return radiansToDegrees(Math.atan(quotient)) * -1;
 };
 
+export const checkCollision = (rectA, rectB) => (
+  rectA.x1 < rectB.x2 && rectA.x2 > rectB.x1 &&
+  rectA.y1 < rectB.y2 && rectA.y2 > rectB.y1
+);
 
 export const getCanvasPosition = (event) => {
   // mouse position on auto-scaling canvas

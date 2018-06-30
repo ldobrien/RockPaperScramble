@@ -9,11 +9,17 @@ import Game from './game.js';
 import { Provider } from 'react-redux';
 import { createStore } from 'redux';
 import reducer from '../reducers';
+import ReactDOM from 'react-dom';
+import registerServiceWorker from '../registerServiceWorker.js';
+import moveObjects from '../reducers/moveObjects';
 
 
+
+var store = createStore(reducer, /* preloadedState, */
+    window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__(),);
 
 class DashboardPage extends React.Component {
-
+  
   /**
    * Class constructor.
    */
@@ -29,6 +35,7 @@ class DashboardPage extends React.Component {
    * This method will be executed after initial rendering.
    */
   componentDidMount() {
+    // const self = this;
     const xhr = new XMLHttpRequest();
     xhr.open('get', '/api/dashboard');
     xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
@@ -43,6 +50,7 @@ class DashboardPage extends React.Component {
       }
     });
     xhr.send();
+
     // const self = this;
 
     // setInterval(() => {
@@ -52,70 +60,49 @@ class DashboardPage extends React.Component {
     //     self.props.onCollide(self.canvasMousePosition);
     // }, 1);
 
-    window.onresize = () => {
-      const cnv = document.getElementById('RockPaperScramble');
-      cnv.style.width = `${window.innerWidth}px`;
-      cnv.style.height = `${window.innerHeight}px`;
-    };
-    window.onresize();
+    // window.onresize = () => {
+    //   const cnv = document.getElementById('RockPaperScramble');
+    //   cnv.style.width = `${window.innerWidth}px`;
+    //   cnv.style.height = `${window.innerHeight}px`;
+    // };
+    // window.onresize();
   }
 
-  trackMouse(event) {
-    this.canvasMousePosition = getCanvasPosition(event);
-  }
+  // trackMouse(event) {
+  //   this.canvasMousePosition = getCanvasPosition(event);
+  // }
   /**
    * Render the component.
    */
+
   render() {
-    // export default function configureStore(initialState) {
-    const store = createStore(reducer, /* preloadedState, */
-    window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__(),);
-    if (module.hot) {
-    // Enable Webpack hot module replacement for reducers
-    module.hot.accept('../reducers', () => {
-      const nextRootReducer = require('../reducers/index');
-      store.replaceReducer(nextRootReducer);
-    });
-  }
-//     const store = createStore(
+  //   // export default function configureStore(initialState) {
+  //   const store = createStore(reducer, /* preloadedState, */
+  //   window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__(),);
+  //   if (module.hot) {
+  //   // Enable Webpack hot module replacement for reducers
+  //   module.hot.accept('../reducers', () => {
+  //     const nextRootReducer = require('../reducers/index');
+  //     store.replaceReducer(nextRootReducer);
+  //   });
+  // }
+    
 //     reducer, /* preloadedState, */
 //     window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__(),
 // );
     return (
       <div>
-    <Provider store={store}>
-        <Game />
-    </Provider>,
-          <Dashboard secretData={this.state.secretData} />
-        </div>);
-  // }
+        <Provider store={store}>
+            <Game />
+        </Provider>,
+        // document.getElementById('root');
+        <Dashboard secretData={this.state.secretData} />
 
+      </div>);
+    registerServiceWorker();
 
-  
-
-  // return store;
 }
 }
-
-// DashboardPage.propTypes = {
-//   x: PropTypes.number.isRequired,
-//   y: PropTypes.number.isRequired,
-//   gameState: PropTypes.shape({
-//     started: PropTypes.bool.isRequired,
-//     kills: PropTypes.number.isRequired,
-//     lives: PropTypes.number.isRequired,
-//     flyingObjects: PropTypes.arrayOf(PropTypes.shape({
-//       position: PropTypes.shape({
-//         x: PropTypes.number.isRequired,
-//         y: PropTypes.number.isRequired
-//       }).isRequired,
-//       id: PropTypes.number.isRequired,
-//     })).isRequired,
-//   }).isRequired,
-//   moveObjects: PropTypes.func.isRequired,
-//   startGame: PropTypes.func.isRequired,
-//   moveObjects: PropTypes.func.isRequired,
-// };
 
 
 export default DashboardPage;
