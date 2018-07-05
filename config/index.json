@@ -1,0 +1,4 @@
+{
+  "dbUri": "mongodb://Lisa:lisalisa@rockpaperscramble-shard-00-00-25cod.mongodb.net:27017,rockpaperscramble-shard-00-01-25cod.mongodb.net:27017,rockpaperscramble-shard-00-02-25cod.mongodb.net:27017/RPSDatabase?ssl=true&replicaSet=RockPaperScramble-shard-0&authSource=admin&retryWrites=true",
+  "jwtSecret": "a secret phrase!!"
+}
