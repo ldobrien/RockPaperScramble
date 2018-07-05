@@ -1,29 +1,28 @@
 import { connect } from 'react-redux';
-
 import App from '../App';
-import { rotateObjects } from '../actions/index';
-import {moveObjects} from '../actions/index';
+import {onCollide} from '../actions/index';
+import { moveObjects, startGame } from '../actions/index';
 
 const mapStateToProps = state => ({
-	angle: state.angle,
-	  x: state.x,
-	  y: state.y,
+  x: state.x,
+  y: state.y,
+  r: state.r,
+  gameState: state.gameState,
+  // width: state.wide,
+  // height: state.high,
 });
 
 const mapDispatchToProps = dispatch => ({
-  rotateObjects: (mousePosition) => {
-    dispatch(rotateObjects(mousePosition));
-  },
   moveObjects: (mousePosition) => {
     dispatch(moveObjects(mousePosition));
   },
+  onCollide: (mousePosition) => {
+    dispatch(onCollide(mousePosition));
+  },
+  startGame: () => {
+    dispatch(startGame());
+  },
 });
-
-// const mapDispatchToProps = dispatch => ({
-//   moveObjects: (mousePosition) => {
-//     dispatch(moveObjects(mousePosition));
-//   },
-// });
 
 const Game = connect(
   mapStateToProps,

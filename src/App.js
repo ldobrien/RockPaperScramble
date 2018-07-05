@@ -4,17 +4,40 @@ import { getCanvasPosition } from './utils/formulas';
 import Canvas from './Components/Canvas';
 import Circle from './Components/Circle';
 
+// import * as Auth0 from 'auth0-web';
+
+// Auth0.configure({
+//   domain: 'rockpaperscramble.auth0.com',
+//   clientID: 'En8lkENVf3eXetciUx9hFxH0j3Or6GRK',
+//   redirectUri: 'http://localhost:3000/',
+//   responseType: 'token id_token',
+//   scope: 'openid profile manage:points',
+// });
+
+
 class App extends Component {
 	componentDidMount() {
     const self = this;
-    setInterval(() => {
-        self.props.rotateObjects(self.canvasMousePosition);
-    }, 10);
+    // Auth0.handleAuthCallback();
+
+    // Auth0.subscribe((auth) => {
+    //   console.log(auth);
+    // });
+
     setInterval(() => {
         self.props.moveObjects(self.canvasMousePosition);
     }, 10);
-  }
+    setInterval(() => {
+        self.props.onCollide(self.canvasMousePosition);
+    }, 1);
 
+    window.onresize = () => {
+      const cnv = document.getElementById('RockPaperScramble');
+      cnv.style.width = `${window.innerWidth}px`;
+      cnv.style.height = `${window.innerHeight}px`;
+    };
+    window.onresize();
+  }
 
   trackMouse(event) {
     this.canvasMousePosition = getCanvasPosition(event);
@@ -22,75 +45,43 @@ class App extends Component {
 
   render() {
     return (
-    
-      <Canvas 
-      	angle={this.props.angle}
-      	x={this.props.x}
-      	y={this.props.y}
-      	trackMouse={event => (this.trackMouse(event))}
-      />
+      <div>
+        <Canvas 
+        	// angle={this.props.angle}
+        	x={this.props.x}
+        	y={this.props.y}
+          r={this.props.r}
+          gameState={this.props.gameState}
+          startGame={this.props.startGame}
+        	trackMouse={event => (this.trackMouse(event))}
+          // width={this.props.width}
+          // height={this.props.height}
+        />
 
+      </div>
     );
   }
 }
 
 App.propTypes = {
-  angle: PropTypes.number.isRequired,
   x: PropTypes.number.isRequired,
   y: PropTypes.number.isRequired,
-  rotateObjects: PropTypes.func.isRequired,
+  gameState: PropTypes.shape({
+    started: PropTypes.bool.isRequired,
+    kills: PropTypes.number.isRequired,
+    lives: PropTypes.number.isRequired,
+    flyingObjects: PropTypes.arrayOf(PropTypes.shape({
+      position: PropTypes.shape({
+        x: PropTypes.number.isRequired,
+        y: PropTypes.number.isRequired
+      }).isRequired,
+      id: PropTypes.number.isRequired,
+    })).isRequired,
+  }).isRequired,
+  moveObjects: PropTypes.func.isRequired,
+  startGame: PropTypes.func.isRequired,
   moveObjects: PropTypes.func.isRequired,
 };
 
 export default App;
 
-
-
-
-
-// export default class Example extends Component {
-//   constructor(props) {
-//     super(props)
-//     this.handleKeyDown = this.handleKeyDown.bind(this)
-//     this.state = {
-//       Circle: 0,
-//       result: []
-//     }
-//   }
-
-//   handleKeyDown(e) {
-//     const { Circle, result } = this.state
-//     // arrow up/down button should select next/previous list element
-//     if (e.keyCode === 38 && Circle > 0) {
-//       this.setState( prevState => ({
-//         Circle: prevState.Circle - 1
-//       }))
-//     } else if (e.keyCode === 40 && Circle < result.length - 1) {
-//       this.setState( prevState => ({
-//         Circle: prevState.Circle + 1
-//       }))
-//     }
-//   }
-
-//   render() {
-//     const { Circle } = this.state
-
-//     return (
-//       <Container>
-//         <Input onKeyDown={ this.handleKeyDown }/>
-//         <List>
-//           {
-//             result.map((item, i) => (
-//               <List.Item
-//                 key={ item._id }
-//                 className={Circle === i ? 'active' : null}
-//               >
-//                 <span>{ item.title }</span>
-//               </List.Item>
-//             ))
-//           }
-//         </List>
-//       </Container>
-//     )
-//   }
-// }
