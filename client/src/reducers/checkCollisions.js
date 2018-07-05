@@ -13,7 +13,7 @@ const checkCollisions = (x, y, r, opps) => {
     const currentLifeTime = (new Date()).getTime() - opp.createdAt;
     const calculatedPosition = {
       x: opp.position.x,
-      y: opp.position.y + ((currentLifeTime / 4000) * gameHeight),
+      y: opp.position.y + ((currentLifeTime / 8000) * gameHeight), // THIS NEEDS TO BE UPDATED
     };
     const rectA = {
       x1: calculatedPosition.x - 40,
@@ -27,6 +27,7 @@ const checkCollisions = (x, y, r, opps) => {
       objectsDestroyed.push({
         oppId: opp.id,
       });
+      // console.log(objectsDestroyed[0]);
     };
   });
   return objectsDestroyed;

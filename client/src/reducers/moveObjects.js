@@ -6,19 +6,22 @@ import checkCollisions from './checkCollisions';
 
 function moveObjects(state, action) {
   // if (!action.mousePosition) return state;
-    const {x,y} = action.mousePosition || {
+  const {x,y} = action.mousePosition || {
     x: 0,
     y: 0,
   };
-  const newState = createFlyingObjects(state);
+  let newState = createFlyingObjects(state);
   // const newStateGameState = newState.gameState;
   const now = (new Date()).getTime();
   let flyingObjects = newState.gameState.flyingObjects.filter(object => (
-    (now - object.createdAt) < 4000
+    (now - object.createdAt) < 8000
   ));
 
   const objectsDestroyed = checkCollisions(x, y, state.r, flyingObjects);
+  // console.log(objectsDestroyed.length);
   const flyingDiscsDestroyed = objectsDestroyed.map(object => (object.flyingDiscId));
+  // console.log(flyingDiscsDestroyed.length);
+  // console.log(flyingDiscsDestroyed);
   flyingObjects = flyingObjects.filter(flyingDisc => (flyingDiscsDestroyed.indexOf(flyingDisc.id)));
 
   return {
