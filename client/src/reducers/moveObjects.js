@@ -11,18 +11,18 @@ function moveObjects(state, action) {
     y: 0,
   };
   let newState = createFlyingObjects(state);
-  // const newStateGameState = newState.gameState;
   const now = (new Date()).getTime();
   let flyingObjects = newState.gameState.flyingObjects.filter(object => (
     (now - object.createdAt) < 8000
   ));
 
-  const objectsDestroyed = checkCollisions(x, y, state.r, flyingObjects);
+  const objectsDestroyed = checkCollisions(state, flyingObjects);
   // console.log(objectsDestroyed.length);
-  const flyingDiscsDestroyed = objectsDestroyed.map(object => (object.flyingDiscId));
-  // console.log(flyingDiscsDestroyed.length);
-  // console.log(flyingDiscsDestroyed);
+  const flyingDiscsDestroyed = objectsDestroyed.map(object => (object.oppId));
+  
+  const bef = flyingObjects.length;
   flyingObjects = flyingObjects.filter(flyingDisc => (flyingDiscsDestroyed.indexOf(flyingDisc.id)));
+  // console.log("AFTER ---- ", (bef === flyingObjects.length));
 
   return {
     ...newState,

@@ -10785,22 +10785,22 @@ function moveObjects(state, action) {
       y = _ref.y;
 
   var newState = (0, _createFlyingObjects2.default)(state);
-  // const newStateGameState = newState.gameState;
   var now = new Date().getTime();
   var flyingObjects = newState.gameState.flyingObjects.filter(function (object) {
     return now - object.createdAt < 8000;
   });
 
-  var objectsDestroyed = (0, _checkCollisions2.default)(x, y, state.r, flyingObjects);
+  var objectsDestroyed = (0, _checkCollisions2.default)(state, flyingObjects);
   // console.log(objectsDestroyed.length);
   var flyingDiscsDestroyed = objectsDestroyed.map(function (object) {
-    return object.flyingDiscId;
+    return object.oppId;
   });
-  // console.log(flyingDiscsDestroyed.length);
-  // console.log(flyingDiscsDestroyed);
+
+  var bef = flyingObjects.length;
   flyingObjects = flyingObjects.filter(function (flyingDisc) {
     return flyingDiscsDestroyed.indexOf(flyingDisc.id);
   });
+  // console.log("AFTER ---- ", (bef === flyingObjects.length));
 
   return _extends({}, newState, {
     gameState: _extends({}, newState.gameState, {
@@ -18949,7 +18949,7 @@ FlyingObject.propTypes = {
 
 var FlyingObjectBase = function FlyingObjectBase(props) {
   var style = {
-    fill: 'blue',
+    fill: 'green',
     stroke: '#5c5c5c'
   };
 
@@ -20199,13 +20199,13 @@ var _formulas = __webpack_require__(37);
 
 var _constants = __webpack_require__(66);
 
-var checkCollisions = function checkCollisions(x, y, r, opps) {
+var checkCollisions = function checkCollisions(self, opps) {
   var objectsDestroyed = [];
   var rectB = {
-    x1: x - r,
-    y1: y - r,
-    x2: x + r,
-    y2: y + r
+    x1: self.x - self.r,
+    y1: self.y - self.r,
+    x2: self.x + self.r,
+    y2: self.y + self.r
   };
   opps.forEach(function (opp) {
     var currentLifeTime = new Date().getTime() - opp.createdAt;
@@ -20221,7 +20221,8 @@ var checkCollisions = function checkCollisions(x, y, r, opps) {
     };
     // console.log(opp.id);
     if ((0, _formulas.checkCollision)(rectA, rectB)) {
-      console.log("COLLISION");
+      // console.log("COLLISION: ");
+      // console.log(opp.id);
       objectsDestroyed.push({
         oppId: opp.id
       });

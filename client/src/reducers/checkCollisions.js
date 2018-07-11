@@ -1,13 +1,13 @@
 import { checkCollision } from '../utils/formulas';
 import { gameHeight } from '../utils/constants';
 
-const checkCollisions = (x, y, r, opps) => {
+const checkCollisions = (self, opps) => {
   const objectsDestroyed = [];
   const rectB = {
-      x1: x - r,
-      y1: y - r,
-      x2: x + r,
-      y2: y + r,
+      x1: self.x - self.r,
+      y1: self.y - self.r,
+      x2: self.x + self.r,
+      y2: self.y + self.r,
     };
   opps.forEach((opp) => {
     const currentLifeTime = (new Date()).getTime() - opp.createdAt;
@@ -23,7 +23,8 @@ const checkCollisions = (x, y, r, opps) => {
     };
     // console.log(opp.id);
     if (checkCollision(rectA, rectB)) {
-      console.log("COLLISION");
+      // console.log("COLLISION: ");
+      // console.log(opp.id);
       objectsDestroyed.push({
         oppId: opp.id,
       });

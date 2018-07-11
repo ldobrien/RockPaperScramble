@@ -37,7 +37,7 @@ FlyingObject.propTypes = {
 
 const FlyingObjectBase = (props) => {
   const style = {
-    fill: 'blue',
+    fill: 'green',
     stroke: '#5c5c5c',
   };
 
