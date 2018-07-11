@@ -17,6 +17,7 @@ const initialState = {
     x: 0,
     y: 0,
     r: 30,
+    color: "yellow",
     team: "Rock",
     // circles: [],
     // wide: 100,

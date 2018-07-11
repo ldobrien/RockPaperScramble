@@ -1,6 +1,7 @@
 import {
   createInterval, flyingObjectsStarterYAxis, maxFlyingObjects,
-  flyingObjectsStarterPositions
+  flyingObjectsStarterPositions,
+  flyingObjectsColors
 } from '../utils/constants';
 
 export default (state) => {
@@ -18,11 +19,15 @@ export default (state) => {
   const id = (new Date()).getTime();
   const predefinedPosition = Math.floor(Math.random() * (60));
   const flyingObjectPosition = flyingObjectsStarterPositions[predefinedPosition];
+  //broke cursor circle when I changed this:
+  const numberOfColors = Math.floor(Math.random() * (3));
+  const flyingObjectsColor = flyingObjectsColors[numberOfColors];
   const newFlyingObject = {
     position: {
       x: flyingObjectPosition,
       y: flyingObjectsStarterYAxis,
     },
+    color: flyingObjectsColor,
     createdAt: (new Date()).getTime(),
     id,
   };

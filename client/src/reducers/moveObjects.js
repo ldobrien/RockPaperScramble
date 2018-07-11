@@ -1,8 +1,9 @@
 import {calculateAngle} from '../utils/formulas';
 import createFlyingObjects from './createFlyingObjects';
 // import { easeElastic } from "d3-ease";
-import { PropTypes } from 'react'
+import { PropTypes } from 'react';
 import checkCollisions from './checkCollisions';
+import Circle  from '../Components/Circle.jsx';
 
 function moveObjects(state, action) {
   // if (!action.mousePosition) return state;
@@ -17,7 +18,7 @@ function moveObjects(state, action) {
     (now - object.createdAt) < 8000
   ));
 
-  const objectsDestroyed = checkCollisions(x, y, state.r, flyingObjects);
+  const objectsDestroyed = checkCollisions(Circle, flyingObjects);
   // console.log(objectsDestroyed.length);
   const flyingDiscsDestroyed = objectsDestroyed.map(object => (object.flyingDiscId));
   // console.log(flyingDiscsDestroyed.length);
@@ -29,10 +30,12 @@ function moveObjects(state, action) {
     gameState: {
       ...newState.gameState,
       flyingObjects,
+      Circle,
     },
     x: x,
     y: y,
     r: state.r,
+    color: state.color,
   };
 }
 

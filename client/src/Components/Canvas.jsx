@@ -59,6 +59,8 @@ const Canvas = (props) => {
     // console.log(cursor);
     // console.log("X: " + props.x);
     // console.log("radius: " + props.r);
+    // const colors = ['red', 'green', 'blue'];
+    // const color = colors[Math.floor(Math.random() * colors.length)];
   return (
     <svg
       id="RockPaperScramble"
@@ -91,6 +93,7 @@ const Canvas = (props) => {
         <FlyingObject
           key={flyingObject.id}
           position={flyingObject.position}
+          color={flyingObject.color}
         />
       ))}
     </svg>
@@ -109,6 +112,7 @@ Canvas.propTypes = {
         x: PropTypes.number.isRequired,
         y: PropTypes.number.isRequired
       }).isRequired,
+      color: PropTypes.string.isRequired,
       id: PropTypes.number.isRequired,
     })).isRequired,
   }).isRequired,

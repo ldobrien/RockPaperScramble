@@ -5075,6 +5075,8 @@ var gameHeight = exports.gameHeight = 1200;
 
 var flyingObjectsStarterYAxis = exports.flyingObjectsStarterYAxis = -600;
 
+var flyingObjectsColors = exports.flyingObjectsColors = ["red", "green", "blue"];
+
 var flyingObjectsStarterPositions = exports.flyingObjectsStarterPositions = [-500, 500, 300, 130, -40, 1000, 2200, -800, -1300, 1234, -1601, -190, -622, -2087, -266, -958, 1155, -1573, -1777, -1896, -1535, -580, 1231, 527, 1484, 1367, -685, -454, -1071, -1171, 641, 1076, 938, -1772, -1120, -54, -1184, 67, -1909, 976, -376, 594, 2318, -279, 957, -1075, 2087, 2371, -261, 796, -1746, -1377, -1039, -1585, -1490, -1627, 743, -787, 686, -1272, -3000];
 
 /***/ }),
@@ -6803,6 +6805,8 @@ var Canvas = function Canvas(props) {
   // console.log(cursor);
   // console.log("X: " + props.x);
   // console.log("radius: " + props.r);
+  // const colors = ['red', 'green', 'blue'];
+  // const color = colors[Math.floor(Math.random() * colors.length)];
   return _react2.default.createElement(
     'svg',
     {
@@ -6836,7 +6840,8 @@ var Canvas = function Canvas(props) {
     props.gameState.flyingObjects.map(function (flyingObject) {
       return _react2.default.createElement(_FlyingObject2.default, {
         key: flyingObject.id,
-        position: flyingObject.position
+        position: flyingObject.position,
+        color: flyingObject.color
       });
     })
   );
@@ -6854,6 +6859,7 @@ Canvas.propTypes = {
         x: _propTypes2.default.number.isRequired,
         y: _propTypes2.default.number.isRequired
       }).isRequired,
+      color: _propTypes2.default.string.isRequired,
       id: _propTypes2.default.number.isRequired
     })).isRequired
   }).isRequired,
@@ -10773,6 +10779,10 @@ var _checkCollisions = __webpack_require__(238);
 
 var _checkCollisions2 = _interopRequireDefault(_checkCollisions);
 
+var _Circle = __webpack_require__(86);
+
+var _Circle2 = _interopRequireDefault(_Circle);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function moveObjects(state, action) {
@@ -10791,7 +10801,7 @@ function moveObjects(state, action) {
     return now - object.createdAt < 8000;
   });
 
-  var objectsDestroyed = (0, _checkCollisions2.default)(x, y, state.r, flyingObjects);
+  var objectsDestroyed = (0, _checkCollisions2.default)(_Circle2.default, flyingObjects);
   // console.log(objectsDestroyed.length);
   var flyingDiscsDestroyed = objectsDestroyed.map(function (object) {
     return object.flyingDiscId;
@@ -10804,11 +10814,13 @@ function moveObjects(state, action) {
 
   return _extends({}, newState, {
     gameState: _extends({}, newState.gameState, {
-      flyingObjects: flyingObjects
+      flyingObjects: flyingObjects,
+      Circle: _Circle2.default
     }),
     x: x,
     y: y,
-    r: state.r
+    r: state.r,
+    color: state.color
   });
 }
 
@@ -18936,7 +18948,7 @@ var FlyingObject = function FlyingObject(props) {
   return _react2.default.createElement(
     Move,
     null,
-    _react2.default.createElement(FlyingObjectBase, { position: props.position })
+    _react2.default.createElement(FlyingObjectBase, { position: props.position, color: props.color })
   );
 };
 
@@ -18944,21 +18956,18 @@ FlyingObject.propTypes = {
   position: _propTypes2.default.shape({
     x: _propTypes2.default.number.isRequired,
     y: _propTypes2.default.number.isRequired
-  }).isRequired
+  }).isRequired,
+  color: _propTypes2.default.string.isRequired
 };
 
 var FlyingObjectBase = function FlyingObjectBase(props) {
-  var style = {
-    fill: 'blue',
-    stroke: '#5c5c5c'
-  };
-
   return _react2.default.createElement('ellipse', {
     cx: props.position.x,
     cy: props.position.y,
     rx: '10',
     ry: '10',
-    style: style
+    fill: props.color,
+    stroke: 'black'
   });
 };
 
@@ -18966,10 +18975,10 @@ FlyingObjectBase.propTypes = {
   position: _propTypes2.default.shape({
     x: _propTypes2.default.number.isRequired,
     y: _propTypes2.default.number.isRequired
-  }).isRequired
+  }).isRequired,
+  color: _propTypes2.default.string.isRequired
 };
 
-// export default FlyingObjectBase;
 exports.default = FlyingObject;
 
 /***/ }),
@@ -20160,6 +20169,7 @@ var mapStateToProps = function mapStateToProps(state) {
     x: state.x,
     y: state.y,
     r: state.r,
+    color: state.color,
     gameState: state.gameState
     // width: state.wide,
     // height: state.high,
@@ -20199,14 +20209,15 @@ var _formulas = __webpack_require__(37);
 
 var _constants = __webpack_require__(66);
 
-var checkCollisions = function checkCollisions(x, y, r, opps) {
+var _Circle = __webpack_require__(86);
+
+var _Circle2 = _interopRequireDefault(_Circle);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var checkCollisions = function checkCollisions(Circle, opps) {
   var objectsDestroyed = [];
-  var rectB = {
-    x1: x - r,
-    y1: y - r,
-    x2: x + r,
-    y2: y + r
-  };
+
   opps.forEach(function (opp) {
     var currentLifeTime = new Date().getTime() - opp.createdAt;
     var calculatedPosition = {
@@ -20218,6 +20229,13 @@ var checkCollisions = function checkCollisions(x, y, r, opps) {
       y1: calculatedPosition.y - 10,
       x2: calculatedPosition.x + 40,
       y2: calculatedPosition.y + 10
+    };
+
+    var rectB = {
+      x1: Circle.position.cx - 8,
+      y1: Circle.position.cy - 8,
+      x2: Circle.position.cx - 8,
+      y2: Circle.position.cy - 8
     };
     // console.log(opp.id);
     if ((0, _formulas.checkCollision)(rectA, rectB)) {
@@ -20265,11 +20283,15 @@ exports.default = function (state) {
   var id = new Date().getTime();
   var predefinedPosition = Math.floor(Math.random() * 60);
   var flyingObjectPosition = _constants.flyingObjectsStarterPositions[predefinedPosition];
+  //broke cursor circle when I changed this:
+  var numberOfColors = Math.floor(Math.random() * 3);
+  var flyingObjectsColor = _constants.flyingObjectsColors[numberOfColors];
   var newFlyingObject = {
     position: {
       x: flyingObjectPosition,
       y: _constants.flyingObjectsStarterYAxis
     },
+    color: flyingObjectsColor,
     createdAt: new Date().getTime(),
     id: id
   };
@@ -20325,6 +20347,7 @@ var initialState = {
   x: 0,
   y: 0,
   r: 30,
+  color: "yellow",
   team: "Rock",
   // circles: [],
   // wide: 100,
