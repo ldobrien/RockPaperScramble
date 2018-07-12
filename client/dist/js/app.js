@@ -10779,10 +10779,6 @@ var _checkCollisions = __webpack_require__(238);
 
 var _checkCollisions2 = _interopRequireDefault(_checkCollisions);
 
-var _Circle = __webpack_require__(86);
-
-var _Circle2 = _interopRequireDefault(_Circle);
-
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function moveObjects(state, action) {
@@ -10795,32 +10791,30 @@ function moveObjects(state, action) {
       y = _ref.y;
 
   var newState = (0, _createFlyingObjects2.default)(state);
-  // const newStateGameState = newState.gameState;
   var now = new Date().getTime();
   var flyingObjects = newState.gameState.flyingObjects.filter(function (object) {
     return now - object.createdAt < 8000;
   });
 
-  var objectsDestroyed = (0, _checkCollisions2.default)(_Circle2.default, flyingObjects);
+  var objectsDestroyed = (0, _checkCollisions2.default)(state, flyingObjects);
   // console.log(objectsDestroyed.length);
   var flyingDiscsDestroyed = objectsDestroyed.map(function (object) {
-    return object.flyingDiscId;
+    return object.oppId;
   });
-  // console.log(flyingDiscsDestroyed.length);
-  // console.log(flyingDiscsDestroyed);
+
+  var bef = flyingObjects.length;
   flyingObjects = flyingObjects.filter(function (flyingDisc) {
     return flyingDiscsDestroyed.indexOf(flyingDisc.id);
   });
+  // console.log("AFTER ---- ", (bef === flyingObjects.length));
 
   return _extends({}, newState, {
     gameState: _extends({}, newState.gameState, {
-      flyingObjects: flyingObjects,
-      Circle: _Circle2.default
+      flyingObjects: flyingObjects
     }),
     x: x,
     y: y,
-    r: state.r,
-    color: state.color
+    r: state.r
   });
 }
 
@@ -20209,15 +20203,14 @@ var _formulas = __webpack_require__(37);
 
 var _constants = __webpack_require__(66);
 
-var _Circle = __webpack_require__(86);
-
-var _Circle2 = _interopRequireDefault(_Circle);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-var checkCollisions = function checkCollisions(Circle, opps) {
+var checkCollisions = function checkCollisions(self, opps) {
   var objectsDestroyed = [];
-
+  var rectB = {
+    x1: self.x - self.r,
+    y1: self.y - self.r,
+    x2: self.x + self.r,
+    y2: self.y + self.r
+  };
   opps.forEach(function (opp) {
     var currentLifeTime = new Date().getTime() - opp.createdAt;
     var calculatedPosition = {
@@ -20230,16 +20223,10 @@ var checkCollisions = function checkCollisions(Circle, opps) {
       x2: calculatedPosition.x + 40,
       y2: calculatedPosition.y + 10
     };
-
-    var rectB = {
-      x1: Circle.position.cx - 8,
-      y1: Circle.position.cy - 8,
-      x2: Circle.position.cx - 8,
-      y2: Circle.position.cy - 8
-    };
     // console.log(opp.id);
     if ((0, _formulas.checkCollision)(rectA, rectB)) {
-      console.log("COLLISION");
+      // console.log("COLLISION: ");
+      // console.log(opp.id);
       objectsDestroyed.push({
         oppId: opp.id
       });

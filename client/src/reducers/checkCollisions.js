@@ -1,10 +1,14 @@
 import { checkCollision } from '../utils/formulas';
 import { gameHeight } from '../utils/constants';
-import Circle  from '../Components/Circle.jsx';
 
-const checkCollisions = (Circle, opps) => {
+const checkCollisions = (self, opps) => {
   const objectsDestroyed = [];
-  
+  const rectB = {
+      x1: self.x - self.r,
+      y1: self.y - self.r,
+      x2: self.x + self.r,
+      y2: self.y + self.r,
+    };
   opps.forEach((opp) => {
     const currentLifeTime = (new Date()).getTime() - opp.createdAt;
     const calculatedPosition = {
@@ -17,22 +21,16 @@ const checkCollisions = (Circle, opps) => {
       x2: calculatedPosition.x + 40,
       y2: calculatedPosition.y + 10,
     };
-
-    const rectB = {
-      x1: Circle.position.cx - 8,
-      y1: Circle.position.cy - 8,
-      x2: Circle.position.cx - 8,
-      y2: Circle.position.cy - 8,
-    };
     // console.log(opp.id);
     if (checkCollision(rectA, rectB)) {
-      console.log("COLLISION");
+      // console.log("COLLISION: ");
+      // console.log(opp.id);
       objectsDestroyed.push({
         oppId: opp.id,
       });
       // console.log(objectsDestroyed[0]);
     };
-});
+  });
   return objectsDestroyed;
 };
 
