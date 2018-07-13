@@ -9,6 +9,7 @@ const mapStateToProps = state => ({
   y: state.y,
   r: state.r,
   gameState: state.gameState,
+  // leaderboard: prop.leaderboard,
   // width: state.wide,
   // height: state.high,
 });

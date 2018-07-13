@@ -30,6 +30,7 @@ function moveObjects(state, action) {
       ...newState.gameState,
       flyingObjects,
     },
+    leaderboard: state.leaderboard,
     x: x,
     y: y,
     r: state.r,

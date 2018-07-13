@@ -12,10 +12,14 @@ import StartGame from './StartGame.jsx';
 import Title from './Title.jsx';
 import Leaderboard from './LeaderBoard.jsx';
 import Rank from './Rank.jsx';
+import DashboardPage from '../containers/DashboardPage.jsx';
+
 
 const opponents = 50;
 const width = window.innerWidth;
 const height = window.innerHeight;
+
+
 // let circles = [];
 // function addOpponents(){
 //       for(var i = 0; i < 50; i++){
@@ -43,16 +47,20 @@ const height = window.innerHeight;
 const Canvas = (props) => {
   const gameHeight = 1200;
   const viewBox = [window.innerWidth / -2, 600 - gameHeight, window.innerWidth, gameHeight];
-  const leaderboard = [
-    { id: 'd4', maxScore: 82, name: 'Ado Kukic', },
-    { id: 'a1', maxScore: 235, name: 'Bruno Krebs', },
-    { id: 'c3', maxScore: 99, name: 'Diego Poza', },
-    { id: 'b2', maxScore: 129, name: 'Jeana Tahnk', },
-    { id: 'e5', maxScore: 34, name: 'Jenny Obrien', },
-    { id: 'f6', maxScore: 153, name: 'Kim Maida', },
-    { id: 'g7', maxScore: 55, name: 'Luke Oliff', },
-    { id: 'h8', maxScore: 146, name: 'Sebastián Peyrott', },
-  ];
+  const leaderboard = props.leaderboard;
+  console.log("WUT ARE DE PROPS", props);
+  // [
+    
+  //   { id: 'd4', maxScore: 82, name: 'Ado Kukic', },
+  //   { id: 'a1', maxScore: 235, name: 'Bruno Krebs', },
+  //   { id: 'c3', maxScore: 99, name: 'Diego Poza', },
+  //   { id: 'b2', maxScore: 129, name: 'Jeana Tahnk', },
+  //   { id: 'e5', maxScore: 34, name: 'Jenny Obrien', },
+  //   { id: 'f6', maxScore: 153, name: 'Kim Maida', },
+  //   { id: 'g7', maxScore: 55, name: 'Luke Oliff', },
+  //   { id: 'h8', maxScore: 146, name: 'Sebastián Peyrott', },
+  // ];
+
   // const viewBox = [width / -2, height / -2, width, height];
     // circles is the array of circle objects
     // console.log(props);

@@ -21,7 +21,8 @@ const initialState = {
     // circles: [],
     // wide: 100,
     // high: 100,
-    gameState: initialGameState,
+    gameState: initialGameState
+    //leaderboard: [1,2,3,4]
 };
 
 

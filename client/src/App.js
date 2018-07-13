@@ -5,8 +5,15 @@ import { getCanvasPosition } from './utils/formulas';
 import Canvas from './Components/Canvas.jsx';
 import Circle from './Components/Circle.jsx';
 
+//const 
+
 
 class App extends Component {
+  // constructor(props) {
+  //   super(props);
+  //   this.createLeaderboard = this.createLeaderboard.bind(this);
+  // }
+
 	componentDidMount() {
     const self = this;
 
@@ -29,17 +36,23 @@ class App extends Component {
     this.canvasMousePosition = getCanvasPosition(event);
   }
 
+  createLeaderboard(id) {
+    
+  }
+
   render() {
     return (
       <div>
         <Canvas 
         	// angle={this.props.angle}
-        	x={this.props.x}
-        	y={this.props.y}
+          leaderboard={this.props.leaderboard}
+          x={this.props.x}
+          y={this.props.y}
           r={this.props.r}
           gameState={this.props.gameState}
           startGame={this.props.startGame}
-        	trackMouse={event => (this.trackMouse(event))}
+          trackMouse={event => (this.trackMouse(event))}
+          // leaderboard=
           // width={this.props.width}
           // height={this.props.height}
         />
