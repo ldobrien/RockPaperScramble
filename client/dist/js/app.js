@@ -19388,7 +19388,7 @@ var Leaderboard = function Leaderboard(props) {
   })
   // Remove from view players who are in the top 3
   .filter(function (member, index) {
-    if (index < 3 || member.id === props.currentPlayer.id) return member;
+    if (index < 4) return member;
     return null;
   });
 
