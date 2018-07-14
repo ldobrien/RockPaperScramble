@@ -12,6 +12,7 @@ import reducer from '../reducers';
 import ReactDOM from 'react-dom';
 import registerServiceWorker from '../registerServiceWorker.js';
 import moveObjects from '../reducers/moveObjects';
+import 'whatwg-fetch';
 
 
 
@@ -27,7 +28,8 @@ class DashboardPage extends React.Component {
     super(props);
 
     this.state = {
-      secretData: ''
+      secretData: '',
+      userHighScores: [],
     };
   }
 
@@ -50,7 +52,18 @@ class DashboardPage extends React.Component {
       }
     });
     xhr.send();
-
+      fetch('/api/users/topscores', {
+        method: 'GET',
+        headers: { 'Authorization': `bearer ${Auth.getToken()}`,
+        'Content-Type': 'application/json' }
+      }) 
+      .then(res => res.json())
+      .then(json => {
+        console.log("THE HIG JSON", json);
+        this.setState({
+          userHighScores: json
+        });
+      });
     // const self = this;
 
     // setInterval(() => {
@@ -93,7 +106,7 @@ class DashboardPage extends React.Component {
     return (
       <div>
         <Provider store={store}>
-            <Game />
+            <Game leaderboard={this.state.userHighScores}/>
         </Provider>,
         // document.getElementById('root');
         <Dashboard secretData={this.state.secretData} />

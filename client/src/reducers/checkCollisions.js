@@ -15,11 +15,15 @@ const checkCollisions = (self, opps) => {
       x: opp.position.x,
       y: opp.position.y + ((currentLifeTime / 8000) * gameHeight), // THIS NEEDS TO BE UPDATED
     };
+    // const calculatedColor = {
+    //   color: opp.color,
+    // };
     const rectA = {
       x1: calculatedPosition.x - 40,
       y1: calculatedPosition.y - 10,
       x2: calculatedPosition.x + 40,
       y2: calculatedPosition.y + 10,
+      // color: calculatedColor,
     };
     // console.log(opp.id);
     if (checkCollision(rectA, rectB)) {
