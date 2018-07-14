@@ -20264,12 +20264,14 @@ var checkCollisions = function checkCollisions(self, opps) {
       });
       // console.log(objectsDestroyed[0]);
     };
-  
-  };
+  }); 
+  return objectsDestroyed;
+};
 
 exports.default = checkCollisions;
 
 /***/ }),
+
 /* 239 */
 /***/ (function(module, exports, __webpack_require__) {
 
