@@ -11033,7 +11033,7 @@ function moveObjects(state, action) {
     gameState: _extends({}, newState.gameState, {
       flyingObjects: flyingObjects
     }),
-    leaderboard: state.leaderboard,
+    //leaderboard: state.leaderboard,
     x: x,
     y: y,
     r: state.r

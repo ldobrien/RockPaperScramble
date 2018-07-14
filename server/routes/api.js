@@ -4,7 +4,7 @@ const router = new express.Router();
 
 const mongoose = require('mongoose');
 
-var MongoClient = require('mongodb').MongoClient;
+//var MongoClient = require('mongodb').MongoClient;
 
 const User = require('mongoose').model('User');
 
