@@ -29,7 +29,6 @@ const checkCollisions = (self, opps) => {
     if (checkCollision(rectA, rectB)) {
       // console.log("COLLISION: ");
       // console.log(opp.id);
-      // if (calculatedColor = "red"){
       objectsDestroyed.push({
         oppId: opp.id,
       });
