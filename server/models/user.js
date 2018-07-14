@@ -58,7 +58,7 @@ UserSchema.pre('save', function saveHook(next) {
 
       // replace a password string with hash value
       user.password = hash;
-      user.maxScore = '20';
+      user.maxScore = '40';
 
       return next();
     });
