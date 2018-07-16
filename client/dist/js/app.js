@@ -11009,6 +11009,12 @@ function moveObjects(state, action) {
     return object.oppId;
   });
 
+  var lostLife = _checkCollisions2.default;
+  var lives = state.gameState.lives;
+  if (lostLife) {
+    lives--;
+  }
+
   var bef = flyingObjects.length;
   flyingObjects = flyingObjects.filter(function (flyingDisc) {
     return flyingDiscsDestroyed.indexOf(flyingDisc.id);
@@ -11017,7 +11023,8 @@ function moveObjects(state, action) {
 
   return _extends({}, newState, {
     gameState: _extends({}, newState.gameState, {
-      flyingObjects: flyingObjects
+      flyingObjects: flyingObjects,
+      lives: lives
     }),
     leaderboard: state.leaderboard,
     x: x,
@@ -20282,8 +20289,10 @@ var checkCollisions = function checkCollisions(self, opps) {
       // console.log(objectsDestroyed[0]);
     };
     if ((0, _formulas.checkBadCollision)(rectA, rectB)) {
-
-      self.r -= 0.1;
+      // return self.gameState.lives - 1;
+      // self.gameState.setState({
+      //   lives: 0
+      // });
 
       // console.log(objectsDestroyed[0]);
     };
