@@ -10867,13 +10867,9 @@ window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__());
 var DashboardPage = function (_React$Component) {
   _inherits(DashboardPage, _React$Component);
 
-<<<<<<< HEAD
   /**
    * Class constructor.
-=======
-  /**
-   * Class constructor.
->>>>>>> c8d6d2958c4a52bc5b36c611026eea419b846fe5
+
    */
   function DashboardPage(props) {
     _classCallCheck(this, DashboardPage);
@@ -10886,14 +10882,8 @@ var DashboardPage = function (_React$Component) {
     };
     return _this;
   }
-
-<<<<<<< HEAD
   /**
    * This method will be executed after initial rendering.
-=======
-  /**
-   * This method will be executed after initial rendering.
->>>>>>> c8d6d2958c4a52bc5b36c611026eea419b846fe5
    */
 
 
@@ -10917,13 +10907,8 @@ var DashboardPage = function (_React$Component) {
         }
       });
       xhr.send();
-<<<<<<< HEAD
 
       fetch('/api/users/topscores', {
-
-=======
-      fetch('/api/users/topscores', {
->>>>>>> c8d6d2958c4a52bc5b36c611026eea419b846fe5
         method: 'GET',
         headers: { 'Authorization': 'bearer ' + _Auth2.default.getToken(),
           'Content-Type': 'application/json' }
@@ -10934,13 +10919,9 @@ var DashboardPage = function (_React$Component) {
         _this2.setState({
           userHighScores: json
         });
-<<<<<<< HEAD
         console.log("THE HIGH SCORES", _this2.state.userHighScores);
       });
 
-=======
-      });
->>>>>>> c8d6d2958c4a52bc5b36c611026eea419b846fe5
       // const self = this;
 
       // setInterval(() => {
@@ -10961,13 +10942,9 @@ var DashboardPage = function (_React$Component) {
     // trackMouse(event) {
     //   this.canvasMousePosition = getCanvasPosition(event);
     // }
-<<<<<<< HEAD
+
     /**
      * Render the component.
-=======
-    /**
-     * Render the component.
->>>>>>> c8d6d2958c4a52bc5b36c611026eea419b846fe5
      */
 
   }, {
@@ -20337,11 +20314,7 @@ var checkCollisions = function checkCollisions(self, opps) {
     if ((0, _formulas.checkCollision)(rectA, rectB)) {
       // console.log("COLLISION: ");
       // console.log(opp.id);
-<<<<<<< HEAD
-=======
-
       // if (calculatedColor = "red"){
->>>>>>> c8d6d2958c4a52bc5b36c611026eea419b846fe5
       objectsDestroyed.push({
         oppId: opp.id
       });
@@ -20349,8 +20322,6 @@ var checkCollisions = function checkCollisions(self, opps) {
 
       // console.log(objectsDestroyed[0]);
     };
-<<<<<<< HEAD
-=======
     if ((0, _formulas.checkBadCollision)(rectA, rectB)) {
       // return self.gameState.lives - 1;
       // self.gameState.setState({
@@ -20358,7 +20329,6 @@ var checkCollisions = function checkCollisions(self, opps) {
       // });
       // console.log(objectsDestroyed[0]);
     };
->>>>>>> c8d6d2958c4a52bc5b36c611026eea419b846fe5
   });
   return objectsDestroyed;
 };
