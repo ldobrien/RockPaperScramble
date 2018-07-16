@@ -39,6 +39,12 @@ FlyingObject.propTypes = {
 
 
 const FlyingObjectBase = (props) => {
+
+  const style = {
+    fill: 'green',
+    stroke: '#5c5c5c',
+  };
+
   return (
     <ellipse
       cx={props.position.x}

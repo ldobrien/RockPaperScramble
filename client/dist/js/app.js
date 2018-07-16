@@ -19170,6 +19170,12 @@ FlyingObject.propTypes = {
 };
 
 var FlyingObjectBase = function FlyingObjectBase(props) {
+
+  var style = {
+    fill: 'green',
+    stroke: '#5c5c5c'
+  };
+
   return _react2.default.createElement('ellipse', {
     cx: props.position.x,
     cy: props.position.y,
@@ -20280,6 +20286,7 @@ var checkCollisions = function checkCollisions(self, opps) {
     if ((0, _formulas.checkCollision)(rectA, rectB)) {
       // console.log("COLLISION: ");
       // console.log(opp.id);
+
       // if (calculatedColor = "red"){
       objectsDestroyed.push({
         oppId: opp.id
@@ -20293,7 +20300,6 @@ var checkCollisions = function checkCollisions(self, opps) {
       // self.gameState.setState({
       //   lives: 0
       // });
-
       // console.log(objectsDestroyed[0]);
     };
   });
