@@ -2783,7 +2783,7 @@ var pathFromBezierCurve = exports.pathFromBezierCurve = function pathFromBezierC
       endingControlPoint = cubicBezierCurve.endingControlPoint,
       endingAxis = cubicBezierCurve.endingAxis;
 
-  return '\n    M' + initialAxis.x + ' ' + initialAxis.y + '\n    c ' + initialControlPoint.x + ' ' + initialControlPoint.y + '\n    ' + endingControlPoint.x + ' ' + endingControlPoint.y + '\n    ' + endingAxis.x + ' ' + endingAxis.y + '\n  ';
+  return "\n    M" + initialAxis.x + " " + initialAxis.y + "\n    c " + initialControlPoint.x + " " + initialControlPoint.y + "\n    " + endingControlPoint.x + " " + endingControlPoint.y + "\n    " + endingAxis.x + " " + endingAxis.y + "\n  ";
 };
 
 var radiansToDegrees = exports.radiansToDegrees = function radiansToDegrees(radians) {
@@ -2805,7 +2805,15 @@ var calculateAngle = exports.calculateAngle = function calculateAngle(x1, y1, x2
 };
 
 var checkCollision = exports.checkCollision = function checkCollision(rectA, rectB) {
-  return rectA.x1 < rectB.x2 && rectA.x2 > rectB.x1 && rectA.y1 < rectB.y2 && rectA.y2 > rectB.y1;
+  return rectA.x1 < rectB.x2 && rectA.x2 > rectB.x1 && rectA.y1 < rectB.y2 && rectA.y2 > rectB.y1 && (rectA.rectclr == "blue" || rectA.rectclr == "red")
+  // && rectA.color == "blue"
+  ;
+};
+
+var checkBadCollision = exports.checkBadCollision = function checkBadCollision(rectA, rectB) {
+  return rectA.x1 < rectB.x2 && rectA.x2 > rectB.x1 && rectA.y1 < rectB.y2 && rectA.y2 > rectB.y1 && rectA.rectclr == "green"
+  // && rectA.color == "blue"
+  ;
 };
 
 var getCanvasPosition = exports.getCanvasPosition = function getCanvasPosition(event) {
@@ -6921,6 +6929,7 @@ var Circle = function Circle(props) {
     cx: props.position.x,
     cy: props.position.y,
     r: props.radius.r
+    //clr="blue"
   });
 };
 
@@ -10858,8 +10867,13 @@ window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__());
 var DashboardPage = function (_React$Component) {
   _inherits(DashboardPage, _React$Component);
 
+<<<<<<< HEAD
   /**
    * Class constructor.
+=======
+  /**
+   * Class constructor.
+>>>>>>> c8d6d2958c4a52bc5b36c611026eea419b846fe5
    */
   function DashboardPage(props) {
     _classCallCheck(this, DashboardPage);
@@ -10873,8 +10887,13 @@ var DashboardPage = function (_React$Component) {
     return _this;
   }
 
+<<<<<<< HEAD
   /**
    * This method will be executed after initial rendering.
+=======
+  /**
+   * This method will be executed after initial rendering.
+>>>>>>> c8d6d2958c4a52bc5b36c611026eea419b846fe5
    */
 
 
@@ -10898,9 +10917,13 @@ var DashboardPage = function (_React$Component) {
         }
       });
       xhr.send();
+<<<<<<< HEAD
 
       fetch('/api/users/topscores', {
 
+=======
+      fetch('/api/users/topscores', {
+>>>>>>> c8d6d2958c4a52bc5b36c611026eea419b846fe5
         method: 'GET',
         headers: { 'Authorization': 'bearer ' + _Auth2.default.getToken(),
           'Content-Type': 'application/json' }
@@ -10911,9 +10934,13 @@ var DashboardPage = function (_React$Component) {
         _this2.setState({
           userHighScores: json
         });
+<<<<<<< HEAD
         console.log("THE HIGH SCORES", _this2.state.userHighScores);
       });
 
+=======
+      });
+>>>>>>> c8d6d2958c4a52bc5b36c611026eea419b846fe5
       // const self = this;
 
       // setInterval(() => {
@@ -10934,8 +10961,13 @@ var DashboardPage = function (_React$Component) {
     // trackMouse(event) {
     //   this.canvasMousePosition = getCanvasPosition(event);
     // }
+<<<<<<< HEAD
     /**
      * Render the component.
+=======
+    /**
+     * Render the component.
+>>>>>>> c8d6d2958c4a52bc5b36c611026eea419b846fe5
      */
 
   }, {
@@ -11025,6 +11057,12 @@ function moveObjects(state, action) {
     return object.oppId;
   });
 
+  var lostLife = _checkCollisions2.default;
+  var lives = state.gameState.lives;
+  if (lostLife) {
+    lives--;
+  }
+
   var bef = flyingObjects.length;
   flyingObjects = flyingObjects.filter(function (flyingDisc) {
     return flyingDiscsDestroyed.indexOf(flyingDisc.id);
@@ -11033,7 +11071,8 @@ function moveObjects(state, action) {
 
   return _extends({}, newState, {
     gameState: _extends({}, newState.gameState, {
-      flyingObjects: flyingObjects
+      flyingObjects: flyingObjects,
+      lives: lives
     }),
 
     //leaderboard: state.leaderboard,
@@ -20254,9 +20293,19 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
+var _react = __webpack_require__(1);
+
+var _react2 = _interopRequireDefault(_react);
+
+var _propTypes = __webpack_require__(5);
+
+var _propTypes2 = _interopRequireDefault(_propTypes);
+
 var _formulas = __webpack_require__(37);
 
 var _constants = __webpack_require__(66);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var checkCollisions = function checkCollisions(self, opps) {
   var objectsDestroyed = [];
@@ -20265,32 +20314,51 @@ var checkCollisions = function checkCollisions(self, opps) {
     y1: self.y - self.r,
     x2: self.x + self.r,
     y2: self.y + self.r
+    // color: self.color,
   };
   opps.forEach(function (opp) {
     var currentLifeTime = new Date().getTime() - opp.createdAt;
     var calculatedPosition = {
       x: opp.position.x,
-      y: opp.position.y + currentLifeTime / 8000 * _constants.gameHeight // THIS NEEDS TO BE UPDATED
+      y: opp.position.y + currentLifeTime / 8000 * _constants.gameHeight
     };
-    // const calculatedColor = {
-    //   color: opp.color,
-    // };
+
+    var calculatedColor = opp.color;
+    // const circleRadius = self.r;
+
     var rectA = {
       x1: calculatedPosition.x - 40,
       y1: calculatedPosition.y - 10,
       x2: calculatedPosition.x + 40,
-      y2: calculatedPosition.y + 10
-      // color: calculatedColor,
+      y2: calculatedPosition.y + 10,
+      rectclr: calculatedColor
     };
     // console.log(opp.id);
     if ((0, _formulas.checkCollision)(rectA, rectB)) {
       // console.log("COLLISION: ");
       // console.log(opp.id);
+<<<<<<< HEAD
+=======
+
+      // if (calculatedColor = "red"){
+>>>>>>> c8d6d2958c4a52bc5b36c611026eea419b846fe5
       objectsDestroyed.push({
         oppId: opp.id
       });
+      self.r += 1;
+
       // console.log(objectsDestroyed[0]);
     };
+<<<<<<< HEAD
+=======
+    if ((0, _formulas.checkBadCollision)(rectA, rectB)) {
+      // return self.gameState.lives - 1;
+      // self.gameState.setState({
+      //   lives: 0
+      // });
+      // console.log(objectsDestroyed[0]);
+    };
+>>>>>>> c8d6d2958c4a52bc5b36c611026eea419b846fe5
   });
   return objectsDestroyed;
 };
