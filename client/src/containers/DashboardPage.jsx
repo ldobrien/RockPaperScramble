@@ -52,18 +52,19 @@ class DashboardPage extends React.Component {
       }
     });
     xhr.send();
-      fetch('/api/users/topscores', {
-        method: 'GET',
-        headers: { 'Authorization': `bearer ${Auth.getToken()}`,
-        'Content-Type': 'application/json' }
-      }) 
-      .then(res => res.json())
-      .then(json => {
-        console.log("THE HIG JSON", json);
-        this.setState({
-          userHighScores: json
-        });
+
+    fetch('/api/users/topscores', {
+      method: 'GET',
+      headers: { 'Authorization': ${Auth.getToken()},
+      'Content-Type': 'application/json' }
+    }) 
+    .then(res => res.json())
+    .then(json => {
+      console.log("THE HIG JSON", json);
+      this.setState({
+        userHighScores: json
       });
+    });
     // const self = this;
 
     // setInterval(() => {
