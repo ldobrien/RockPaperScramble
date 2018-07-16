@@ -2810,6 +2810,12 @@ var checkCollision = exports.checkCollision = function checkCollision(rectA, rec
   ;
 };
 
+var checkBadCollision = exports.checkBadCollision = function checkBadCollision(rectA, rectB) {
+  return rectA.x1 < rectB.x2 && rectA.x2 > rectB.x1 && rectA.y1 < rectB.y2 && rectA.y2 > rectB.y1 && rectA.rectclr == "green"
+  // && rectA.color == "blue"
+  ;
+};
+
 var getCanvasPosition = exports.getCanvasPosition = function getCanvasPosition(event) {
   // mouse position on auto-scaling canvas
   // https://stackoverflow.com/a/10298843/1232793
@@ -20254,6 +20260,7 @@ var checkCollisions = function checkCollisions(self, opps) {
     };
 
     var calculatedColor = opp.color;
+    // const circleRadius = self.r;
 
     var rectA = {
       x1: calculatedPosition.x - 40,
@@ -20270,6 +20277,13 @@ var checkCollisions = function checkCollisions(self, opps) {
       objectsDestroyed.push({
         oppId: opp.id
       });
+      self.r += 1;
+
+      // console.log(objectsDestroyed[0]);
+    };
+    if ((0, _formulas.checkBadCollision)(rectA, rectB)) {
+
+      self.r -= 0.1;
 
       // console.log(objectsDestroyed[0]);
     };

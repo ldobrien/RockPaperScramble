@@ -34,6 +34,13 @@ export const checkCollision = (rectA, rectB) => (
 // && rectA.color == "blue"
 );
 
+export const checkBadCollision = (rectA, rectB) => (
+  rectA.x1 < rectB.x2 && rectA.x2 > rectB.x1 &&
+  rectA.y1 < rectB.y2 && rectA.y2 > rectB.y1 
+ && (rectA.rectclr == "green")
+// && rectA.color == "blue"
+);
+
 export const getCanvasPosition = (event) => {
   // mouse position on auto-scaling canvas
   // https://stackoverflow.com/a/10298843/1232793

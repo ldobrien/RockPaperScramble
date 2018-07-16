@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { checkCollision } from '../utils/formulas';
+import { checkBadCollision } from '../utils/formulas';
 import { gameHeight } from '../utils/constants';
 
 const checkCollisions = (self, opps) => {
@@ -19,7 +20,8 @@ const checkCollisions = (self, opps) => {
       y: opp.position.y + ((currentLifeTime / 8000) * gameHeight),
     };
 
-      const calculatedColor = opp.color;
+    const calculatedColor = opp.color;
+   // const circleRadius = self.r;
     
     const rectA = {
       x1: calculatedPosition.x - 40,
@@ -36,6 +38,15 @@ const checkCollisions = (self, opps) => {
         objectsDestroyed.push({
           oppId: opp.id,
         });
+        self.r += 1;
+
+
+      // console.log(objectsDestroyed[0]);
+    };
+     if (checkBadCollision(rectA, rectB)) {
+      
+        self.r -= 0.1;
+
 
       // console.log(objectsDestroyed[0]);
     };
