@@ -10,6 +10,8 @@ export const gameHeight = 1200;
 
 export const flyingObjectsStarterYAxis = -600;
 
+export const flyingObjectsColors = ["red", "green", "blue"];
+
 export const flyingObjectsStarterPositions = [
   -500,
   500,

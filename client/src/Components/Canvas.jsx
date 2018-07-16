@@ -3,6 +3,7 @@ import React from 'react';
 import Arena from './Arena.jsx';
 import Circle from './Circle.jsx';
 import PropTypes from 'prop-types';
+import DashboardPage from '../containers/DashboardPage.jsx';
 // import Login from './Login.jsx';
 
 import CurrentScore from './CurrentScore.jsx';
@@ -12,7 +13,7 @@ import StartGame from './StartGame.jsx';
 import Title from './Title.jsx';
 import Leaderboard from './LeaderBoard.jsx';
 import Rank from './Rank.jsx';
-import DashboardPage from '../containers/DashboardPage.jsx';
+
 
 
 const opponents = 50;
@@ -48,6 +49,7 @@ const Canvas = (props) => {
   const gameHeight = 1200;
   const viewBox = [window.innerWidth / -2, 600 - gameHeight, window.innerWidth, gameHeight];
   const leaderboard = props.leaderboard;
+
   console.log("WUT ARE DE PROPS", props);
   // [
     
@@ -61,12 +63,15 @@ const Canvas = (props) => {
   //   { id: 'h8', maxScore: 146, name: 'Sebastián Peyrott', },
   // ];
 
+
   // const viewBox = [width / -2, height / -2, width, height];
     // circles is the array of circle objects
     // console.log(props);
     // console.log(cursor);
     // console.log("X: " + props.x);
     // console.log("radius: " + props.r);
+    // const colors = ['red', 'green', 'blue'];
+    // const color = colors[Math.floor(Math.random() * colors.length)];
   return (
     <svg
       id="RockPaperScramble"
@@ -99,6 +104,7 @@ const Canvas = (props) => {
         <FlyingObject
           key={flyingObject.id}
           position={flyingObject.position}
+          color={flyingObject.color}
         />
       ))}
     </svg>
@@ -117,6 +123,7 @@ Canvas.propTypes = {
         x: PropTypes.number.isRequired,
         y: PropTypes.number.isRequired
       }).isRequired,
+      color: PropTypes.string.isRequired,
       id: PropTypes.number.isRequired,
     })).isRequired,
   }).isRequired,

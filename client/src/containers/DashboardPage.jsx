@@ -54,6 +54,7 @@ class DashboardPage extends React.Component {
     xhr.send();
 
     fetch('/api/users/topscores', {
+
                 method: 'GET',
                 headers: { 'Authorization': `bearer ${Auth.getToken()}`,
                         'Content-Type': 'application/json' }
@@ -69,7 +70,6 @@ class DashboardPage extends React.Component {
 
       
       
-
     // const self = this;
 
     // setInterval(() => {

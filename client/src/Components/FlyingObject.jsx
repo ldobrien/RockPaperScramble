@@ -23,21 +23,25 @@ const Move = styled.g`
 
 const FlyingObject = props => (
   <Move>
-    <FlyingObjectBase position={props.position} />
+    <FlyingObjectBase position={props.position} color={props.color}/>
   </Move>
 );
+
+
 
 FlyingObject.propTypes = {
   position: PropTypes.shape({
     x: PropTypes.number.isRequired,
     y: PropTypes.number.isRequired
   }).isRequired,
+  color: PropTypes.string.isRequired,
 };
 
 
 const FlyingObjectBase = (props) => {
+
   const style = {
-    fill: 'blue',
+    fill: 'green',
     stroke: '#5c5c5c',
   };
 
@@ -47,7 +51,8 @@ const FlyingObjectBase = (props) => {
       cy={props.position.y}
       rx="10"
       ry="10"
-      style={style}
+      fill ={props.color}
+      stroke = 'black'
     />
   );
 };
@@ -57,7 +62,7 @@ FlyingObjectBase.propTypes = {
     x: PropTypes.number.isRequired,
     y: PropTypes.number.isRequired
   }).isRequired,
+  color: PropTypes.string.isRequired,
 };
 
-// export default FlyingObjectBase;
 export default FlyingObject;

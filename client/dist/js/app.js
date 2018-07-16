@@ -5075,6 +5075,8 @@ var gameHeight = exports.gameHeight = 1200;
 
 var flyingObjectsStarterYAxis = exports.flyingObjectsStarterYAxis = -600;
 
+var flyingObjectsColors = exports.flyingObjectsColors = ["red", "green", "blue"];
+
 var flyingObjectsStarterPositions = exports.flyingObjectsStarterPositions = [-500, 500, 300, 130, -40, 1000, 2200, -800, -1300, 1234, -1601, -190, -622, -2087, -266, -958, 1155, -1573, -1777, -1896, -1535, -580, 1231, 527, 1484, 1367, -685, -454, -1071, -1171, 641, 1076, 938, -1772, -1120, -54, -1184, 67, -1909, 976, -376, 594, 2318, -279, 957, -1075, 2087, 2371, -261, 796, -1746, -1377, -1039, -1585, -1490, -1627, 743, -787, 686, -1272, -3000];
 
 /***/ }),
@@ -6734,6 +6736,10 @@ var _propTypes = __webpack_require__(5);
 
 var _propTypes2 = _interopRequireDefault(_propTypes);
 
+var _DashboardPage = __webpack_require__(137);
+
+var _DashboardPage2 = _interopRequireDefault(_DashboardPage);
+
 var _CurrentScore = __webpack_require__(225);
 
 var _CurrentScore2 = _interopRequireDefault(_CurrentScore);
@@ -6762,15 +6768,11 @@ var _Rank = __webpack_require__(135);
 
 var _Rank2 = _interopRequireDefault(_Rank);
 
-var _DashboardPage = __webpack_require__(137);
-
-var _DashboardPage2 = _interopRequireDefault(_DashboardPage);
-
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+var opponents = 50;
 // import Login from './Login.jsx';
 
-var opponents = 50;
 var width = window.innerWidth;
 var height = window.innerHeight;
 
@@ -6802,6 +6804,7 @@ var Canvas = function Canvas(props) {
   var gameHeight = 1200;
   var viewBox = [window.innerWidth / -2, 600 - gameHeight, window.innerWidth, gameHeight];
   var leaderboard = props.leaderboard;
+
   console.log("WUT ARE DE PROPS", props);
   // [
 
@@ -6815,12 +6818,15 @@ var Canvas = function Canvas(props) {
   //   { id: 'h8', maxScore: 146, name: 'Sebastián Peyrott', },
   // ];
 
+
   // const viewBox = [width / -2, height / -2, width, height];
   // circles is the array of circle objects
   // console.log(props);
   // console.log(cursor);
   // console.log("X: " + props.x);
   // console.log("radius: " + props.r);
+  // const colors = ['red', 'green', 'blue'];
+  // const color = colors[Math.floor(Math.random() * colors.length)];
   return _react2.default.createElement(
     'svg',
     {
@@ -6854,7 +6860,8 @@ var Canvas = function Canvas(props) {
     props.gameState.flyingObjects.map(function (flyingObject) {
       return _react2.default.createElement(_FlyingObject2.default, {
         key: flyingObject.id,
-        position: flyingObject.position
+        position: flyingObject.position,
+        color: flyingObject.color
       });
     })
   );
@@ -6872,6 +6879,7 @@ Canvas.propTypes = {
         x: _propTypes2.default.number.isRequired,
         y: _propTypes2.default.number.isRequired
       }).isRequired,
+      color: _propTypes2.default.string.isRequired,
       id: _propTypes2.default.number.isRequired
     })).isRequired
   }).isRequired,
@@ -10605,26 +10613,19 @@ var App = function (_Component) {
   }, {
     key: 'render',
     value: function render() {
-      var _this2 = this;
+      var _this2 = this,
+          _React$createElement;
 
       return _react2.default.createElement(
         'div',
         null,
-        _react2.default.createElement(_Canvas2.default
-        // angle={this.props.angle}
-        , { leaderboard: this.props.leaderboard,
-          x: this.props.x,
-          y: this.props.y,
-          r: this.props.r,
-          gameState: this.props.gameState,
-          startGame: this.props.startGame,
-          trackMouse: function trackMouse(event) {
-            return _this2.trackMouse(event);
-          }
-          // leaderboard=
-          // width={this.props.width}
-          // height={this.props.height}
-        })
+        _react2.default.createElement(_Canvas2.default, (_React$createElement = {
+
+          leaderboard: this.props.leaderboard
+          // angle={this.props.angle}
+        }, _defineProperty(_React$createElement, 'leaderboard', this.props.leaderboard), _defineProperty(_React$createElement, 'x', this.props.x), _defineProperty(_React$createElement, 'y', this.props.y), _defineProperty(_React$createElement, 'r', this.props.r), _defineProperty(_React$createElement, 'gameState', this.props.gameState), _defineProperty(_React$createElement, 'startGame', this.props.startGame), _defineProperty(_React$createElement, 'trackMouse', function trackMouse(event) {
+          return _this2.trackMouse(event);
+        }), _React$createElement))
       );
     }
   }]);
@@ -10899,6 +10900,7 @@ var DashboardPage = function (_React$Component) {
       xhr.send();
 
       fetch('/api/users/topscores', {
+
         method: 'GET',
         headers: { 'Authorization': 'bearer ' + _Auth2.default.getToken(),
           'Content-Type': 'application/json' }
@@ -11012,28 +11014,30 @@ function moveObjects(state, action) {
       y = _ref.y;
 
   var newState = (0, _createFlyingObjects2.default)(state);
-  // const newStateGameState = newState.gameState;
   var now = new Date().getTime();
   var flyingObjects = newState.gameState.flyingObjects.filter(function (object) {
     return now - object.createdAt < 8000;
   });
 
-  var objectsDestroyed = (0, _checkCollisions2.default)(x, y, state.r, flyingObjects);
+  var objectsDestroyed = (0, _checkCollisions2.default)(state, flyingObjects);
   // console.log(objectsDestroyed.length);
   var flyingDiscsDestroyed = objectsDestroyed.map(function (object) {
-    return object.flyingDiscId;
+    return object.oppId;
   });
-  // console.log(flyingDiscsDestroyed.length);
-  // console.log(flyingDiscsDestroyed);
+
+  var bef = flyingObjects.length;
   flyingObjects = flyingObjects.filter(function (flyingDisc) {
     return flyingDiscsDestroyed.indexOf(flyingDisc.id);
   });
+  // console.log("AFTER ---- ", (bef === flyingObjects.length));
 
   return _extends({}, newState, {
     gameState: _extends({}, newState.gameState, {
       flyingObjects: flyingObjects
     }),
+
     //leaderboard: state.leaderboard,
+
     x: x,
     y: y,
     r: state.r
@@ -19164,7 +19168,7 @@ var FlyingObject = function FlyingObject(props) {
   return _react2.default.createElement(
     Move,
     null,
-    _react2.default.createElement(FlyingObjectBase, { position: props.position })
+    _react2.default.createElement(FlyingObjectBase, { position: props.position, color: props.color })
   );
 };
 
@@ -19172,12 +19176,14 @@ FlyingObject.propTypes = {
   position: _propTypes2.default.shape({
     x: _propTypes2.default.number.isRequired,
     y: _propTypes2.default.number.isRequired
-  }).isRequired
+  }).isRequired,
+  color: _propTypes2.default.string.isRequired
 };
 
 var FlyingObjectBase = function FlyingObjectBase(props) {
+
   var style = {
-    fill: 'blue',
+    fill: 'green',
     stroke: '#5c5c5c'
   };
 
@@ -19186,7 +19192,8 @@ var FlyingObjectBase = function FlyingObjectBase(props) {
     cy: props.position.y,
     rx: '10',
     ry: '10',
-    style: style
+    fill: props.color,
+    stroke: 'black'
   });
 };
 
@@ -19194,10 +19201,10 @@ FlyingObjectBase.propTypes = {
   position: _propTypes2.default.shape({
     x: _propTypes2.default.number.isRequired,
     y: _propTypes2.default.number.isRequired
-  }).isRequired
+  }).isRequired,
+  color: _propTypes2.default.string.isRequired
 };
 
-// export default FlyingObjectBase;
 exports.default = FlyingObject;
 
 /***/ }),
@@ -20210,6 +20217,7 @@ var mapStateToProps = function mapStateToProps(state) {
     x: state.x,
     y: state.y,
     r: state.r,
+    color: state.color,
     gameState: state.gameState
     // leaderboard: prop.leaderboard,
     // width: state.wide,
@@ -20250,13 +20258,13 @@ var _formulas = __webpack_require__(37);
 
 var _constants = __webpack_require__(66);
 
-var checkCollisions = function checkCollisions(x, y, r, opps) {
+var checkCollisions = function checkCollisions(self, opps) {
   var objectsDestroyed = [];
   var rectB = {
-    x1: x - r,
-    y1: y - r,
-    x2: x + r,
-    y2: y + r
+    x1: self.x - self.r,
+    y1: self.y - self.r,
+    x2: self.x + self.r,
+    y2: self.y + self.r
   };
   opps.forEach(function (opp) {
     var currentLifeTime = new Date().getTime() - opp.createdAt;
@@ -20264,15 +20272,20 @@ var checkCollisions = function checkCollisions(x, y, r, opps) {
       x: opp.position.x,
       y: opp.position.y + currentLifeTime / 8000 * _constants.gameHeight // THIS NEEDS TO BE UPDATED
     };
+    // const calculatedColor = {
+    //   color: opp.color,
+    // };
     var rectA = {
       x1: calculatedPosition.x - 40,
       y1: calculatedPosition.y - 10,
       x2: calculatedPosition.x + 40,
       y2: calculatedPosition.y + 10
+      // color: calculatedColor,
     };
     // console.log(opp.id);
     if ((0, _formulas.checkCollision)(rectA, rectB)) {
-      console.log("COLLISION");
+      // console.log("COLLISION: ");
+      // console.log(opp.id);
       objectsDestroyed.push({
         oppId: opp.id
       });
@@ -20316,11 +20329,15 @@ exports.default = function (state) {
   var id = new Date().getTime();
   var predefinedPosition = Math.floor(Math.random() * 60);
   var flyingObjectPosition = _constants.flyingObjectsStarterPositions[predefinedPosition];
+  //broke cursor circle when I changed this:
+  var numberOfColors = Math.floor(Math.random() * 3);
+  var flyingObjectsColor = _constants.flyingObjectsColors[numberOfColors];
   var newFlyingObject = {
     position: {
       x: flyingObjectPosition,
       y: _constants.flyingObjectsStarterYAxis
     },
+    color: flyingObjectsColor,
     createdAt: new Date().getTime(),
     id: id
   };
@@ -20376,6 +20393,7 @@ var initialState = {
   x: 0,
   y: 0,
   r: 30,
+  color: "yellow",
   team: "Rock",
   // circles: [],
   // wide: 100,
