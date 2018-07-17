@@ -53,6 +53,7 @@ const Canvas = (props) => {
     // console.log("radius: " + props.r);
     // const colors = ['red', 'green', 'blue'];
     // const color = colors[Math.floor(Math.random() * colors.length)];
+    // console.log(props.score);
   return (
     <svg
       id="RockPaperScramble"
@@ -70,7 +71,7 @@ const Canvas = (props) => {
 
      <Circle position={{x: props.x, y: props.y}} radius={{r: props.r}}/>
 
-     <CurrentScore score={15}/>
+     <CurrentScore score={props.score}/>
       <Heart position={{x: -600, y: 35}} />
       
       { ! props.gameState.started &&
@@ -95,6 +96,7 @@ const Canvas = (props) => {
 Canvas.propTypes = {
   x: PropTypes.number.isRequired,
   y: PropTypes.number.isRequired,
+  score: PropTypes.number.isRequired,
   gameState: PropTypes.shape({
     started: PropTypes.bool.isRequired,
     kills: PropTypes.number.isRequired,
