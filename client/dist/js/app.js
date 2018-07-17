@@ -6835,6 +6835,7 @@ var Canvas = function Canvas(props) {
   // console.log("radius: " + props.r);
   // const colors = ['red', 'green', 'blue'];
   // const color = colors[Math.floor(Math.random() * colors.length)];
+  // console.log(props.score);
   return _react2.default.createElement(
     'svg',
     {
@@ -6854,7 +6855,7 @@ var Canvas = function Canvas(props) {
     ),
     _react2.default.createElement(_Arena2.default, { position: { x: props.x, y: props.y } }),
     _react2.default.createElement(_Circle2.default, { position: { x: props.x, y: props.y }, radius: { r: props.r } }),
-    _react2.default.createElement(_CurrentScore2.default, { score: 15 }),
+    _react2.default.createElement(_CurrentScore2.default, { score: props.score }),
     _react2.default.createElement(_Heart2.default, { position: { x: -600, y: 35 } }),
     !props.gameState.started && _react2.default.createElement(
       'g',
@@ -6878,6 +6879,7 @@ var Canvas = function Canvas(props) {
 Canvas.propTypes = {
   x: _propTypes2.default.number.isRequired,
   y: _propTypes2.default.number.isRequired,
+  score: _propTypes2.default.number.isRequired,
   gameState: _propTypes2.default.shape({
     started: _propTypes2.default.bool.isRequired,
     kills: _propTypes2.default.number.isRequired,
@@ -10632,7 +10634,7 @@ var App = function (_Component) {
 
           leaderboard: this.props.leaderboard
           // angle={this.props.angle}
-        }, _defineProperty(_React$createElement, 'leaderboard', this.props.leaderboard), _defineProperty(_React$createElement, 'x', this.props.x), _defineProperty(_React$createElement, 'y', this.props.y), _defineProperty(_React$createElement, 'r', this.props.r), _defineProperty(_React$createElement, 'gameState', this.props.gameState), _defineProperty(_React$createElement, 'startGame', this.props.startGame), _defineProperty(_React$createElement, 'trackMouse', function trackMouse(event) {
+        }, _defineProperty(_React$createElement, 'leaderboard', this.props.leaderboard), _defineProperty(_React$createElement, 'x', this.props.x), _defineProperty(_React$createElement, 'y', this.props.y), _defineProperty(_React$createElement, 'r', this.props.r), _defineProperty(_React$createElement, 'score', this.props.score), _defineProperty(_React$createElement, 'gameState', this.props.gameState), _defineProperty(_React$createElement, 'startGame', this.props.startGame), _defineProperty(_React$createElement, 'trackMouse', function trackMouse(event) {
           return _this2.trackMouse(event);
         }), _React$createElement))
       );
@@ -10869,7 +10871,6 @@ var DashboardPage = function (_React$Component) {
 
   /**
    * Class constructor.
-
    */
   function DashboardPage(props) {
     _classCallCheck(this, DashboardPage);
@@ -10882,6 +10883,7 @@ var DashboardPage = function (_React$Component) {
     };
     return _this;
   }
+
   /**
    * This method will be executed after initial rendering.
    */
@@ -10915,11 +10917,10 @@ var DashboardPage = function (_React$Component) {
       }).then(function (res) {
         return res.json();
       }).then(function (json) {
-        console.log("THE HIG JSON", json);
+        // console.log("THE HIG JSON", json);
         _this2.setState({
           userHighScores: json
         });
-        console.log("THE HIGH SCORES", _this2.state.userHighScores);
       });
 
       // const self = this;
@@ -10942,7 +10943,6 @@ var DashboardPage = function (_React$Component) {
     // trackMouse(event) {
     //   this.canvasMousePosition = getCanvasPosition(event);
     // }
-
     /**
      * Render the component.
      */
@@ -19084,6 +19084,7 @@ var CurrentScore = function CurrentScore(props) {
     fontSize: 80,
     fill: '#ffffba'
   };
+  // console.log(props.score);
 
   return _react2.default.createElement(
     'g',
@@ -20233,11 +20234,10 @@ var mapStateToProps = function mapStateToProps(state) {
     x: state.x,
     y: state.y,
     r: state.r,
+    score: state.score,
     color: state.color,
     gameState: state.gameState
-    // leaderboard: prop.leaderboard,
-    // width: state.wide,
-    // height: state.high,
+
   };
 };
 
@@ -20312,13 +20312,19 @@ var checkCollisions = function checkCollisions(self, opps) {
     };
     // console.log(opp.id);
     if ((0, _formulas.checkCollision)(rectA, rectB)) {
+
       // console.log("COLLISION: ");
       // console.log(opp.id);
+
       // if (calculatedColor = "red"){
       objectsDestroyed.push({
         oppId: opp.id
       });
       self.r += 1;
+      self.score += 1;
+
+      // console.log(self.score);
+
 
       // console.log(objectsDestroyed[0]);
     };
@@ -20431,13 +20437,16 @@ var initialState = {
   x: 0,
   y: 0,
   r: 30,
+  score: 0,
   color: "yellow",
   team: "Rock",
   // circles: [],
   // wide: 100,
   // high: 100,
+
   gameState: initialGameState
   //leaderboard: [1,2,3,4]
+
 };
 
 function reducer() {

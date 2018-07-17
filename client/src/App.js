@@ -51,6 +51,7 @@ class App extends Component {
           x={this.props.x}
           y={this.props.y}
           r={this.props.r}
+          score={this.props.score}
           gameState={this.props.gameState}
           startGame={this.props.startGame}
           trackMouse={event => (this.trackMouse(event))}
