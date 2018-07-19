@@ -45,6 +45,8 @@ const checkCollisions = (self, opps) => {
       // console.log(objectsDestroyed[0]);
     };
      if (checkBadCollision(rectA, rectB)) {
+
+      //
       // return self.gameState.lives - 1;
       // self.gameState.setState({
       //   lives: 0
