@@ -54,6 +54,7 @@ const checkCollisions = (self, opps) => {
       //   lives: 0
       // });
       // console.log(objectsDestroyed[0]);
+      
     };
   });
   return objectsDestroyed;

@@ -50,7 +50,7 @@ const Canvas = (props) => {
   const viewBox = [window.innerWidth / -2, 600 - gameHeight, window.innerWidth, gameHeight];
   const leaderboard = props.leaderboard;
 
-  console.log("WUT ARE DE PROPS", props);
+
   // [
     
   //   { id: 'd4', maxScore: 82, name: 'Ado Kukic', },

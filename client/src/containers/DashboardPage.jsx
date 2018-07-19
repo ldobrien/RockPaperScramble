@@ -16,6 +16,7 @@ import 'whatwg-fetch';
 
 
 
+
 var store = createStore(reducer, /* preloadedState, */
     window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__(),);
 
@@ -65,6 +66,15 @@ class DashboardPage extends React.Component {
         userHighScores: json
       });
       });
+
+    
+    fetch('/api/users/topscores', {
+      method: 'PUT',
+       headers: { 'Authorization': `bearer ${Auth.getToken()}`,
+      'Content-Type': 'application/json' }
+    })
+     .then(res => res.json())
+     .then(data => Game.state.score)
 
       
       
