@@ -42,4 +42,16 @@ router.get('/users/topscores', (req, res) => {
     });
 });
 
+router.put('/users/topscores', (req,res) => {
+    User.findByIdAndUpdate(req.params._id, { $set: {maxScore: req.body}}, 
+        function(err,score) {
+            if (err) {
+                res.send(err);
+            } else {
+                res.send(score);
+            }
+    });
+});
+
+
 module.exports = router;

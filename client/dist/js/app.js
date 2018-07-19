@@ -6813,7 +6813,6 @@ var Canvas = function Canvas(props) {
   var viewBox = [window.innerWidth / -2, 600 - gameHeight, window.innerWidth, gameHeight];
   var leaderboard = props.leaderboard;
 
-  console.log("WUT ARE DE PROPS", props);
   // [
 
   //   { id: 'd4', maxScore: 82, name: 'Ado Kukic', },
@@ -10921,6 +10920,16 @@ var DashboardPage = function (_React$Component) {
         _this2.setState({
           userHighScores: json
         });
+      });
+
+      fetch('/api/users/topscores', {
+        method: 'PUT',
+        headers: { 'Authorization': 'bearer ' + _Auth2.default.getToken(),
+          'Content-Type': 'application/json' }
+      }).then(function (res) {
+        return res.json();
+      }).then(function (data) {
+        return _game2.default.state.score;
       });
 
       // const self = this;
@@ -20334,6 +20343,7 @@ var checkCollisions = function checkCollisions(self, opps) {
       //   lives: 0
       // });
       // console.log(objectsDestroyed[0]);
+
     };
   });
   return objectsDestroyed;
