@@ -3,7 +3,8 @@ import createFlyingObjects from './createFlyingObjects';
 // import { easeElastic } from "d3-ease";
 import { PropTypes } from 'react'
 import checkCollisions from './checkCollisions';
-import checkBadCollisions from './checkCollisions';
+import checkBadCollisions from './checkBadCollisions';
+import initialGameState from './index.js'
 
 function moveObjects(state, action) {
   // if (!action.mousePosition) return state;
@@ -16,14 +17,16 @@ function moveObjects(state, action) {
   let flyingObjects = newState.gameState.flyingObjects.filter(object => (
     (now - object.createdAt) < 8000
   ));
-
+  let lives = state.gameState.lives;
+  const endGame = checkBadCollisions(state, flyingObjects);
   const objectsDestroyed = checkCollisions(state, flyingObjects);
   // console.log(objectsDestroyed.length);
   const flyingDiscsDestroyed = objectsDestroyed.map(object => (object.oppId));
   
-  const lostLife = checkBadCollisions;
-  let lives = state.gameState.lives;
-  if (lostLife) {
+  
+  // console.log("END: " + endGame);
+  if (endGame === true) { 
+    // console.log("BAD COLLISION");
     lives--;
   }
 

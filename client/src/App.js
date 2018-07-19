@@ -41,10 +41,14 @@ class App extends Component {
   }
 
   render() {
-    return (
-      <div>
-        <Canvas 
+    // if(self.props.gameState.lives <= 0){
+    //   return(
+    //     <div>
+    //     <leaderboard
+    //     leaderboard = {this.props.leaderboard}
+    //     />
 
+<<<<<<< HEAD
         leaderboard = {this.props.leaderboard}
         	// angle={this.props.angle}
           leaderboard={this.props.leaderboard}
@@ -59,11 +63,34 @@ class App extends Component {
           // width={this.props.width}
           // height={this.props.height}
         />
+=======
+    //   </div>
+    //   );
+    // }
+    // else {
+      return (
+        <div>
+          <Canvas 
+>>>>>>> d435fa92c14c7dd0751af62a787a7eefebfc6751
 
-      </div>
-    );
+          leaderboard = {this.props.leaderboard}
+          	// angle={this.props.angle}
+          	x={this.props.x}
+          	y={this.props.y}
+            r={this.props.r}
+            score={this.props.score}
+            gameState={this.props.gameState}
+            startGame={this.props.startGame}
+          	trackMouse={event => (this.trackMouse(event))}
+            // width={this.props.width}
+            // height={this.props.height}
+          />
+
+        </div>
+      );
+    }
   }
-}
+// }
 
 App.propTypes = {
   x: PropTypes.number.isRequired,
