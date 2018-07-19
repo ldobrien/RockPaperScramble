@@ -32,6 +32,7 @@ const checkCollisions = (self, opps) => {
     };
     // console.log(opp.id);
     if (checkCollision(rectA, rectB)) {
+
       // console.log("COLLISION: ");
       // console.log(opp.id);
 
@@ -40,6 +41,9 @@ const checkCollisions = (self, opps) => {
           oppId: opp.id,
         });
         self.r += 1;
+        self.score += 1;
+
+        // console.log(self.score);
 
 
       // console.log(objectsDestroyed[0]);
