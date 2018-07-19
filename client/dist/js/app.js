@@ -10986,6 +10986,10 @@ var _checkCollisions = __webpack_require__(238);
 
 var _checkCollisions2 = _interopRequireDefault(_checkCollisions);
 
+var _index = __webpack_require__(240);
+
+var _index2 = _interopRequireDefault(_index);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function moveObjects(state, action) {
@@ -11009,10 +11013,8 @@ function moveObjects(state, action) {
     return object.oppId;
   });
 
-  var lostLife = _checkCollisions2.default;
-  var lives = state.gameState.lives;
-  if (lostLife) {
-    lives--;
+  if (_checkCollisions2.default) {
+    // this.state = initialGameState;
   }
 
   var bef = flyingObjects.length;
@@ -11023,8 +11025,7 @@ function moveObjects(state, action) {
 
   return _extends({}, newState, {
     gameState: _extends({}, newState.gameState, {
-      flyingObjects: flyingObjects,
-      lives: lives
+      flyingObjects: flyingObjects
     }),
     leaderboard: state.leaderboard,
     x: x,

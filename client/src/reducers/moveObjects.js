@@ -4,6 +4,7 @@ import createFlyingObjects from './createFlyingObjects';
 import { PropTypes } from 'react'
 import checkCollisions from './checkCollisions';
 import checkBadCollisions from './checkCollisions';
+import initialGameState from './index.js'
 
 function moveObjects(state, action) {
   // if (!action.mousePosition) return state;
@@ -20,11 +21,10 @@ function moveObjects(state, action) {
   const objectsDestroyed = checkCollisions(state, flyingObjects);
   // console.log(objectsDestroyed.length);
   const flyingDiscsDestroyed = objectsDestroyed.map(object => (object.oppId));
-  
-  const lostLife = checkBadCollisions;
-  let lives = state.gameState.lives;
-  if (lostLife) {
-    lives--;
+
+
+  if (checkBadCollisions) { 
+    // this.state = initialGameState;
   }
 
   
@@ -37,7 +37,6 @@ function moveObjects(state, action) {
     gameState: {
       ...newState.gameState,
       flyingObjects,
-      lives,
     },
     leaderboard: state.leaderboard,
     x: x,
