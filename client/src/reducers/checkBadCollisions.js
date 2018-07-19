@@ -4,8 +4,8 @@ import { checkCollision } from '../utils/formulas';
 import { checkBadCollision } from '../utils/formulas';
 import { gameHeight } from '../utils/constants';
 
-const checkCollisions = (self, opps) => {
-  const objectsDestroyed = [];
+const checkBadCollisions = (self, opps) => {
+  let flag= false;
   const rectB = {
     x1: self.x - self.r,
     y1: self.y - self.r,
@@ -31,26 +31,12 @@ const checkCollisions = (self, opps) => {
       rectclr:calculatedColor,
     };
     // console.log(opp.id);
-    if (checkCollision(rectA, rectB)) {
-
-      // console.log("COLLISION: ");
-      // console.log(opp.id);
-
-      // if (calculatedColor = "red"){
-        objectsDestroyed.push({
-          oppId: opp.id,
-        });
-        self.r += 1;
-        self.score += 1;
-
-        // console.log(self.score);
-
-
-      // console.log(objectsDestroyed[0]);
-    };
-     
+    if (checkBadCollision(rectA, rectB)){
+      // console.log("BAD BAD BAD");
+      flag = true;
+    }
   });
-  return objectsDestroyed;
+  return flag;
 };
 
-export default checkCollisions;
+export default checkBadCollisions;

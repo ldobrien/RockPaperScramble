@@ -6783,81 +6783,55 @@ var opponents = 50;
 
 var width = window.innerWidth;
 var height = window.innerHeight;
-// let circles = [];
-// function addOpponents(){
-//       for(var i = 0; i < 50; i++){
-//         circles.push({position:{
-//           x:Math.random() * (2*width) - width, 
-//           y:Math.random() * (2*height) - height},
-//           r:15})
-//       }
-//     }
-
-// addOpponents();
-// var xhttp = new XMLHttpRequest();
-// var leaderboard;
-// xhttp.onreadystatechange = function(){
-//   if(this.readyState == 4 && this.status == 200){
-//     leaderboard = JSON.parse(this.response);
-//   }
-// };
-// xhttp.open("GET", "/getusers", true);
-// xhttp.send();
-// const db = mongoose;
-// var cursor = db.collection('users').find({});
-
 
 var Canvas = function Canvas(props) {
   var gameHeight = 1200;
   var viewBox = [window.innerWidth / -2, 600 - gameHeight, window.innerWidth, gameHeight];
   var leaderboard = props.leaderboard;
-  // const viewBox = [width / -2, height / -2, width, height];
-  // circles is the array of circle objects
-  // console.log(props);
-  // console.log(cursor);
-  // console.log("X: " + props.x);
-  // console.log("radius: " + props.r);
-  // const colors = ['red', 'green', 'blue'];
-  // const color = colors[Math.floor(Math.random() * colors.length)];
-  // console.log(props.score);
-  return _react2.default.createElement(
-    'svg',
-    {
-      id: 'RockPaperScramble'
-      // preserveAspectRatio="xMaxYMax none"
-      , onMouseMove: props.trackMouse,
-      viewBox: viewBox
-    },
-    _react2.default.createElement(
-      'defs',
-      null,
+  var lives = props.gameState.lives;
+  console.log(lives);
+  if (lives <= 0) {
+    return _react2.default.createElement(_LeaderBoard2.default, { currentPlayer: leaderboard[3], leaderboard: leaderboard });
+  } else {
+    return _react2.default.createElement(
+      'svg',
+      {
+        id: 'RockPaperScramble'
+        // preserveAspectRatio="xMaxYMax none"
+        , onMouseMove: props.trackMouse,
+        viewBox: viewBox
+      },
       _react2.default.createElement(
-        'filter',
-        { id: 'shadow' },
-        _react2.default.createElement('feDropShadow', { dx: '1', dy: '1', stdDeviation: '2' })
-      )
-    ),
-    _react2.default.createElement(_Arena2.default, { position: { x: props.x, y: props.y } }),
-    _react2.default.createElement(_Circle2.default, { position: { x: props.x, y: props.y }, radius: { r: props.r } }),
-    _react2.default.createElement(_CurrentScore2.default, { score: props.score }),
-    _react2.default.createElement(_Heart2.default, { position: { x: -600, y: 35 } }),
-    !props.gameState.started && _react2.default.createElement(
-      'g',
-      null,
-      _react2.default.createElement(_StartGame2.default, { onClick: function onClick() {
-          return props.startGame();
-        } }),
-      _react2.default.createElement(_Title2.default, null),
-      _react2.default.createElement(_LeaderBoard2.default, { currentPlayer: leaderboard[3], leaderboard: leaderboard })
-    ),
-    props.gameState.flyingObjects.map(function (flyingObject) {
-      return _react2.default.createElement(_FlyingObject2.default, {
-        key: flyingObject.id,
-        position: flyingObject.position,
-        color: flyingObject.color
-      });
-    })
-  );
+        'defs',
+        null,
+        _react2.default.createElement(
+          'filter',
+          { id: 'shadow' },
+          _react2.default.createElement('feDropShadow', { dx: '1', dy: '1', stdDeviation: '2' })
+        )
+      ),
+      _react2.default.createElement(_Arena2.default, { position: { x: props.x, y: props.y } }),
+      _react2.default.createElement(_Circle2.default, { position: { x: props.x, y: props.y }, radius: { r: props.r } }),
+      _react2.default.createElement(_CurrentScore2.default, { score: props.score }),
+      _react2.default.createElement(_Heart2.default, { position: { x: -600, y: 35 } }),
+      !props.gameState.started && _react2.default.createElement(
+        'g',
+        null,
+        _react2.default.createElement(_StartGame2.default, { onClick: function onClick() {
+            return props.startGame();
+          } }),
+        _react2.default.createElement(_Title2.default, null),
+        _react2.default.createElement(_LeaderBoard2.default, { currentPlayer: leaderboard[3], leaderboard: leaderboard })
+      ),
+      props.gameState.flyingObjects.map(function (flyingObject) {
+        return _react2.default.createElement(_FlyingObject2.default, {
+          key: flyingObject.id,
+          position: flyingObject.position,
+          color: flyingObject.color
+        });
+      })
+    );
+  }
 };
 
 Canvas.propTypes = {
@@ -10598,6 +10572,17 @@ var App = function (_Component) {
     value: function render() {
       var _this2 = this;
 
+      // if(self.props.gameState.lives <= 0){
+      //   return(
+      //     <div>
+      //     <leaderboard
+      //     leaderboard = {this.props.leaderboard}
+      //     />
+
+      //   </div>
+      //   );
+      // }
+      // else {
       return _react2.default.createElement(
         'div',
         null,
@@ -10623,6 +10608,7 @@ var App = function (_Component) {
 
   return App;
 }(_react.Component);
+// }
 
 App.propTypes = _defineProperty({
   x: _propTypes2.default.number.isRequired,
@@ -11061,6 +11047,10 @@ var _checkCollisions = __webpack_require__(239);
 
 var _checkCollisions2 = _interopRequireDefault(_checkCollisions);
 
+var _checkBadCollisions = __webpack_require__(536);
+
+var _checkBadCollisions2 = _interopRequireDefault(_checkBadCollisions);
+
 var _index = __webpack_require__(138);
 
 var _index2 = _interopRequireDefault(_index);
@@ -11081,15 +11071,18 @@ function moveObjects(state, action) {
   var flyingObjects = newState.gameState.flyingObjects.filter(function (object) {
     return now - object.createdAt < 8000;
   });
-
+  var lives = state.gameState.lives;
+  var endGame = (0, _checkBadCollisions2.default)(state, flyingObjects);
   var objectsDestroyed = (0, _checkCollisions2.default)(state, flyingObjects);
   // console.log(objectsDestroyed.length);
   var flyingDiscsDestroyed = objectsDestroyed.map(function (object) {
     return object.oppId;
   });
 
-  if (_checkCollisions2.default) {
-    // this.state = initialGameState;
+  // console.log("END: " + endGame);
+  if (endGame === true) {
+    // console.log("BAD COLLISION");
+    lives--;
   }
 
   var bef = flyingObjects.length;
@@ -11100,7 +11093,8 @@ function moveObjects(state, action) {
 
   return _extends({}, newState, {
     gameState: _extends({}, newState.gameState, {
-      flyingObjects: flyingObjects
+      flyingObjects: flyingObjects,
+      lives: lives
     }),
     leaderboard: state.leaderboard,
     x: x,
@@ -20285,10 +20279,9 @@ var mapStateToProps = function mapStateToProps(state) {
     r: state.r,
     score: state.score,
     color: state.color,
-    gameState: state.gameState
+    gameState: state.gameState,
+    lives: state.gameState.lives
 
-    // width: state.wide,
-    // height: state.high,
   };
 };
 
@@ -20377,15 +20370,6 @@ var checkCollisions = function checkCollisions(self, opps) {
       // console.log(self.score);
 
 
-      // console.log(objectsDestroyed[0]);
-    };
-    if ((0, _formulas.checkBadCollision)(rectA, rectB)) {
-
-      //
-      // return self.gameState.lives - 1;
-      // self.gameState.setState({
-      //   lives: 0
-      // });
       // console.log(objectsDestroyed[0]);
     };
   });
@@ -52253,6 +52237,68 @@ _reactDom2.default.render(_react2.default.createElement(
   { muiTheme: (0, _getMuiTheme2.default)() },
   _react2.default.createElement(_reactRouter.Router, { history: _reactRouter.browserHistory, routes: _routes2.default })
 ), document.getElementById('react-app'));
+
+/***/ }),
+/* 536 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _react = __webpack_require__(1);
+
+var _react2 = _interopRequireDefault(_react);
+
+var _propTypes = __webpack_require__(5);
+
+var _propTypes2 = _interopRequireDefault(_propTypes);
+
+var _formulas = __webpack_require__(37);
+
+var _constants = __webpack_require__(66);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var checkBadCollisions = function checkBadCollisions(self, opps) {
+  var flag = false;
+  var rectB = {
+    x1: self.x - self.r,
+    y1: self.y - self.r,
+    x2: self.x + self.r,
+    y2: self.y + self.r
+    // color: self.color,
+  };
+  opps.forEach(function (opp) {
+    var currentLifeTime = new Date().getTime() - opp.createdAt;
+    var calculatedPosition = {
+      x: opp.position.x,
+      y: opp.position.y + currentLifeTime / 8000 * _constants.gameHeight
+    };
+
+    var calculatedColor = opp.color;
+    // const circleRadius = self.r;
+
+    var rectA = {
+      x1: calculatedPosition.x - 40,
+      y1: calculatedPosition.y - 10,
+      x2: calculatedPosition.x + 40,
+      y2: calculatedPosition.y + 10,
+      rectclr: calculatedColor
+    };
+    // console.log(opp.id);
+    if ((0, _formulas.checkBadCollision)(rectA, rectB)) {
+      // console.log("BAD BAD BAD");
+      flag = true;
+    }
+  });
+  return flag;
+};
+
+exports.default = checkBadCollisions;
 
 /***/ })
 /******/ ]);
