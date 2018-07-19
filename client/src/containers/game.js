@@ -8,10 +8,11 @@ const mapStateToProps = state => ({
   x: state.x,
   y: state.y,
   r: state.r,
+  score: state.score,
   color: state.color,
   gameState: state.gameState,
-  // width: state.wide,
-  // height: state.high,
+  lives: state.gameState.lives,
+
 });
 
 const mapDispatchToProps = dispatch => ({

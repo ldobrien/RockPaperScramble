@@ -17,12 +17,14 @@ const initialState = {
     x: 0,
     y: 0,
     r: 30,
+    score: 0,
     color: "yellow",
     team: "Rock",
     // circles: [],
     // wide: 100,
     // high: 100,
     gameState: initialGameState,
+    
 };
 
 
