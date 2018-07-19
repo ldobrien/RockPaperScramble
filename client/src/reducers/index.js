@@ -12,17 +12,12 @@ const initialGameState = {
   lastObjectCreatedAt: new Date(),
 };
 const initialState = {
-	// angle: 45,
-  // direction: "UP",
     x: 0,
     y: 0,
     r: 30,
     score: 0,
     color: "yellow",
     team: "Rock",
-    // circles: [],
-    // wide: 100,
-    // high: 100,
     gameState: initialGameState,
     
 };
@@ -30,8 +25,6 @@ const initialState = {
 
 function reducer(state = initialState, action) {
   switch (action.type) {
-    // case COLLIDE:
-    //   return onCollide(state, action, {this.props.r}, )
     case MOVE_OBJECTS:
       return moveObjects(state, action);
     case START_GAME:

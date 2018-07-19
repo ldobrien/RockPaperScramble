@@ -10431,9 +10431,6 @@ window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__());
 var DashboardPage = function (_React$Component) {
   _inherits(DashboardPage, _React$Component);
 
-  /**
-   * Class constructor.
-   */
   function DashboardPage(props) {
     _classCallCheck(this, DashboardPage);
 
@@ -10446,21 +10443,14 @@ var DashboardPage = function (_React$Component) {
     return _this;
   }
 
-  /**
-   * This method will be executed after initial rendering.
-   */
-
-
   _createClass(DashboardPage, [{
     key: 'componentDidMount',
     value: function componentDidMount() {
       var _this2 = this;
 
-      // const self = this;
       var xhr = new XMLHttpRequest();
       xhr.open('get', '/api/dashboard');
       xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
-      // set the authorization HTTP header
       xhr.setRequestHeader('Authorization', 'bearer ' + _Auth2.default.getToken());
       xhr.responseType = 'json';
       xhr.addEventListener('load', function () {
@@ -10479,52 +10469,15 @@ var DashboardPage = function (_React$Component) {
       }).then(function (res) {
         return res.json();
       }).then(function (json) {
-        // console.log("THE HIG JSON", json);
         _this2.setState({
           userHighScores: json
         });
       });
-      // const self = this;
-
-      // setInterval(() => {
-      //     self.props.moveObjects(self.canvasMousePosition);
-      // }, 10);
-      // setInterval(() => {
-      //     self.props.onCollide(self.canvasMousePosition);
-      // }, 1);
-
-      // window.onresize = () => {
-      //   const cnv = document.getElementById('RockPaperScramble');
-      //   cnv.style.width = `${window.innerWidth}px`;
-      //   cnv.style.height = `${window.innerHeight}px`;
-      // };
-      // window.onresize();
     }
-
-    // trackMouse(event) {
-    //   this.canvasMousePosition = getCanvasPosition(event);
-    // }
-    /**
-     * Render the component.
-     */
-
   }, {
     key: 'render',
     value: function render() {
-      //   // export default function configureStore(initialState) {
-      //   const store = createStore(reducer, /* preloadedState, */
-      //   window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__(),);
-      //   if (module.hot) {
-      //   // Enable Webpack hot module replacement for reducers
-      //   module.hot.accept('../reducers', () => {
-      //     const nextRootReducer = require('../reducers/index');
-      //     store.replaceReducer(nextRootReducer);
-      //   });
-      // }
 
-      //     reducer, /* preloadedState, */
-      //     window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__(),
-      // );
       return _react2.default.createElement(
         'div',
         null,
@@ -17669,43 +17622,11 @@ var opponents = 50;
 
 var width = window.innerWidth;
 var height = window.innerHeight;
-// let circles = [];
-// function addOpponents(){
-//       for(var i = 0; i < 50; i++){
-//         circles.push({position:{
-//           x:Math.random() * (2*width) - width, 
-//           y:Math.random() * (2*height) - height},
-//           r:15})
-//       }
-//     }
-
-// addOpponents();
-// var xhttp = new XMLHttpRequest();
-// var leaderboard;
-// xhttp.onreadystatechange = function(){
-//   if(this.readyState == 4 && this.status == 200){
-//     leaderboard = JSON.parse(this.response);
-//   }
-// };
-// xhttp.open("GET", "/getusers", true);
-// xhttp.send();
-// const db = mongoose;
-// var cursor = db.collection('users').find({});
-
 
 var Canvas = function Canvas(props) {
   var gameHeight = 1200;
   var viewBox = [window.innerWidth / -2, 600 - gameHeight, window.innerWidth, gameHeight];
   var leaderboard = props.leaderboard;
-  // const viewBox = [width / -2, height / -2, width, height];
-  // circles is the array of circle objects
-  // console.log(props);
-  // console.log(cursor);
-  // console.log("X: " + props.x);
-  // console.log("radius: " + props.r);
-  // const colors = ['red', 'green', 'blue'];
-  // const color = colors[Math.floor(Math.random() * colors.length)];
-  // console.log(props.score);
   return _react2.default.createElement(
     'svg',
     {
@@ -17797,7 +17718,6 @@ var CurrentScore = function CurrentScore(props) {
     fontSize: 80,
     fill: '#ffffba'
   };
-  // console.log(props.score);
 
   return _react2.default.createElement(
     'g',
@@ -50410,7 +50330,6 @@ var checkCollisions = function checkCollisions(self, opps) {
     y1: self.y - self.r,
     x2: self.x + self.r,
     y2: self.y + self.r
-    // color: self.color,
   };
   opps.forEach(function (opp) {
     var currentLifeTime = new Date().getTime() - opp.createdAt;
@@ -50420,7 +50339,6 @@ var checkCollisions = function checkCollisions(self, opps) {
     };
 
     var calculatedColor = opp.color;
-    // const circleRadius = self.r;
 
     var rectA = {
       x1: calculatedPosition.x - 40,
@@ -50429,30 +50347,16 @@ var checkCollisions = function checkCollisions(self, opps) {
       y2: calculatedPosition.y + 10,
       rectclr: calculatedColor
     };
-    // console.log(opp.id);
+
     if ((0, _formulas.checkCollision)(rectA, rectB)) {
-
-      // console.log("COLLISION: ");
-      // console.log(opp.id);
-
-      // if (calculatedColor = "red"){
       objectsDestroyed.push({
         oppId: opp.id
       });
       self.r += 1;
       self.score += 1;
-
-      // console.log(self.score);
-
-
-      // console.log(objectsDestroyed[0]);
     };
     if ((0, _formulas.checkBadCollision)(rectA, rectB)) {
       // return self.gameState.lives - 1;
-      // self.gameState.setState({
-      //   lives: 0
-      // });
-      // console.log(objectsDestroyed[0]);
     };
   });
   return objectsDestroyed;
@@ -50551,17 +50455,12 @@ var initialGameState = {
   lastObjectCreatedAt: new Date()
 };
 var initialState = {
-  // angle: 45,
-  // direction: "UP",
   x: 0,
   y: 0,
   r: 30,
   score: 0,
   color: "yellow",
   team: "Rock",
-  // circles: [],
-  // wide: 100,
-  // high: 100,
   gameState: initialGameState
 
 };
@@ -50571,8 +50470,6 @@ function reducer() {
   var action = arguments[1];
 
   switch (action.type) {
-    // case COLLIDE:
-    //   return onCollide(state, action, {this.props.r}, )
     case _actions.MOVE_OBJECTS:
       return (0, _moveObjects2.default)(state, action);
     case _actions.START_GAME:

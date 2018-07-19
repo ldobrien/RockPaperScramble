@@ -14,20 +14,6 @@ const UserSchema = new mongoose.Schema({
   maxScore: String
 });
 
-// QUERY
-// var usersModel = mongoose.model('RPSDatabase.users', UserSchema);
-// app.get('/getusers', function(req, res){
-//   usersModel.find({},
-//     function(err, foundData) {
-//       if(err) {
-//         console.log(err);
-//         return res.status(400).send();
-//       } else {
-//         // console.log(foundData);
-//         return res.status(200).send(foundData);
-//       }
-//     });
-// });
 
 /**
  * Compare the passed password with the value in the database. A model method.
@@ -58,7 +44,7 @@ UserSchema.pre('save', function saveHook(next) {
 
       // replace a password string with hash value
       user.password = hash;
-      user.maxScore = '40';
+      user.maxScore = '0';
 
       return next();
     });
