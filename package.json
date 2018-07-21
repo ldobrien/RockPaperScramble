@@ -5,10 +5,7 @@
   "main": "index.js",
   "private": true,
   "scripts": {
-
-    "heroku-postbuild": "webpack -p --config ./webpack.prod.config.js --progress",
-    "start": "nodemon server/server.js",
-
+    "start": "node server/server.js",
     "bundle": "webpack",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
