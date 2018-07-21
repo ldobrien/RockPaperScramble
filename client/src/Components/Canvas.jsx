@@ -19,84 +19,20 @@ import Rank from './Rank.jsx';
 const opponents = 50;
 const width = window.innerWidth;
 const height = window.innerHeight;
-<<<<<<< HEAD
 
-
-// let circles = [];
-// function addOpponents(){
-//       for(var i = 0; i < 50; i++){
-//         circles.push({position:{
-//           x:Math.random() * (2*width) - width, 
-//           y:Math.random() * (2*height) - height},
-//           r:15})
-//       }
-//     }
-
-// addOpponents();
-// var xhttp = new XMLHttpRequest();
-// var leaderboard;
-// xhttp.onreadystatechange = function(){
-//   if(this.readyState == 4 && this.status == 200){
-//     leaderboard = JSON.parse(this.response);
-//   }
-// };
-// xhttp.open("GET", "/getusers", true);
-// xhttp.send();
-// const db = mongoose;
-// var cursor = db.collection('users').find({});
-=======
->>>>>>> d435fa92c14c7dd0751af62a787a7eefebfc6751
 
 
 const Canvas = (props) => {
   const gameHeight = 1200;
   const viewBox = [window.innerWidth / -2, 600 - gameHeight, window.innerWidth, gameHeight];
   const leaderboard = props.leaderboard;
-<<<<<<< HEAD
 
-
-  // [
-    
-  //   { id: 'd4', maxScore: 82, name: 'Ado Kukic', },
-  //   { id: 'a1', maxScore: 235, name: 'Bruno Krebs', },
-  //   { id: 'c3', maxScore: 99, name: 'Diego Poza', },
-  //   { id: 'b2', maxScore: 129, name: 'Jeana Tahnk', },
-  //   { id: 'e5', maxScore: 34, name: 'Jenny Obrien', },
-  //   { id: 'f6', maxScore: 153, name: 'Kim Maida', },
-  //   { id: 'g7', maxScore: 55, name: 'Luke Oliff', },
-  //   { id: 'h8', maxScore: 146, name: 'Sebastián Peyrott', },
-  // ];
-
-
-  // const viewBox = [width / -2, height / -2, width, height];
-    // circles is the array of circle objects
-    // console.log(props);
-    // console.log(cursor);
-    // console.log("X: " + props.x);
-    // console.log("radius: " + props.r);
-    // const colors = ['red', 'green', 'blue'];
-    // const color = colors[Math.floor(Math.random() * colors.length)];
-    // console.log(props.score);
-  return (
-    <svg
-      id="RockPaperScramble"
-      // preserveAspectRatio="xMaxYMax none"
-      onMouseMove={props.trackMouse}
-      viewBox={viewBox}
-    >
-    <defs>
-      <filter id="shadow">
-        <feDropShadow dx="1" dy="1" stdDeviation="2" />
-      </filter>
-    </defs>
-      
-     <Arena position={{x: props.x, y: props.y}}/> 
-=======
   let lives = props.gameState.lives;
   console.log(lives);
     if (lives <= 0){
       return(
       <Leaderboard currentPlayer={leaderboard[3]} leaderboard={leaderboard} />
+      // SEAN - CALL FUNCTION 
       );
     }
     else{
@@ -116,7 +52,6 @@ const Canvas = (props) => {
          <Arena position={{x: props.x, y: props.y}}/> 
 
          <Circle position={{x: props.x, y: props.y}} radius={{r: props.r}}/>
->>>>>>> d435fa92c14c7dd0751af62a787a7eefebfc6751
 
          <CurrentScore score={props.score}/>
           <Heart position={{x: -600, y: 35}} />
