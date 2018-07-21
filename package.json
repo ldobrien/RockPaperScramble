@@ -5,8 +5,7 @@
   "main": "index.js",
   "private": true,
   "scripts": {
-    "start": "nodemon --use_strict index.js",
-    "heroku-postbuild": "npm install && npm run bundle && npm start",
+    "start": "webpack -d | nodemon index.js",
     "bundle": "webpack",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
