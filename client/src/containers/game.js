@@ -11,10 +11,6 @@ const mapStateToProps = state => ({
   score: state.score,
   color: state.color,
   gameState: state.gameState,
-<<<<<<< HEAD
-=======
-  lives: state.gameState.lives,
->>>>>>> d435fa92c14c7dd0751af62a787a7eefebfc6751
 
 });
 

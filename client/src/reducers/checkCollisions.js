@@ -48,18 +48,7 @@ const checkCollisions = (self, opps) => {
 
       // console.log(objectsDestroyed[0]);
     };
-<<<<<<< HEAD
-     if (checkBadCollision(rectA, rectB)) {
-      // return self.gameState.lives - 1;
-      // self.gameState.setState({
-      //   lives: 0
-      // });
-      // console.log(objectsDestroyed[0]);
-      
-    };
-=======
-     
->>>>>>> d435fa92c14c7dd0751af62a787a7eefebfc6751
+
   });
   return objectsDestroyed;
 };
