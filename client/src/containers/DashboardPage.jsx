@@ -13,6 +13,7 @@ import ReactDOM from 'react-dom';
 import registerServiceWorker from '../registerServiceWorker.js';
 import moveObjects from '../reducers/moveObjects';
 import 'whatwg-fetch';
+import LeaderBoard from '../Components/LeaderBoard.jsx';
 
 
 

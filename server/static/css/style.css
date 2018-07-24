@@ -1,12 +1,14 @@
 @import url('https://fonts.googleapis.com/css?family=Joti+One');
 @import url('https://fonts.googleapis.com/css?family=Eater');
 @import url('https://fonts.googleapis.com/css?family=Gloria+Hallelujah');
-@import url('https://fonts.googleapis.com/css?family=Alfa+Slab+One');
+@import url('https://fonts.googleapis.com/css?family=Alfa+Slab+One'); 
 
 
 html, body {
   overflow: hidden;
   height: 100%;
+  background-color: #e1bee7; 
+  background-image: url("/images/bg.png");
 }
 
 body {
@@ -15,7 +17,7 @@ body {
 }
 
 a {
-  color: #00bcd4;
+  color: 6600cc;
   font-weight: bold;
   text-decoration: none;
   transition: color 0.4s;
@@ -56,15 +58,20 @@ a:hover {
 .container {
   margin: 0 auto;
   text-align: center;
-  width: 700px;
+  color: #f5e6ff;
+  width: 400px;
+  height: 400px;
 }
+
 
 .card-heading {
   padding: 16px;
+ 
 }
 
 .field-line, .button-line {
   padding: 16px;
+
 }
 
 .error-message {
