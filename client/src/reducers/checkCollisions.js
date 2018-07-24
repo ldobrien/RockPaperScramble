@@ -40,7 +40,7 @@ const checkCollisions = (self, opps) => {
         objectsDestroyed.push({
           oppId: opp.id,
         });
-        self.r += 1;
+        self.r += 3;
         self.score += 1;
 
         // console.log(self.score);
@@ -48,6 +48,7 @@ const checkCollisions = (self, opps) => {
 
       // console.log(objectsDestroyed[0]);
     };
+
   });
   return objectsDestroyed;
 };

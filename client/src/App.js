@@ -54,6 +54,7 @@ class App extends Component {
       return (
         <div>
           <Canvas 
+
           leaderboard = {this.props.leaderboard}
           	// angle={this.props.angle}
           	x={this.props.x}

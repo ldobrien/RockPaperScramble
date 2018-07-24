@@ -10601,6 +10601,7 @@ var App = function (_Component) {
         'div',
         null,
         _react2.default.createElement(_Canvas2.default, {
+
           leaderboard: this.props.leaderboard
           // angle={this.props.angle}
           , x: this.props.x,
@@ -20453,7 +20454,7 @@ var checkCollisions = function checkCollisions(self, opps) {
       objectsDestroyed.push({
         oppId: opp.id
       });
-      self.r += 1;
+      self.r += 3;
       self.score += 1;
 
       // console.log(self.score);

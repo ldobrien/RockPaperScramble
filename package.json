@@ -5,7 +5,7 @@
   "main": "index.js",
   "private": true,
   "scripts": {
-    "start": "nodemon --use_strict index.js",
+    "start": "node index.js",
     "bundle": "webpack",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
