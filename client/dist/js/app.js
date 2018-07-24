@@ -6772,15 +6772,27 @@ var _LeaderBoard = __webpack_require__(231);
 
 var _LeaderBoard2 = _interopRequireDefault(_LeaderBoard);
 
+var _LoginPage = __webpack_require__(236);
+
+var _LoginPage2 = _interopRequireDefault(_LoginPage);
+
 var _Rank = __webpack_require__(135);
 
 var _Rank2 = _interopRequireDefault(_Rank);
 
+var _Auth = __webpack_require__(66);
+
+var _Auth2 = _interopRequireDefault(_Auth);
+
+var _game = __webpack_require__(238);
+
+var _game2 = _interopRequireDefault(_game);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var opponents = 50;
 // import Login from './Login.jsx';
 
+var opponents = 50;
 var width = window.innerWidth;
 var height = window.innerHeight;
 
@@ -6790,8 +6802,26 @@ var Canvas = function Canvas(props) {
   var leaderboard = props.leaderboard;
 
   var lives = props.gameState.lives;
-  console.log(lives);
+  // console.log(lives);
+  //   console.log(LoginPage.user.email);
   if (lives <= 0) {
+    // console.log("END GAME");
+    // console.log(props.email);
+    // call server to update score using
+    // fetch('/api/users/topscores', {
+    //     method: 'PUT',
+    //     headers: { 'Authorization': `bearer ${Auth.getToken()}`,
+    //         'Content-Type': 'application/json' },
+    //     body: {
+    //         email: that.props.email,
+    //         score: that.props.score,
+    //     }
+
+    // })
+    //     .then(res => res.json());
+
+    console.log('stored email', localStorage.getItem('email'));
+
     return _react2.default.createElement(_LeaderBoard2.default, { currentPlayer: leaderboard[3], leaderboard: leaderboard });
   } else {
     return _react2.default.createElement(
@@ -6835,6 +6865,11 @@ var Canvas = function Canvas(props) {
   }
 };
 
+// LoginPage.Proptypes = {
+//   user: PropTypes.shape({
+//       email: PropTypes.string.isRequired,
+//   }).isRequired
+// };
 Canvas.propTypes = {
   x: _propTypes2.default.number.isRequired,
   y: _propTypes2.default.number.isRequired,
@@ -6853,7 +6888,8 @@ Canvas.propTypes = {
     })).isRequired
   }).isRequired,
   trackMouse: _propTypes2.default.func.isRequired,
-  startGame: _propTypes2.default.func.isRequired
+  startGame: _propTypes2.default.func.isRequired,
+  email: _propTypes2.default.string.isRequired
 };
 
 exports.default = Canvas;
@@ -10503,6 +10539,8 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
+var _App$propTypes;
+
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
 var _react = __webpack_require__(1);
@@ -10595,6 +10633,7 @@ var App = function (_Component) {
       //   );
       // }
       // else {
+      //   console.log(this.props.email);
       return _react2.default.createElement(
         'div',
         null,
@@ -10610,7 +10649,8 @@ var App = function (_Component) {
           startGame: this.props.startGame,
           trackMouse: function trackMouse(event) {
             return _this2.trackMouse(event);
-          }
+          },
+          email: this.props.email
           // width={this.props.width}
           // height={this.props.height}
         })
@@ -10622,7 +10662,7 @@ var App = function (_Component) {
 }(_react.Component);
 // }
 
-App.propTypes = _defineProperty({
+App.propTypes = (_App$propTypes = {
   x: _propTypes2.default.number.isRequired,
   y: _propTypes2.default.number.isRequired,
   gameState: _propTypes2.default.shape({
@@ -10639,7 +10679,7 @@ App.propTypes = _defineProperty({
   }).isRequired,
   moveObjects: _propTypes2.default.func.isRequired,
   startGame: _propTypes2.default.func.isRequired
-}, 'moveObjects', _propTypes2.default.func.isRequired);
+}, _defineProperty(_App$propTypes, 'moveObjects', _propTypes2.default.func.isRequired), _defineProperty(_App$propTypes, 'email', _propTypes2.default.string.isRequired), _App$propTypes);
 
 exports.default = App;
 
@@ -10740,6 +10780,7 @@ var MOVE_OBJECTS = exports.MOVE_OBJECTS = 'MOVE_OBJECTS';
 var ROTATE_OBJECTS = exports.ROTATE_OBJECTS = 'ROTATE_OBJECTS';
 var ON_COLLIDE = exports.ON_COLLIDE = 'ON_COLLIDE';
 var START_GAME = exports.START_GAME = 'START_GAME';
+var LOGIN_SUCCESS = exports.LOGIN_SUCCESS = 'LOGIN_SUCCESS';
 
 var moveObjects = exports.moveObjects = function moveObjects(mousePosition) {
   return {
@@ -10765,6 +10806,13 @@ var onCollide = exports.onCollide = function onCollide(mousePosition) {
 var startGame = exports.startGame = function startGame() {
   return {
     type: START_GAME
+  };
+};
+
+var LoginSuccess = exports.LoginSuccess = function LoginSuccess(email) {
+  return {
+    type: LOGIN_SUCCESS,
+    email: email
   };
 };
 
@@ -10869,7 +10917,7 @@ var DashboardPage = function (_React$Component) {
 
   _createClass(DashboardPage, [{
     key: 'componentDidMount',
-    value: function componentDidMount() {
+    value: function componentDidMount(props) {
       var _this2 = this;
 
       // const self = this;
@@ -10899,16 +10947,6 @@ var DashboardPage = function (_React$Component) {
         _this2.setState({
           userHighScores: json
         });
-      });
-
-      fetch('/api/users/topscores', {
-        method: 'PUT',
-        headers: { 'Authorization': 'bearer ' + _Auth2.default.getToken(),
-          'Content-Type': 'application/json' }
-      }).then(function (res) {
-        return res.json();
-      }).then(function (data) {
-        return _game2.default.state.score;
       });
 
       // const self = this;
@@ -10983,6 +11021,8 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
 var _actions = __webpack_require__(136);
 
 var _moveObjects = __webpack_require__(139);
@@ -11020,9 +11060,9 @@ var initialState = {
   // wide: 100,
   // high: 100,
 
-  gameState: initialGameState
+  gameState: initialGameState,
   //leaderboard: [1,2,3,4]
-
+  email: ""
 };
 
 function reducer() {
@@ -11032,9 +11072,15 @@ function reducer() {
   switch (action.type) {
     // case COLLIDE:
     //   return onCollide(state, action, {this.props.r}, )
+    case _actions.LOGIN_SUCCESS:
+      var email = action.email;
+      // console.log(email);
+
+      return _extends({}, state, { email: email });
     case _actions.MOVE_OBJECTS:
       return (0, _moveObjects2.default)(state, action);
     case _actions.START_GAME:
+
       return (0, _startGame2.default)(state, initialGameState);
     case _actions.ON_COLLIDE:
       return (0, _onCollide2.default)(state, action);
@@ -18861,10 +18907,6 @@ var _Auth = __webpack_require__(66);
 
 var _Auth2 = _interopRequireDefault(_Auth);
 
-var _App = __webpack_require__(134);
-
-var _App2 = _interopRequireDefault(_App);
-
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var routes = {
@@ -19198,7 +19240,7 @@ var Dashboard = function Dashboard(_ref) {
     _Card.Card,
     { className: 'container' },
     _react2.default.createElement(_Card.CardTitle, {
-      title: 'Dashboard',
+      title: 'Dashboard: GAME OVER',
       subtitle: 'You should get access to this page only after authentication.'
     }),
     secretData && _react2.default.createElement(
@@ -19973,6 +20015,8 @@ Object.defineProperty(exports, "__esModule", {
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
+var _reactRedux = __webpack_require__(201);
+
 var _react = __webpack_require__(1);
 
 var _react2 = _interopRequireDefault(_react);
@@ -19984,6 +20028,10 @@ var _Auth2 = _interopRequireDefault(_Auth);
 var _LoginForm = __webpack_require__(232);
 
 var _LoginForm2 = _interopRequireDefault(_LoginForm);
+
+var _index = __webpack_require__(136);
+
+var _actions = __webpack_require__(136);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -20066,6 +20114,13 @@ var LoginPage = function (_React$Component) {
 
           // change the current URL to /
           _this2.context.router.replace('/');
+
+          // 
+          console.log(email);
+
+          localStorage.setItem('email', email);
+
+          // this.props.onLoginSuccess(email);
         } else {
           // failure
 
@@ -20118,10 +20173,23 @@ var LoginPage = function (_React$Component) {
 
   return LoginPage;
 }(_react2.default.Component);
+//
+
 
 LoginPage.contextTypes = {
   router: _react.PropTypes.object.isRequired
 };
+
+// const mapDispatchToProps = dispatch => ({
+//     onLoginSuccess: email => {
+//         dispatch(LoginSuccess(email));
+//     }
+// });
+
+// export default connect(
+//     null,
+//     mapDispatchToProps
+// )(LoginPage);
 
 exports.default = LoginPage;
 
@@ -20298,7 +20366,6 @@ var _index = __webpack_require__(136);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-// import DashboardPage from '../DashboardPage.jsx';
 var mapStateToProps = function mapStateToProps(state) {
   return {
     x: state.x,
@@ -20306,13 +20373,19 @@ var mapStateToProps = function mapStateToProps(state) {
     r: state.r,
     score: state.score,
     color: state.color,
-    gameState: state.gameState
-
+    gameState: state.gameState,
+    email: state.email
   };
 };
+// import DashboardPage from '../DashboardPage.jsx';
+
 
 var mapDispatchToProps = function mapDispatchToProps(dispatch) {
   return {
+    // LoginSuccess:
+    // () => {
+    //     dispatch(LoginSuccess());
+    // }
     moveObjects: function moveObjects(mousePosition) {
       dispatch((0, _index.moveObjects)(mousePosition));
     },

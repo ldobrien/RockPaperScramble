@@ -43,7 +43,7 @@ router.get('/users/topscores', (req, res) => {
 });
 
 router.put('/users/topscores', (req,res) => {
-    User.findByIdAndUpdate(req.params._id, { $set: {maxScore: req.body}}, 
+    User.findOneAndUpdate(req.body.email, { $set: {maxScore: req.body.score}},
         function(err,score) {
             if (err) {
                 res.send(err);
@@ -52,6 +52,7 @@ router.put('/users/topscores', (req,res) => {
             }
     });
 });
+
 
 
 module.exports = router;

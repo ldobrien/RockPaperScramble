@@ -2,6 +2,7 @@ import { connect } from 'react-redux';
 import App from '../App';
 // import DashboardPage from '../DashboardPage.jsx';
 import {onCollide} from '../actions/index';
+import {LoginSuccess} from '../actions/index';
 import { moveObjects, startGame } from '../actions/index';
 
 const mapStateToProps = state => ({
@@ -11,10 +12,14 @@ const mapStateToProps = state => ({
   score: state.score,
   color: state.color,
   gameState: state.gameState,
-
+  email: state.email
 });
 
 const mapDispatchToProps = dispatch => ({
+  // LoginSuccess:
+  // () => {
+  //     dispatch(LoginSuccess());
+  // }
   moveObjects: (mousePosition) => {
     dispatch(moveObjects(mousePosition));
   },
@@ -23,7 +28,7 @@ const mapDispatchToProps = dispatch => ({
   },
   startGame: () => {
     dispatch(startGame());
-  },
+  }
 });
 
 const Game = connect(

@@ -12,7 +12,10 @@ import Heart from './Heart.jsx';
 import StartGame from './StartGame.jsx';
 import Title from './Title.jsx';
 import Leaderboard from './LeaderBoard.jsx';
+import LoginPage from '../containers/LoginPage.jsx';
 import Rank from './Rank.jsx';
+import Auth from "../modules/Auth";
+import Game from "../containers/game";
 
 
 
@@ -27,8 +30,26 @@ const Canvas = (props) => {
   const leaderboard = props.leaderboard;
 
   let lives = props.gameState.lives;
-  console.log(lives);
+  // console.log(lives);
+  //   console.log(LoginPage.user.email);
     if (lives <= 0){
+      // console.log("END GAME");
+      // console.log(props.email);
+      // call server to update score using
+        // fetch('/api/users/topscores', {
+        //     method: 'PUT',
+        //     headers: { 'Authorization': `bearer ${Auth.getToken()}`,
+        //         'Content-Type': 'application/json' },
+        //     body: {
+        //         email: that.props.email,
+        //         score: that.props.score,
+        //     }
+
+        // })
+        //     .then(res => res.json());
+
+        console.log('stored email', localStorage.getItem('email'));
+
       return(
       <Leaderboard currentPlayer={leaderboard[3]} leaderboard={leaderboard} />
       );
@@ -76,7 +97,11 @@ const Canvas = (props) => {
     }
 };
 
-
+// LoginPage.Proptypes = {
+//   user: PropTypes.shape({
+//       email: PropTypes.string.isRequired,
+//   }).isRequired
+// };
 Canvas.propTypes = {
   x: PropTypes.number.isRequired,
   y: PropTypes.number.isRequired,
@@ -96,6 +121,7 @@ Canvas.propTypes = {
   }).isRequired,
   trackMouse: PropTypes.func.isRequired,
   startGame: PropTypes.func.isRequired,
+  email: PropTypes.string.isRequired
 };
 
 
