@@ -7,8 +7,9 @@ import Canvas from '../Components/Canvas.jsx';
 import Circle from '../Components/Circle.jsx';
 import Game from './game.js';
 import { Provider } from 'react-redux';
-import { createStore } from 'redux';
-import reducer from '../reducers';
+// import { createStore } from 'redux';
+import { store } from '../store/configurestore';
+import reducer from '../reducers/gameReducer';
 import ReactDOM from 'react-dom';
 import registerServiceWorker from '../registerServiceWorker.js';
 import moveObjects from '../reducers/moveObjects';
@@ -17,8 +18,8 @@ import 'whatwg-fetch';
 
 
 
-var store = createStore(reducer, /* preloadedState, */
-    window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__(),);
+// var store = createStore(reducer, /* preloadedState, */
+//     window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__(),);
 
 class DashboardPage extends React.Component {
   
@@ -54,24 +55,21 @@ class DashboardPage extends React.Component {
     });
     xhr.send();
 
-    fetch('/api/users/topscores', {
-    method: 'GET',
-      headers: { 'Authorization': `bearer ${Auth.getToken()}`,
-      'Content-Type': 'application/json' }
-    }) 
-    .then(res => res.json())
-    .then(json => {
-      // console.log("THE HIG JSON", json);
-      this.setState({
-        userHighScores: json
-      });
-      });
+    // fetch('/api/users/topscores', {
+    // method: 'GET',
+    //   headers: { 'Authorization': `bearer ${Auth.getToken()}`,
+    //   'Content-Type': 'application/json' }
+    // })
+    // .then(res => res.json())
+    // .then(json => {
+    //   // console.log("THE HIG JSON", json);
+    //   this.setState({
+    //     userHighScores: json
+    //   });
+    // });
 
-    
+    this.props.actions.fetchLeaders();
 
-
-      
-      
     // const self = this;
 
     // setInterval(() => {

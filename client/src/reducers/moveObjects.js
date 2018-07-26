@@ -4,7 +4,7 @@ import createFlyingObjects from './createFlyingObjects';
 import { PropTypes } from 'react'
 import checkCollisions from './checkCollisions';
 import checkBadCollisions from './checkBadCollisions';
-import initialGameState from './index.js'
+import initialGameState from './gameReducer.js'
 
 function moveObjects(state, action) {
   // if (!action.mousePosition) return state;

@@ -5097,42 +5097,44 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-var MOVE_OBJECTS = exports.MOVE_OBJECTS = 'MOVE_OBJECTS';
-var ROTATE_OBJECTS = exports.ROTATE_OBJECTS = 'ROTATE_OBJECTS';
-var ON_COLLIDE = exports.ON_COLLIDE = 'ON_COLLIDE';
-var START_GAME = exports.START_GAME = 'START_GAME';
-var LOGIN_SUCCESS = exports.LOGIN_SUCCESS = 'LOGIN_SUCCESS';
+exports.LoginSuccess = exports.startGame = exports.onCollide = exports.rotateObjects = exports.moveObjects = undefined;
+
+var _actionTypes = __webpack_require__(541);
+
+var types = _interopRequireWildcard(_actionTypes);
+
+function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
 
 var moveObjects = exports.moveObjects = function moveObjects(mousePosition) {
   return {
-    type: MOVE_OBJECTS,
+    type: types.MOVE_OBJECTS,
     mousePosition: mousePosition
   };
 };
 
 var rotateObjects = exports.rotateObjects = function rotateObjects(mousePosition) {
   return {
-    type: ROTATE_OBJECTS,
+    type: types.ROTATE_OBJECTS,
     mousePosition: mousePosition
   };
 };
 
 var onCollide = exports.onCollide = function onCollide(mousePosition) {
   return {
-    type: ON_COLLIDE,
+    type: types.ON_COLLIDE,
     mousePosition: mousePosition
   };
 };
 
 var startGame = exports.startGame = function startGame() {
   return {
-    type: START_GAME
+    type: types.START_GAME
   };
 };
 
 var LoginSuccess = exports.LoginSuccess = function LoginSuccess(email) {
   return {
-    type: LOGIN_SUCCESS,
+    type: types.LOGIN_SUCCESS,
     email: email
   };
 };
@@ -10726,11 +10728,11 @@ var _game2 = _interopRequireDefault(_game);
 
 var _reactRedux = __webpack_require__(127);
 
-var _redux = __webpack_require__(220);
+var _configurestore = __webpack_require__(540);
 
-var _reducers = __webpack_require__(140);
+var _gameReducer = __webpack_require__(537);
 
-var _reducers2 = _interopRequireDefault(_reducers);
+var _gameReducer2 = _interopRequireDefault(_gameReducer);
 
 var _reactDom = __webpack_require__(37);
 
@@ -10753,9 +10755,11 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+// import { createStore } from 'redux';
 
-var store = (0, _redux.createStore)(_reducers2.default, /* preloadedState, */
-window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__());
+
+// var store = createStore(reducer, /* preloadedState, */
+//     window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__(),);
 
 var DashboardPage = function (_React$Component) {
   _inherits(DashboardPage, _React$Component);
@@ -10801,18 +10805,20 @@ var DashboardPage = function (_React$Component) {
       });
       xhr.send();
 
-      fetch('/api/users/topscores', {
-        method: 'GET',
-        headers: { 'Authorization': 'bearer ' + _Auth2.default.getToken(),
-          'Content-Type': 'application/json' }
-      }).then(function (res) {
-        return res.json();
-      }).then(function (json) {
-        // console.log("THE HIG JSON", json);
-        _this2.setState({
-          userHighScores: json
-        });
-      });
+      // fetch('/api/users/topscores', {
+      // method: 'GET',
+      //   headers: { 'Authorization': `bearer ${Auth.getToken()}`,
+      //   'Content-Type': 'application/json' }
+      // })
+      // .then(res => res.json())
+      // .then(json => {
+      //   // console.log("THE HIG JSON", json);
+      //   this.setState({
+      //     userHighScores: json
+      //   });
+      // });
+
+      this.props.actions.fetchLeaders();
 
       // const self = this;
 
@@ -10860,7 +10866,7 @@ var DashboardPage = function (_React$Component) {
         null,
         _react2.default.createElement(
           _reactRedux.Provider,
-          { store: store },
+          { store: _configurestore.store },
           _react2.default.createElement(_game2.default, { leaderboard: this.state.userHighScores })
         ),
         ', // document.getElementById(\'root\');',
@@ -11131,78 +11137,20 @@ exports.default = Game;
 
 
 Object.defineProperty(exports, "__esModule", {
-  value: true
+    value: true
 });
+exports.leaderboard = exports.checkBadCollisions = undefined;
 
-var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+var _leaderboard = __webpack_require__(539);
 
-var _actions = __webpack_require__(67);
-
-var _moveObjects = __webpack_require__(141);
-
-var _moveObjects2 = _interopRequireDefault(_moveObjects);
-
-var _startGame = __webpack_require__(243);
-
-var _startGame2 = _interopRequireDefault(_startGame);
-
-var _onCollide = __webpack_require__(242);
-
-var _onCollide2 = _interopRequireDefault(_onCollide);
+var _leaderboard2 = _interopRequireDefault(_leaderboard);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-// import createEnemies from './enemies';
-var initialGameState = {
-  started: false,
-  kills: 0,
-  lives: 1,
-  flyingObjects: [],
-  lastObjectCreatedAt: new Date()
-};
-var initialState = {
-  // angle: 45,
-  // direction: "UP",
-  x: 0,
-  y: 0,
-  r: 30,
-  score: 0,
-  color: "yellow",
-  // team: "Rock",
-  // circles: [],
-  // wide: 100,
-  // high: 100,
+exports.checkBadCollisions = _leaderboard2.default;
+exports.leaderboard = _leaderboard2.default;
 
-  gameState: initialGameState,
-  //leaderboard: [1,2,3,4]
-  email: ""
-};
-
-function reducer() {
-  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : initialState;
-  var action = arguments[1];
-
-  switch (action.type) {
-    // case COLLIDE:
-    //   return onCollide(state, action, {this.props.r}, )
-    case _actions.LOGIN_SUCCESS:
-      var email = action.email;
-      // console.log(email);
-
-      return _extends({}, state, { email: email });
-    case _actions.MOVE_OBJECTS:
-      return (0, _moveObjects2.default)(state, action);
-    case _actions.START_GAME:
-
-      return (0, _startGame2.default)(state, initialGameState);
-    case _actions.ON_COLLIDE:
-      return (0, _onCollide2.default)(state, action);
-    default:
-      return state;
-  }
-}
-
-exports.default = reducer;
+// TODO add all other reducers in same format as above
 
 /***/ }),
 /* 141 */
@@ -11235,9 +11183,9 @@ var _checkBadCollisions = __webpack_require__(239);
 
 var _checkBadCollisions2 = _interopRequireDefault(_checkBadCollisions);
 
-var _index = __webpack_require__(140);
+var _gameReducer = __webpack_require__(537);
 
-var _index2 = _interopRequireDefault(_index);
+var _gameReducer2 = _interopRequireDefault(_gameReducer);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -20593,56 +20541,7 @@ exports.default = function (state) {
 };
 
 /***/ }),
-/* 242 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-
-var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
-// import { PropTypes } from 'react'
-
-
-var _Canvas = __webpack_require__(86);
-
-var _Canvas2 = _interopRequireDefault(_Canvas);
-
-var _propTypes = __webpack_require__(5);
-
-var _propTypes2 = _interopRequireDefault(_propTypes);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function onCollide(state, action) {
-  if (!action.mousePosition) return state;
-  // if (!action.collide) return state;
-  // const { x, y } = action.mousePosition;
-  var _action$mousePosition = action.mousePosition,
-      x = _action$mousePosition.x,
-      y = _action$mousePosition.y;
-
-  var currx = { x: x };
-  // console.log(vx);
-  // const r = radius1 + radius2;
-
-  // console.log(circles.length);
-  for (var i = 0; i < _Canvas2.default.length; i++) {
-    // console.log(circles[i]);
-    // if(circles[i].x === currx){
-    //   console.log("HIT");
-    //   //
-    // }
-  }
-  return _extends({}, state);
-}
-
-exports.default = onCollide;
-
-/***/ }),
+/* 242 */,
 /* 243 */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -52396,6 +52295,172 @@ _reactDom2.default.render(_react2.default.createElement(
   { muiTheme: (0, _getMuiTheme2.default)() },
   _react2.default.createElement(_reactRouter.Router, { history: _reactRouter.browserHistory, routes: _routes2.default })
 ), document.getElementById('react-app'));
+
+/***/ }),
+/* 537 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _actions = __webpack_require__(67);
+
+var _moveObjects = __webpack_require__(141);
+
+var _moveObjects2 = _interopRequireDefault(_moveObjects);
+
+var _startGame = __webpack_require__(243);
+
+var _startGame2 = _interopRequireDefault(_startGame);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var initialGameState = {
+  started: false,
+  kills: 0,
+  lives: 1,
+  flyingObjects: [],
+  lastObjectCreatedAt: new Date()
+};
+
+function gameReducer() {
+  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : initialState;
+  var action = arguments[1];
+
+  switch (action.type) {
+    case _actions.MOVE_OBJECTS:
+      return (0, _moveObjects2.default)(state, action);
+    case _actions.START_GAME:
+
+      return (0, _startGame2.default)(state, initialGameState);
+    case _actions.ON_COLLIDE:
+      return onCollide(state, action);
+    default:
+      return state;
+  }
+}
+
+exports.default = gameReducer;
+
+/***/ }),
+/* 538 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var initialState = {
+    x: 0,
+    y: 0,
+    r: 30,
+    score: 0,
+    color: "yellow",
+    gameState: initialGameState,
+    leaders: {},
+    email: ""
+};
+
+/***/ }),
+/* 539 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+exports.default = leadersReducer;
+
+var _initialState = __webpack_require__(538);
+
+var _initialState2 = _interopRequireDefault(_initialState);
+
+var _actionTypes = __webpack_require__(541);
+
+var types = _interopRequireWildcard(_actionTypes);
+
+function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function leadersReducer() {
+  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : _initialState2.default;
+  var action = arguments[1];
+
+  switch (action.type) {
+    case types.FETCH_LEADERS_SUCCESS:
+      return _extends({}, state, { data: action.leaders });
+    default:
+      return state;
+  }
+}
+
+/***/ }),
+/* 540 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.store = exports.history = undefined;
+
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+var _redux = __webpack_require__(220);
+
+var _reduxThunk = __webpack_require__(!(function webpackMissingModule() { var e = new Error("Cannot find module \"redux-thunk\""); e.code = 'MODULE_NOT_FOUND';; throw e; }()));
+
+var _reduxThunk2 = _interopRequireDefault(_reduxThunk);
+
+var _createBrowserHistory = __webpack_require__(!(function webpackMissingModule() { var e = new Error("Cannot find module \"history/createBrowserHistory\""); e.code = 'MODULE_NOT_FOUND';; throw e; }()));
+
+var _createBrowserHistory2 = _interopRequireDefault(_createBrowserHistory);
+
+var _reactRouterRedux = __webpack_require__(!(function webpackMissingModule() { var e = new Error("Cannot find module \"react-router-redux\""); e.code = 'MODULE_NOT_FOUND';; throw e; }()));
+
+var _reducers = __webpack_require__(140);
+
+var reducers = _interopRequireWildcard(_reducers);
+
+function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var history = exports.history = (0, _createBrowserHistory2.default)();
+var historyMiddleware = (0, _reactRouterRedux.routerMiddleware)(history);
+
+var store = exports.store = (0, _redux.createStore)((0, _redux.combineReducers)(_extends({}, reducers, {
+  router: _reactRouterRedux.routerReducer
+})), (0, _redux.applyMiddleware)(historyMiddleware, _reduxThunk2.default));
+
+/***/ }),
+/* 541 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+var LOGGED_IN = exports.LOGGED_IN = 'LOGGED_IN';
+var FETCH_LEADERS_SUCCESS = exports.FETCH_LEADERS_SUCCESS = "FETCH_LEADERS_SUCCESS";
+var MOVE_OBJECTS = exports.MOVE_OBJECTS = 'MOVE_OBJECTS';
+var ROTATE_OBJECTS = exports.ROTATE_OBJECTS = 'ROTATE_OBJECTS';
+var ON_COLLIDE = exports.ON_COLLIDE = 'ON_COLLIDE';
+var START_GAME = exports.START_GAME = 'START_GAME';
+var LOGIN_SUCCESS = exports.LOGIN_SUCCESS = 'LOGIN_SUCCESS';
 
 /***/ })
 /******/ ]);

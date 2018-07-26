@@ -1,10 +1,10 @@
-import * as types from '../actions/actionTypes';
 import initialState from './initialState';
+import * as types from '../actions/actionTypes';
 
-export default function leaderboardReducer(state = initialState, action) {
+export default function leadersReducer(state = initialState, action) {
   switch (action.type) {
-    case types.FETCH_LEADERBOARD_SUCCESS:
-      return { ...state, errorMessage: '', data: action.leaderboard };
+    case types.FETCH_LEADERS_SUCCESS:
+      return { ...state, data: action.leaders };
     default:
       return state;
   }

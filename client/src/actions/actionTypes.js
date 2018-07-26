@@ -1,0 +1,7 @@
+export const LOGGED_IN = 'LOGGED_IN';
+export const FETCH_LEADERS_SUCCESS = "FETCH_LEADERS_SUCCESS";
+export const MOVE_OBJECTS = 'MOVE_OBJECTS';
+export const ROTATE_OBJECTS = 'ROTATE_OBJECTS';
+export const ON_COLLIDE = 'ON_COLLIDE';
+export const START_GAME = 'START_GAME';
+export const LOGIN_SUCCESS = 'LOGIN_SUCCESS';
