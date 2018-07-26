@@ -35,8 +35,6 @@ const Rank = (props) => {
 
 Rank.propTypes = {
   player: PropTypes.shape({
-    id: PropTypes.string.isRequired,
-    maxScore: PropTypes.number.isRequired,
     name: PropTypes.string.isRequired,
     rank: PropTypes.number.isRequired,
     currentPlayer: PropTypes.bool.isRequired,

@@ -32,27 +32,32 @@ const Canvas = (props) => {
   let lives = props.gameState.lives;
   // console.log(lives);
   //   console.log(LoginPage.user.email);
-    if (lives <= 0){
-      // console.log("END GAME");
-      // console.log(props.email);
+    if (lives === 0){
+
       // call server to update score using
-        // fetch('/api/users/topscores', {
-        //     method: 'PUT',
-        //     headers: { 'Authorization': `bearer ${Auth.getToken()}`,
-        //         'Content-Type': 'application/json' },
-        //     body: {
-        //         email: that.props.email,
-        //         score: that.props.score,
-        //     }
-
-        // })
-        //     .then(res => res.json());
-
         console.log('stored email', localStorage.getItem('email'));
+      //   console.log('score', props.score);
+        fetch('/api/users/topscores', {
+            method: 'PUT',
+            headers: { 'Authorization': `bearer ${Auth.getToken()}`,
+                'Content-Type': 'application/json' },
+            body: {
+                email: localStorage.getItem('email'),
+                // email: "sean@sean.com",
+                score: props.score,
+            }
 
-      return(
-      <Leaderboard currentPlayer={leaderboard[3]} leaderboard={leaderboard} />
-      );
+        })
+            .then(res => res.json());
+
+        return(
+            <Leaderboard currentPlayer={leaderboard[3]} leaderboard={leaderboard} />
+        );
+    }
+    else if (lives < 0){
+        return(
+            <Leaderboard currentPlayer={leaderboard[3]} leaderboard={leaderboard} />
+        );
     }
     else{
       return (

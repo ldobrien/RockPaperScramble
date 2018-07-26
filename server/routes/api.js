@@ -43,14 +43,17 @@ router.get('/users/topscores', (req, res) => {
 });
 
 router.put('/users/topscores', (req,res) => {
-    User.findOneAndUpdate(req.body.email, { $set: {maxScore: req.body.score}},
+	// console.log("PUT");
+	// console.log(req.body);
+    User.findOneAndUpdate({email: 'sean@sean.com'}, { $set: {maxScore: "1000"}},
         function(err,score) {
             if (err) {
                 res.send(err);
             } else {
-                res.send(score);
+                return res.send('200');
             }
-    });
+    }
+    );
 });
 
 

@@ -19,7 +19,7 @@ const initialState = {
     r: 30,
     score: 0,
     color: "yellow",
-    team: "Rock",
+    // team: "Rock",
     // circles: [],
     // wide: 100,
     // high: 100,

@@ -24,9 +24,9 @@ const checkCollisions = (self, opps) => {
    // const circleRadius = self.r;
     
     const rectA = {
-      x1: calculatedPosition.x - 40,
+      x1: calculatedPosition.x - 10,
       y1: calculatedPosition.y - 10,
-      x2: calculatedPosition.x + 40,
+      x2: calculatedPosition.x + 10,
       y2: calculatedPosition.y + 10,
       rectclr:calculatedColor,
     };
@@ -40,7 +40,7 @@ const checkCollisions = (self, opps) => {
         objectsDestroyed.push({
           oppId: opp.id,
         });
-        self.r += 3;
+        self.r += 1;
         self.score += 1;
 
         // console.log(self.score);
