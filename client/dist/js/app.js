@@ -6856,18 +6856,23 @@ var Canvas = function Canvas(props) {
   //   console.log(LoginPage.user.email);
   if (lives === 0) {
 
+    var str = localStorage.getItem('email');
+    var strNew = str.replace("%40", "@");
+
+    console.log(strNew);
+
     // call server to update score using
-    console.log('stored email', localStorage.getItem('email'));
+    console.log('stored email:', strNew /*localStorage.getItem('email')*/);
     //   console.log('score', props.score);
-    fetch('/api/users/topscores', {
+    fetch('/api/users/topscores/' + strNew /*localStorage.getItem('email')*/, {
       method: 'PUT',
       headers: { 'Authorization': 'bearer ' + _Auth2.default.getToken(),
         'Content-Type': 'application/json' },
-      body: {
-        email: localStorage.getItem('email'),
+      body: JSON.stringify({
+        //email: localStorage.getItem('email'),
         // email: "sean@sean.com",
         score: props.score
-      }
+      })
 
     }).then(function (res) {
       return res.json();
@@ -10989,9 +10994,13 @@ var LoginPage = function (_React$Component) {
           _this2.context.router.replace('/');
 
           // 
-          console.log(email);
 
-          localStorage.setItem('email', email);
+          var str = email;
+          var strNew = str.replace("%40", "@");
+          console.log(email);
+          console.log(strNew);
+          localStorage.setItem('email', strNew);
+          // localStorage.setItem('email', email);
 
           // this.props.onLoginSuccess(email);
         } else {

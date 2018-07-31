@@ -34,18 +34,23 @@ const Canvas = (props) => {
   //   console.log(LoginPage.user.email);
     if (lives === 0){
 
+        var str = localStorage.getItem('email');
+        var strNew = str.replace("%40","@");
+        
+        console.log(strNew);
+
       // call server to update score using
-        console.log('stored email', localStorage.getItem('email'));
+        console.log('stored email:', strNew /*localStorage.getItem('email')*/);
       //   console.log('score', props.score);
-        fetch('/api/users/topscores', {
+        fetch('/api/users/topscores/' + strNew /*localStorage.getItem('email')*/, {
             method: 'PUT',
             headers: { 'Authorization': `bearer ${Auth.getToken()}`,
                 'Content-Type': 'application/json' },
-            body: {
-                email: localStorage.getItem('email'),
+            body: JSON.stringify({
+                //email: localStorage.getItem('email'),
                 // email: "sean@sean.com",
                 score: props.score,
-            }
+            })
 
         })
             .then(res => res.json());

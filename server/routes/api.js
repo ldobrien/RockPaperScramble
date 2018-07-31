@@ -42,10 +42,11 @@ router.get('/users/topscores', (req, res) => {
     });
 });
 
-router.put('/users/topscores', (req,res) => {
+router.put('/users/topscores/:email', (req,res) => {
 	// console.log("PUT");
-	// console.log(req.body);
-    User.findOneAndUpdate({email: 'sean@sean.com'}, { $set: {maxScore: "1000"}},
+	console.log(req.body);
+
+    User.findOneAndUpdate({'email': req.params.email}, {maxScore: req.body.score},
         function(err,score) {
             if (err) {
                 res.send(err);
@@ -55,6 +56,21 @@ router.put('/users/topscores', (req,res) => {
     }
     );
 });
+
+// router.put('/users/topscores/:email', (req,res) => {
+//     // console.log("PUT");
+//     console.log(req.body);
+    
+//     User.findOne({'email': req.params.email}, {maxScore: req.body.score},
+//         function(err,score) {
+//             if (err) {
+//                 res.send(err);
+//             } else {
+//                 return res.send('200');
+//             }
+//     }
+//     );
+// });
 
 
 

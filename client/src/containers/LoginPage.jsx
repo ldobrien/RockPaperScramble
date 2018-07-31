@@ -71,9 +71,13 @@ class LoginPage extends React.Component {
         this.context.router.replace('/');
 
         // 
-        console.log(email);
 
-        localStorage.setItem('email', email);
+        var str = email;
+        var strNew = str.replace("%40","@");
+        console.log(email);
+        console.log(strNew);
+        localStorage.setItem('email', strNew);
+        // localStorage.setItem('email', email);
 
           // this.props.onLoginSuccess(email);
       } else {
