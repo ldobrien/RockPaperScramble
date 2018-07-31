@@ -8,8 +8,8 @@ const Leaderboard = (props) => {
     fill: 'transparent',
     stroke: 'blue',
     strokeDasharray: '14',   //container it lives in
-    x: "-1050",
-    y: "-200"
+    x: -1050,
+    y: -200
     // x: "-350",
     // y: "-600"
   };
@@ -48,9 +48,7 @@ const Leaderboard = (props) => {
   return (
     <g>
       <text filter="url(#shadow)" style={leaderboardTitle} x="-900" y="-220">Leaderboard</text>
-      <rect style={style} width="700" height="330" />
-
-      //Show leaderboard if currently logged in
+      <rect style={style} width={700} height="330" />
       {
         props.currentPlayer && leaderboard.map((player, idx) => {
           const position = {
@@ -66,21 +64,19 @@ const Leaderboard = (props) => {
 
 Leaderboard.propTypes = {
   currentPlayer: PropTypes.shape({
-    id: PropTypes.string.isRequired,
-    maxScore: PropTypes.number.isRequired,
+    maxScore: PropTypes.string.isRequired,
     name: PropTypes.string.isRequired,
   }),
   leaderboard: PropTypes.arrayOf(PropTypes.shape({
-    id: PropTypes.string.isRequired,
-    maxScore: PropTypes.number.isRequired,
+    // maxScore: PropTypes.string.isRequired,
     name: PropTypes.string.isRequired,
     ranking: PropTypes.number,
   })),
 };
-
-Leaderboard.defaultProps = {
-  currentPlayer: null,
-  leaderboard: null,
-};
+//
+// Leaderboard.defaultProps = {
+//   currentPlayer: null,
+//   leaderboard: null,
+// };
 
 export default Leaderboard;

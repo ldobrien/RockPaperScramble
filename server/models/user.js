@@ -11,7 +11,7 @@ const UserSchema = new mongoose.Schema({
   },
   password: String,
   name: String,
-  maxScore: String
+  maxScore: Number
 });
 
 // QUERY

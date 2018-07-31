@@ -36,22 +36,51 @@ router.get('/users/topscores', (req, res) => {
     	(err, users) => {
 	    if (err) { 
 	    	res.send(err); 
-	    } else {
-	    	res.json(users);
-	    }
+        } else {
+            res.json(users);
+        }
     });
 });
 
-router.put('/users/topscores', (req,res) => {
-    User.findByIdAndUpdate(req.params._id, { $set: {maxScore: req.body}}, 
+router.get('/users/topscores/:email', (req,res) => {
+    // console.log("PUT");
+    console.log(req.body);
+    
+    User.findOne(
+        {
+            'email': req.params.email
+        }, 
+        {
+            maxScore:1,
+            _id:0
+        },
+        (err,current) => {
+            if (err) {
+                res.send(err);
+            } else {
+                console.log(current);
+                res.json(current);
+            }
+    }
+    );
+});
+
+router.put('/users/topscores/:email', (req,res) => {
+    // console.log("PUT");
+    console.log(req.body);
+
+    User.findOneAndUpdate({'email': req.params.email}, {maxScore: req.body.score},
         function(err,score) {
             if (err) {
                 res.send(err);
             } else {
-                res.send(score);
+                return res.send('200');
             }
-    });
+    }
+    );
 });
+
+
 
 
 module.exports = router;

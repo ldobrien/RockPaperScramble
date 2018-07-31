@@ -51,6 +51,7 @@ class App extends Component {
     //   );
     // }
     // else {
+    //   console.log(this.props.email);
       return (
         <div>
           <Canvas 
@@ -64,6 +65,7 @@ class App extends Component {
             gameState={this.props.gameState}
             startGame={this.props.startGame}
           	trackMouse={event => (this.trackMouse(event))}
+            email={this.props.email}
             // width={this.props.width}
             // height={this.props.height}
           />
@@ -92,6 +94,7 @@ App.propTypes = {
   moveObjects: PropTypes.func.isRequired,
   startGame: PropTypes.func.isRequired,
   moveObjects: PropTypes.func.isRequired,
+  email: PropTypes.string.isRequired
 };
 
 export default App;

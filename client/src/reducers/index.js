@@ -1,5 +1,5 @@
 
-import { MOVE_OBJECTS, START_GAME, ON_COLLIDE } from '../actions';
+import { MOVE_OBJECTS, START_GAME, ON_COLLIDE, LOGIN_SUCCESS } from '../actions';
 import moveObjects from './moveObjects';
 import startGame from './startGame';
 import onCollide from './onCollide';
@@ -19,14 +19,14 @@ const initialState = {
     r: 30,
     score: 0,
     color: "yellow",
-    team: "Rock",
+    // team: "Rock",
     // circles: [],
     // wide: 100,
     // high: 100,
 
-    gameState: initialGameState
+    gameState: initialGameState,
     //leaderboard: [1,2,3,4]
-
+    email: "",
 };
 
 
@@ -34,9 +34,14 @@ function reducer(state = initialState, action) {
   switch (action.type) {
     // case COLLIDE:
     //   return onCollide(state, action, {this.props.r}, )
+    case LOGIN_SUCCESS:
+      const { email } = action;
+      // console.log(email);
+      return {...state, email};
     case MOVE_OBJECTS:
       return moveObjects(state, action);
     case START_GAME:
+
       return startGame(state, initialGameState);
     case ON_COLLIDE:
       return onCollide(state, action);

@@ -1,7 +1,9 @@
+import { connect } from 'react-redux';
 import React, { PropTypes } from 'react';
 import Auth from '../modules/Auth';
 import LoginForm from '../Components/LoginForm.jsx';
-
+import {LoginSuccess} from '../actions/index';
+import {moveObjects, onCollide} from "../actions";
 
 class LoginPage extends React.Component {
 
@@ -38,7 +40,7 @@ class LoginPage extends React.Component {
    *
    * @param {object} event - the JavaScript event object
    */
-  processForm(event) {
+  processForm (event) {
     // prevent default action. in this case, action is the form submission event
     event.preventDefault();
 
@@ -67,6 +69,17 @@ class LoginPage extends React.Component {
 
         // change the current URL to /
         this.context.router.replace('/');
+
+        // 
+
+        var str = email;
+        var strNew = str.replace("%40","@");
+        console.log(email);
+        console.log(strNew);
+        localStorage.setItem('email', strNew);
+        // localStorage.setItem('email', email);
+
+          // this.props.onLoginSuccess(email);
       } else {
         // failure
 
@@ -113,9 +126,20 @@ class LoginPage extends React.Component {
   }
 
 }
-
+//
 LoginPage.contextTypes = {
   router: PropTypes.object.isRequired
 };
+
+// const mapDispatchToProps = dispatch => ({
+//     onLoginSuccess: email => {
+//         dispatch(LoginSuccess(email));
+//     }
+// });
+
+// export default connect(
+//     null,
+//     mapDispatchToProps
+// )(LoginPage);
 
 export default LoginPage;

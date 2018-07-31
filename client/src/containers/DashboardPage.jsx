@@ -37,7 +37,7 @@ class DashboardPage extends React.Component {
   /**
    * This method will be executed after initial rendering.
    */
-  componentDidMount() {
+  componentDidMount(props) {
     // const self = this;
     const xhr = new XMLHttpRequest();
     xhr.open('get', '/api/dashboard');
@@ -55,7 +55,7 @@ class DashboardPage extends React.Component {
     xhr.send();
 
     fetch('/api/users/topscores', {
-    method: 'GET',
+      method: 'GET',
       headers: { 'Authorization': `bearer ${Auth.getToken()}`,
       'Content-Type': 'application/json' }
     }) 
@@ -68,13 +68,7 @@ class DashboardPage extends React.Component {
       });
 
     
-    fetch('/api/users/topscores', {
-      method: 'PUT',
-       headers: { 'Authorization': `bearer ${Auth.getToken()}`,
-      'Content-Type': 'application/json' }
-    })
-     .then(res => res.json())
-     .then(data => Game.state.score)
+
 
       
       
