@@ -55,7 +55,7 @@ class DashboardPage extends React.Component {
     xhr.send();
 
     fetch('/api/users/topscores', {
-    method: 'GET',
+      method: 'GET',
       headers: { 'Authorization': `bearer ${Auth.getToken()}`,
       'Content-Type': 'application/json' }
     }) 

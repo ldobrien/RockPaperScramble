@@ -6855,28 +6855,59 @@ var Canvas = function Canvas(props) {
   // console.log(lives);
   //   console.log(LoginPage.user.email);
   if (lives === 0) {
-
     var str = localStorage.getItem('email');
     var strNew = str.replace("%40", "@");
-
     console.log(strNew);
 
-    // call server to update score using
-    console.log('stored email:', strNew /*localStorage.getItem('email')*/);
-    //   console.log('score', props.score);
-    fetch('/api/users/topscores/' + strNew /*localStorage.getItem('email')*/, {
-      method: 'PUT',
+    var currScore = 0;
+    fetch('/api/users/currscores/' + strNew, {
+      method: 'GET',
       headers: { 'Authorization': 'bearer ' + _Auth2.default.getToken(),
-        'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        //email: localStorage.getItem('email'),
-        // email: "sean@sean.com",
-        score: props.score
-      })
-
+        'Content-Type': 'application/json' }
     }).then(function (res) {
       return res.json();
+    }).then(function (json) {
+      console.log("THE HIG JSON:", json);
+      currScore = json;
+      if (currScore.maxScore < props.score) {
+        fetch('/api/users/topscores/' + strNew /*localStorage.getItem('email')*/, {
+          method: 'PUT',
+          headers: { 'Authorization': 'bearer ' + _Auth2.default.getToken(),
+            'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            //email: localStorage.getItem('email'),
+            // email: "sean@sean.com",
+            score: props.score
+          })
+
+        }).then(function (res) {
+          return res.json();
+        });
+        console.log("DB SCORE:", currScore.maxScore);
+      }
     });
+
+    console.log("CURR SCORE:", currScore.maxScore);
+    console.log("GAME SCORE:", props.score);
+
+    // if (props.score > currScore.maxScore) {
+
+    // // call server to update score using
+    //   console.log('stored email:', strNew /*localStorage.getItem('email')*/);
+    // //   console.log('score', props.score);
+    //   fetch('/api/users/topscores/' + strNew /*localStorage.getItem('email')*/, {
+    //       method: 'PUT',
+    //       headers: { 'Authorization': `bearer ${Auth.getToken()}`,
+    //           'Content-Type': 'application/json' },
+    //       body: JSON.stringify({
+    //           //email: localStorage.getItem('email'),
+    //           // email: "sean@sean.com",
+    //           score: props.score,
+    //       })
+
+    //   })
+    //   .then(res => res.json());
+    // } 
 
     return _react2.default.createElement(_LeaderBoard2.default, { currentPlayer: leaderboard[3], leaderboard: leaderboard });
   } else if (lives < 0) {
