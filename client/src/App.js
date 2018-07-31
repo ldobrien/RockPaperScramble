@@ -11,6 +11,7 @@ import Circle from './Components/Circle.jsx';
 class App extends Component {
 
 	componentDidMount() {
+	    console.log("Top");
     const self = this;
 
     setInterval(() => {

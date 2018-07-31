@@ -27,10 +27,12 @@ class Canvas extends React.Component {
     }
 
     componentWillMount() {
+        console.log("MOUNT");
         fetchLeaders();
     }
 
     componentWillReceiveProps(nextProps) {
+        console.log("NEXT PROPS");
         if (nextProps.leaders) {
             this.setState({ leaderboard: nextProps.leaderboard });
         }
