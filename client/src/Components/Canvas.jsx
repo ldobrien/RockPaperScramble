@@ -38,7 +38,7 @@ const Canvas = (props) => {
         console.log(strNew);
 
       let currScore = 0;
-      fetch('/api/users/currscores/' + strNew, {
+      fetch('/api/users/topscores/' + strNew, {
         method: 'GET',
         headers: { 'Authorization': `bearer ${Auth.getToken()}`,
         'Content-Type': 'application/json' }
@@ -47,6 +47,7 @@ const Canvas = (props) => {
       .then(json => {
         console.log("THE HIG JSON:", json);
         currScore = json
+        console.log("DB SCORE:", currScore.maxScore);
         if (currScore.maxScore < props.score){
             fetch('/api/users/topscores/' + strNew /*localStorage.getItem('email')*/, {
             method: 'PUT',
@@ -60,12 +61,11 @@ const Canvas = (props) => {
 
         })
         .then(res => res.json());
-        console.log("DB SCORE:", currScore.maxScore);
         }
         });
         
 
-        console.log("CURR SCORE:", currScore.maxScore);
+        // console.log("CURR SCORE:", currScore.maxScore);
         console.log("GAME SCORE:", props.score);
 
       // if (props.score > currScore.maxScore) {
