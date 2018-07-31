@@ -4,8 +4,6 @@ const router = new express.Router();
 
 const mongoose = require('mongoose');
 
-
-
 const User = require('mongoose').model('User');
 
 //var uri = "mongodb+srv://Lisa:lisalisa@rockpaperscramble-25cod.mongodb.net/test?retryWrites=true";
@@ -42,7 +40,7 @@ router.get('/users/topscores', (req, res) => {
     });
 });
 
-router.put('/users/topscores', (req,res) => {
+router.put('/users/topscores/:id', (req,res) => {
 	// console.log("PUT");
 	// console.log(req.body);
     User.findOneAndUpdate({email: 'sean@sean.com'}, { $set: {maxScore: "1000"}},
@@ -50,12 +48,10 @@ router.put('/users/topscores', (req,res) => {
             if (err) {
                 res.send(err);
             } else {
-                return res.send('200');
+                return res.send(200);
             }
     }
     );
 });
-
-
 
 module.exports = router;

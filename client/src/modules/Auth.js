@@ -36,6 +36,11 @@ class Auth {
     return localStorage.getItem('token');
   }
 
+
+  static getUserIdTheHackyWay() {
+    return localStorage.getItem('userId');
+  }
+
 }
 
 export default Auth;

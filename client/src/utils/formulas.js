@@ -27,14 +27,14 @@ export const calculateAngle = (x1, y1, x2, y2) => {
   return radiansToDegrees(Math.atan(quotient)) * -1;
 };
 
-export const checkCollision = (rectA, rectB) => (
+export const checkCol = (rectA, rectB) => (
   rectA.x1 < rectB.x2 && rectA.x2 > rectB.x1 &&
   rectA.y1 < rectB.y2 && rectA.y2 > rectB.y1 
  && (rectA.rectclr == "blue" ||rectA.rectclr == "red")
 // && rectA.color == "blue"
 );
 
-export const checkBadCollision = (rectA, rectB) => (
+export const checkBad = (rectA, rectB) => (
   rectA.x1 < rectB.x2 && rectA.x2 > rectB.x1 &&
   rectA.y1 < rectB.y2 && rectA.y2 > rectB.y1 
  && (rectA.rectclr == "green")

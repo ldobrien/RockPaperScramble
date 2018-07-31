@@ -12,6 +12,9 @@ app.use(express.static('./server/static/'));
 app.use(express.static('./client/dist/'));
 // tell the app to parse HTTP body messages
 app.use(bodyParser.urlencoded({ extended: false }));
+// added line to know how to parse data when using JSONStringify
+app.use(bodyParser.json());
+
 // pass the passport middleware
 app.use(passport.initialize());
 

@@ -5,6 +5,7 @@ import {
 } from '../utils/constants';
 
 export default (state) => {
+  console.log(state);
   if ( ! state.gameState.started) return state; // game not running
 
   const now = (new Date()).getTime();
@@ -19,7 +20,7 @@ export default (state) => {
   const id = (new Date()).getTime();
   const predefinedPosition = Math.floor(Math.random() * (60));
   const flyingObjectPosition = flyingObjectsStarterPositions[predefinedPosition];
-  //broke cursor circle when I changed this:
+
   const numberOfColors = Math.floor(Math.random() * (3));
   const flyingObjectsColor = flyingObjectsColors[numberOfColors];
   const newFlyingObject = {
@@ -31,8 +32,6 @@ export default (state) => {
     createdAt: (new Date()).getTime(),
     id,
   };
-  // const stateGameState = state.gameState;
-  // const stateGameStateFlyingObjects = state.gameState.flyingObjects;
 
   return {
     ...state,

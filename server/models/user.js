@@ -11,7 +11,7 @@ const UserSchema = new mongoose.Schema({
   },
   password: String,
   name: String,
-  maxScore: Double
+  maxScore: Number,
 });
 
 // QUERY
@@ -31,7 +31,6 @@ const UserSchema = new mongoose.Schema({
 
 /**
  * Compare the passed password with the value in the database. A model method.
- *
  * @param {string} password
  * @returns {object} callback
  */

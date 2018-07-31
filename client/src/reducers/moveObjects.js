@@ -5,9 +5,9 @@ import { PropTypes } from 'react'
 import checkCollisions from './checkCollisions';
 import checkBadCollisions from './checkBadCollisions';
 import initialGameState from './gameReducer.js'
+import initialState from "./initialState";
 
 function moveObjects(state, action) {
-  // if (!action.mousePosition) return state;
   const {x,y} = action.mousePosition || {
     x: 0,
     y: 0,
@@ -20,20 +20,15 @@ function moveObjects(state, action) {
   let lives = state.gameState.lives;
   const endGame = checkBadCollisions(state, flyingObjects);
   const objectsDestroyed = checkCollisions(state, flyingObjects);
-  // console.log(objectsDestroyed.length);
   const flyingDiscsDestroyed = objectsDestroyed.map(object => (object.oppId));
-  
-  
-  // console.log("END: " + endGame);
-  if (endGame === true) { 
-    // console.log("BAD COLLISION");
+
+  if (endGame === true) {
     lives--;
   }
 
   
   const bef = flyingObjects.length;
   flyingObjects = flyingObjects.filter(flyingDisc => (flyingDiscsDestroyed.indexOf(flyingDisc.id)));
-  // console.log("AFTER ---- ", (bef === flyingObjects.length));
 
   return {
     ...newState,
@@ -42,9 +37,6 @@ function moveObjects(state, action) {
       flyingObjects,
       lives,
     },
-
-    //leaderboard: state.leaderboard,
-
     x: x,
     y: y,
     r: state.r,

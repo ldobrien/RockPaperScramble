@@ -15,18 +15,15 @@ const Leaderboard = (props) => {
   };
 
   //what it will look like
-  const leaderboardTitle = {
+  const title = {
     fontFamily: 'Times New Roman, Arial',
     fontSize: 50,
     fill: '#ffe6ff',
     cursor: 'default',
-    // x:"-150",
-    // y:"-630"
-
   };
 
-  let leaderboard = props.leaderboard || [];  //Sorting the top score on top
-  leaderboard = leaderboard.sort((prev, next) => {
+  let leaders = props.leaderboard || [];  //Sorting the top score on top
+  leaders = leaders.sort((prev, next) => {
     //sort by name if tied
     if (prev.maxScore === next.maxScore) {
       return prev.name <= next.name ? 1 : -1;
@@ -47,10 +44,10 @@ const Leaderboard = (props) => {
 
   return (
     <g>
-      <text filter="url(#shadow)" style={leaderboardTitle} x="-900" y="-220">Leaderboard</text>
+      <text filter="url(#shadow)" style={title} x="-900" y="-220">Leaderboard</text>
       <rect style={style} width={700} height="330" />
       {
-        props.currentPlayer && leaderboard.map((player, idx) => {
+        props.currentPlayer && leaders.map((player, idx) => {
           const position = {
             x: -800,
             y: -130 + (70 * idx)

@@ -9,10 +9,6 @@ import Circle from './Components/Circle.jsx';
 
 
 class App extends Component {
-  // constructor(props) {
-  //   super(props);
-  //   this.createLeaderboard = this.createLeaderboard.bind(this);
-  // }
 
 	componentDidMount() {
     const self = this;
@@ -32,32 +28,17 @@ class App extends Component {
     window.onresize();
   }
 
+  // ask - should map statetoprops be in this file?? it's currently in game.js
   trackMouse(event) {
     this.canvasMousePosition = getCanvasPosition(event);
   }
 
-  createLeaderboard(id) {
-    
-  }
-
   render() {
-    // if(self.props.gameState.lives <= 0){
-    //   return(
-    //     <div>
-    //     <leaderboard
-    //     leaderboard = {this.props.leaderboard}
-    //     />
-    //   </div>
-    //   );
-    // }
-    // else {
-    //   console.log(this.props.email);
       return (
         <div>
           <Canvas 
 
           leaderboard = {this.props.leaderboard}
-          	// angle={this.props.angle}
           	x={this.props.x}
           	y={this.props.y}
             r={this.props.r}
@@ -66,8 +47,6 @@ class App extends Component {
             startGame={this.props.startGame}
           	trackMouse={event => (this.trackMouse(event))}
             email={this.props.email}
-            // width={this.props.width}
-            // height={this.props.height}
           />
 
         </div>
@@ -93,7 +72,6 @@ App.propTypes = {
   }).isRequired,
   moveObjects: PropTypes.func.isRequired,
   startGame: PropTypes.func.isRequired,
-  moveObjects: PropTypes.func.isRequired,
   email: PropTypes.string.isRequired
 };
 

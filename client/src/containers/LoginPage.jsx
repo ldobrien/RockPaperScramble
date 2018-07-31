@@ -58,6 +58,10 @@ class LoginPage extends React.Component {
       if (xhr.status === 200) {
         // success
 
+        // console.log("WHERE THE F IS THE USER ID", xhr.response);
+        // const userId = xhr.response.data.user???
+        // localStorage.setItem('userid', userId);
+
         // change the component-container state
         this.setState({
           errors: {}

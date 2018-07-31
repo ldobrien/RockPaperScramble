@@ -1,41 +1,35 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { checkCollision } from '../utils/formulas';
-import { checkBadCollision } from '../utils/formulas';
+import { checkCol } from '../utils/formulas';
+import { checkBad } from '../utils/formulas';
 import { gameHeight } from '../utils/constants';
 
-const checkBadCollisions = (self, opps) => {
+const checkBadCollisions = (state, flyingObjects) => {
   let flag= false;
-  const rectB = {
-    x1: self.x - self.r,
-    y1: self.y - self.r,
-    x2: self.x + self.r,
-    y2: self.y + self.r,
-   // color: self.color,
-  };
-  opps.forEach((opp) => {
-    const currentLifeTime = (new Date()).getTime() - opp.createdAt;
-    const calculatedPosition = {
-      x: opp.position.x,
-      y: opp.position.y + ((currentLifeTime / 8000) * gameHeight),
-    };
-
-    const calculatedColor = opp.color;
-   // const circleRadius = self.r;
-    
-    const rectA = {
-      x1: calculatedPosition.x - 40,
-      y1: calculatedPosition.y - 10,
-      x2: calculatedPosition.x + 40,
-      y2: calculatedPosition.y + 10,
-      rectclr:calculatedColor,
-    };
-    // console.log(opp.id);
-    if (checkBadCollision(rectA, rectB)){
-      // console.log("BAD BAD BAD");
-      flag = true;
-    }
-  });
+  // const rectB = {
+  //   x1: state.x - state.r,
+  //   y1: state.y - state.r,
+  //   x2: state.x + state.r,
+  //   y2: state.y + state.r,
+  // };
+  // flyingObjects.forEach((opp) => {
+  //   const currentLifeTime = (new Date()).getTime() - opp.createdAt;
+  //   const calculatedPosition = {
+  //     x: opp.position.x,
+  //     y: opp.position.y + ((currentLifeTime / 8000) * gameHeight),
+  //   };
+  //
+  //   const calculatedColor = opp.color;
+  //
+  //   const rectA = {
+  //     x1: calculatedPosition.x - 10,
+  //     y1: calculatedPosition.y - 10,
+  //     x2: calculatedPosition.x + 10,
+  //     y2: calculatedPosition.y + 10,
+  //     rectclr:calculatedColor,
+  //   };
+  //   flag = flag || checkBad(rectA, rectB);
+  // });
   return flag;
 };
 

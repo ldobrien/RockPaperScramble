@@ -2,6 +2,7 @@
 import { MOVE_OBJECTS, START_GAME, ON_COLLIDE } from '../actions';
 import moveObjects from './moveObjects';
 import startGame from './startGame';
+import initialState from './initialState';
 
 const initialGameState = {
   started: false,
@@ -11,7 +12,6 @@ const initialGameState = {
   lastObjectCreatedAt: new Date(),
 };
 
-
 function gameReducer(state = initialState, action) {
   switch (action.type) {
     case MOVE_OBJECTS:
@@ -19,8 +19,6 @@ function gameReducer(state = initialState, action) {
     case START_GAME:
 
       return startGame(state, initialGameState);
-    case ON_COLLIDE:
-      return onCollide(state, action);
     default:
       return state;
   }
