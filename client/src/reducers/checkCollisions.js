@@ -11,7 +11,7 @@ const checkCollisions = (self, opps) => {
     y1: self.y - self.r,
     x2: self.x + self.r,
     y2: self.y + self.r,
-   // color: self.color,
+  
   };
   opps.forEach((opp) => {
     const currentLifeTime = (new Date()).getTime() - opp.createdAt;
@@ -21,7 +21,7 @@ const checkCollisions = (self, opps) => {
     };
 
     const calculatedColor = opp.color;
-   // const circleRadius = self.r;
+  
     
     const rectA = {
       x1: calculatedPosition.x - 10,
@@ -30,23 +30,17 @@ const checkCollisions = (self, opps) => {
       y2: calculatedPosition.y + 10,
       rectclr:calculatedColor,
     };
-    // console.log(opp.id);
+ 
     if (checkCollision(rectA, rectB)) {
 
-      // console.log("COLLISION: ");
-      // console.log(opp.id);
-
-      // if (calculatedColor = "red"){
+   
         objectsDestroyed.push({
           oppId: opp.id,
         });
         self.r += 1;
         self.score += 1;
 
-        // console.log(self.score);
-
-
-      // console.log(objectsDestroyed[0]);
+   
     };
 
   });

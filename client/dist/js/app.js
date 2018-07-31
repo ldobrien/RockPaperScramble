@@ -4722,46 +4722,19 @@ var Auth = function () {
 
   _createClass(Auth, null, [{
     key: 'authenticateUser',
-
-
-    /**
-     * Authenticate a user. Save a token string in Local Storage
-     *
-     * @param {string} token
-     */
     value: function authenticateUser(token) {
       localStorage.setItem('token', token);
     }
-
-    /**
-     * Check if a user is authenticated - check if a token is saved in Local Storage
-     *
-     * @returns {boolean}
-     */
-
   }, {
     key: 'isUserAuthenticated',
     value: function isUserAuthenticated() {
       return localStorage.getItem('token') !== null;
     }
-
-    /**
-     * Deauthenticate a user. Remove a token from Local Storage.
-     *
-     */
-
   }, {
     key: 'deauthenticateUser',
     value: function deauthenticateUser() {
       localStorage.removeItem('token');
     }
-
-    /**
-     * Get a token value.
-     *
-     * @returns {string}
-     */
-
   }, {
     key: 'getToken',
     value: function getToken() {
@@ -6806,10 +6779,6 @@ var _FlyingObject = __webpack_require__(231);
 
 var _FlyingObject2 = _interopRequireDefault(_FlyingObject);
 
-var _Heart = __webpack_require__(232);
-
-var _Heart2 = _interopRequireDefault(_Heart);
-
 var _StartGame = __webpack_require__(236);
 
 var _StartGame2 = _interopRequireDefault(_StartGame);
@@ -6840,9 +6809,11 @@ var _game2 = _interopRequireDefault(_game);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+var opponents = 50;
+//import Heart from './Heart.jsx';
+
 // import Login from './Login.jsx';
 
-var opponents = 50;
 var width = window.innerWidth;
 var height = window.innerHeight;
 
@@ -6852,8 +6823,7 @@ var Canvas = function Canvas(props) {
   var leaderboard = props.leaderboard;
 
   var lives = props.gameState.lives;
-  // console.log(lives);
-  //   console.log(LoginPage.user.email);
+
   if (lives === 0) {
     var str = localStorage.getItem('email');
     var strNew = str.replace("%40", "@");
@@ -6871,13 +6841,12 @@ var Canvas = function Canvas(props) {
       currScore = json;
       console.log("DB SCORE:", currScore.maxScore);
       if (currScore.maxScore < props.score) {
-        fetch('/api/users/topscores/' + strNew /*localStorage.getItem('email')*/, {
+        fetch('/api/users/topscores/' + strNew, {
           method: 'PUT',
           headers: { 'Authorization': 'bearer ' + _Auth2.default.getToken(),
             'Content-Type': 'application/json' },
           body: JSON.stringify({
-            //email: localStorage.getItem('email'),
-            // email: "sean@sean.com",
+
             score: props.score
           })
 
@@ -6887,27 +6856,7 @@ var Canvas = function Canvas(props) {
       }
     });
 
-    // console.log("CURR SCORE:", currScore.maxScore);
     console.log("GAME SCORE:", props.score);
-
-    // if (props.score > currScore.maxScore) {
-
-    // // call server to update score using
-    //   console.log('stored email:', strNew /*localStorage.getItem('email')*/);
-    // //   console.log('score', props.score);
-    //   fetch('/api/users/topscores/' + strNew /*localStorage.getItem('email')*/, {
-    //       method: 'PUT',
-    //       headers: { 'Authorization': `bearer ${Auth.getToken()}`,
-    //           'Content-Type': 'application/json' },
-    //       body: JSON.stringify({
-    //           //email: localStorage.getItem('email'),
-    //           // email: "sean@sean.com",
-    //           score: props.score,
-    //       })
-
-    //   })
-    //   .then(res => res.json());
-    // } 
 
     return _react2.default.createElement(_LeaderBoard2.default, { currentPlayer: leaderboard[3], leaderboard: leaderboard });
   } else if (lives < 0) {
@@ -6916,9 +6865,9 @@ var Canvas = function Canvas(props) {
     return _react2.default.createElement(
       'svg',
       {
-        id: 'RockPaperScramble'
-        // preserveAspectRatio="xMaxYMax none"
-        , onMouseMove: props.trackMouse,
+        id: 'RockPaperScramble',
+
+        onMouseMove: props.trackMouse,
         viewBox: viewBox
       },
       _react2.default.createElement(
@@ -6933,7 +6882,6 @@ var Canvas = function Canvas(props) {
       _react2.default.createElement(_Arena2.default, { position: { x: props.x, y: props.y } }),
       _react2.default.createElement(_Circle2.default, { position: { x: props.x, y: props.y }, radius: { r: props.r } }),
       _react2.default.createElement(_CurrentScore2.default, { score: props.score }),
-      _react2.default.createElement(_Heart2.default, { position: { x: -600, y: 35 } }),
       !props.gameState.started && _react2.default.createElement(
         'g',
         null,
@@ -6954,11 +6902,6 @@ var Canvas = function Canvas(props) {
   }
 };
 
-// LoginPage.Proptypes = {
-//   user: PropTypes.shape({
-//       email: PropTypes.string.isRequired,
-//   }).isRequired
-// };
 Canvas.propTypes = {
   x: _propTypes2.default.number.isRequired,
   y: _propTypes2.default.number.isRequired,
@@ -6982,7 +6925,6 @@ Canvas.propTypes = {
 };
 
 exports.default = Canvas;
-// export {circles};
 
 /***/ }),
 /* 87 */
@@ -7008,14 +6950,14 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 var Circle = function Circle(props) {
   var circleStyle = {
     fill: 'red'
-    // animation-delay: 2s;
+
   };
   return _react2.default.createElement('circle', {
     style: circleStyle,
     cx: props.position.x,
     cy: props.position.y,
     r: props.radius.r
-    //clr="blue"
+
   });
 };
 
@@ -10669,41 +10611,33 @@ var Leaderboard = function Leaderboard(props) {
   var style = {
     fill: 'transparent',
     stroke: 'blue',
-    strokeDasharray: '14', //container it lives in
+    strokeDasharray: '14',
     x: -1050,
     y: -200
-    // x: "-350",
-    // y: "-600"
+
   };
 
-  //what it will look like
   var leaderboardTitle = {
     fontFamily: 'Times New Roman, Arial',
     fontSize: 50,
     fill: '#ffe6ff',
     cursor: 'default'
-    // x:"-150",
-    // y:"-630"
 
   };
 
-  var leaderboard = props.leaderboard || []; //Sorting the top score on top
+  var leaderboard = props.leaderboard || [];
   leaderboard = leaderboard.sort(function (prev, next) {
-    //sort by name if tied
+
     if (prev.maxScore === next.maxScore) {
       return prev.name <= next.name ? 1 : -1;
     }
     return prev.maxScore < next.maxScore ? 1 : -1;
-  })
-  // Calling map to show player flag and highlight ranking of active player
-  .map(function (member, index) {
+  }).map(function (member, index) {
     return _extends({}, member, {
       rank: index + 1,
       currentPlayer: member.id === props.currentPlayer.id
     });
-  })
-  // Remove from view players who are in the top 3
-  .filter(function (member, index) {
+  }).filter(function (member, index) {
     if (index < 4) return member;
     return null;
   });
@@ -10739,10 +10673,7 @@ Leaderboard.propTypes = {
   }))
 };
 //
-// Leaderboard.defaultProps = {
-//   currentPlayer: null,
-//   leaderboard: null,
-// };
+
 
 exports.default = Leaderboard;
 
@@ -10904,15 +10835,11 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-var store = (0, _redux.createStore)(_reducers2.default, /* preloadedState, */
-window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__());
+var store = (0, _redux.createStore)(_reducers2.default, window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__());
 
 var DashboardPage = function (_React$Component) {
   _inherits(DashboardPage, _React$Component);
 
-  /**
-   * Class constructor.
-   */
   function DashboardPage(props) {
     _classCallCheck(this, DashboardPage);
 
@@ -10925,21 +10852,15 @@ var DashboardPage = function (_React$Component) {
     return _this;
   }
 
-  /**
-   * This method will be executed after initial rendering.
-   */
-
-
   _createClass(DashboardPage, [{
     key: 'componentDidMount',
     value: function componentDidMount(props) {
       var _this2 = this;
 
-      // const self = this;
       var xhr = new XMLHttpRequest();
       xhr.open('get', '/api/dashboard');
       xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
-      // set the authorization HTTP header
+
       xhr.setRequestHeader('Authorization', 'bearer ' + _Auth2.default.getToken());
       xhr.responseType = 'json';
       xhr.addEventListener('load', function () {
@@ -10958,53 +10879,16 @@ var DashboardPage = function (_React$Component) {
       }).then(function (res) {
         return res.json();
       }).then(function (json) {
-        // console.log("THE HIG JSON", json);
+
         _this2.setState({
           userHighScores: json
         });
       });
-
-      // const self = this;
-
-      // setInterval(() => {
-      //     self.props.moveObjects(self.canvasMousePosition);
-      // }, 10);
-      // setInterval(() => {
-      //     self.props.onCollide(self.canvasMousePosition);
-      // }, 1);
-
-      // window.onresize = () => {
-      //   const cnv = document.getElementById('RockPaperScramble');
-      //   cnv.style.width = `${window.innerWidth}px`;
-      //   cnv.style.height = `${window.innerHeight}px`;
-      // };
-      // window.onresize();
     }
-
-    // trackMouse(event) {
-    //   this.canvasMousePosition = getCanvasPosition(event);
-    // }
-    /**
-     * Render the component.
-     */
-
   }, {
     key: 'render',
     value: function render() {
-      //   // export default function configureStore(initialState) {
-      //   const store = createStore(reducer, /* preloadedState, */
-      //   window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__(),);
-      //   if (module.hot) {
-      //   // Enable Webpack hot module replacement for reducers
-      //   module.hot.accept('../reducers', () => {
-      //     const nextRootReducer = require('../reducers/index');
-      //     store.replaceReducer(nextRootReducer);
-      //   });
-      // }
 
-      //     reducer, /* preloadedState, */
-      //     window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__(),
-      // );
       return _react2.default.createElement(
         'div',
         null,
@@ -11067,9 +10951,6 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 var LoginPage = function (_React$Component) {
   _inherits(LoginPage, _React$Component);
 
-  /**
-   * Class constructor.
-   */
   function LoginPage(props, context) {
     _classCallCheck(this, LoginPage);
 
@@ -11083,7 +10964,6 @@ var LoginPage = function (_React$Component) {
       localStorage.removeItem('successMessage');
     }
 
-    // set the initial component state
     _this.state = {
       errors: {},
       successMessage: successMessage,
@@ -11098,60 +10978,39 @@ var LoginPage = function (_React$Component) {
     return _this;
   }
 
-  /**
-   * Process the form.
-   *
-   * @param {object} event - the JavaScript event object
-   */
-
-
   _createClass(LoginPage, [{
     key: 'processForm',
     value: function processForm(event) {
       var _this2 = this;
 
-      // prevent default action. in this case, action is the form submission event
       event.preventDefault();
 
-      // create a string for an HTTP body message
       var email = encodeURIComponent(this.state.user.email);
       var password = encodeURIComponent(this.state.user.password);
       var formData = 'email=' + email + '&password=' + password;
 
-      // create an AJAX request
       var xhr = new XMLHttpRequest();
       xhr.open('post', '/auth/login');
       xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
       xhr.responseType = 'json';
       xhr.addEventListener('load', function () {
         if (xhr.status === 200) {
-          // success
 
-          // change the component-container state
           _this2.setState({
             errors: {}
           });
 
-          // save the token
           _Auth2.default.authenticateUser(xhr.response.token);
 
-          // change the current URL to /
           _this2.context.router.replace('/');
-
-          // 
 
           var str = email;
           var strNew = str.replace("%40", "@");
           console.log(email);
           console.log(strNew);
           localStorage.setItem('email', strNew);
-          // localStorage.setItem('email', email);
-
-          // this.props.onLoginSuccess(email);
         } else {
-          // failure
 
-          // change the component state
           var errors = xhr.response.errors ? xhr.response.errors : {};
           errors.summary = xhr.response.message;
 
@@ -11162,13 +11021,6 @@ var LoginPage = function (_React$Component) {
       });
       xhr.send(formData);
     }
-
-    /**
-     * Change the user object.
-     *
-     * @param {object} event - the JavaScript event object
-     */
-
   }, {
     key: 'changeUser',
     value: function changeUser(event) {
@@ -11180,11 +11032,6 @@ var LoginPage = function (_React$Component) {
         user: user
       });
     }
-
-    /**
-     * Render the component.
-     */
-
   }, {
     key: 'render',
     value: function render() {
@@ -11200,23 +11047,10 @@ var LoginPage = function (_React$Component) {
 
   return LoginPage;
 }(_react2.default.Component);
-//
-
 
 LoginPage.contextTypes = {
   router: _react.PropTypes.object.isRequired
 };
-
-// const mapDispatchToProps = dispatch => ({
-//     onLoginSuccess: email => {
-//         dispatch(LoginSuccess(email));
-//     }
-// });
-
-// export default connect(
-//     null,
-//     mapDispatchToProps
-// )(LoginPage);
 
 exports.default = LoginPage;
 
@@ -11252,15 +11086,10 @@ var mapStateToProps = function mapStateToProps(state) {
     email: state.email
   };
 };
-// import DashboardPage from '../DashboardPage.jsx';
-
 
 var mapDispatchToProps = function mapDispatchToProps(dispatch) {
   return {
-    // LoginSuccess:
-    // () => {
-    //     dispatch(LoginSuccess());
-    // }
+
     moveObjects: function moveObjects(mousePosition) {
       dispatch((0, _index.moveObjects)(mousePosition));
     },
@@ -11306,7 +11135,6 @@ var _onCollide2 = _interopRequireDefault(_onCollide);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-// import createEnemies from './enemies';
 var initialGameState = {
   started: false,
   kills: 0,
@@ -11315,20 +11143,15 @@ var initialGameState = {
   lastObjectCreatedAt: new Date()
 };
 var initialState = {
-  // angle: 45,
-  // direction: "UP",
+
   x: 0,
   y: 0,
   r: 30,
   score: 0,
   color: "yellow",
-  // team: "Rock",
-  // circles: [],
-  // wide: 100,
-  // high: 100,
 
   gameState: initialGameState,
-  //leaderboard: [1,2,3,4]
+
   email: ""
 };
 
@@ -11337,11 +11160,10 @@ function reducer() {
   var action = arguments[1];
 
   switch (action.type) {
-    // case COLLIDE:
-    //   return onCollide(state, action, {this.props.r}, )
+
     case _actions.LOGIN_SUCCESS:
       var email = action.email;
-      // console.log(email);
+
 
       return _extends({}, state, { email: email });
     case _actions.MOVE_OBJECTS:
@@ -11370,8 +11192,6 @@ Object.defineProperty(exports, "__esModule", {
 });
 
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
-// import { easeElastic } from "d3-ease";
-
 
 var _formulas = __webpack_require__(30);
 
@@ -11396,7 +11216,6 @@ var _index2 = _interopRequireDefault(_index);
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function moveObjects(state, action) {
-  // if (!action.mousePosition) return state;
   var _ref = action.mousePosition || {
     x: 0,
     y: 0
@@ -11412,14 +11231,11 @@ function moveObjects(state, action) {
   var lives = state.gameState.lives;
   var endGame = (0, _checkBadCollisions2.default)(state, flyingObjects);
   var objectsDestroyed = (0, _checkCollisions2.default)(state, flyingObjects);
-  // console.log(objectsDestroyed.length);
   var flyingDiscsDestroyed = objectsDestroyed.map(function (object) {
     return object.oppId;
   });
 
-  // console.log("END: " + endGame);
   if (endGame === true) {
-    // console.log("BAD COLLISION");
     lives--;
   }
 
@@ -11427,15 +11243,12 @@ function moveObjects(state, action) {
   flyingObjects = flyingObjects.filter(function (flyingDisc) {
     return flyingDiscsDestroyed.indexOf(flyingDisc.id);
   });
-  // console.log("AFTER ---- ", (bef === flyingObjects.length));
 
   return _extends({}, newState, {
     gameState: _extends({}, newState.gameState, {
       flyingObjects: flyingObjects,
       lives: lives
     }),
-
-    //leaderboard: state.leaderboard,
 
     x: x,
     y: y,
@@ -19158,7 +18971,6 @@ var _Auth2 = _interopRequireDefault(_Auth);
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var routes = {
-  // base component (wrapper for the whole application).
   component: _Base2.default,
   childRoutes: [{
     path: '/',
@@ -19180,7 +18992,6 @@ var routes = {
     onEnter: function onEnter(nextState, replace) {
       _Auth2.default.deauthenticateUser();
 
-      // change the current URL to /
       replace('/');
     }
   }]
@@ -19336,11 +19147,6 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-// import { PropTypes } from 'react'
-
-
-//const 
-
 
 var App = function (_Component) {
   _inherits(App, _Component);
@@ -19353,12 +19159,6 @@ var App = function (_Component) {
 
   _createClass(App, [{
     key: 'componentDidMount',
-
-    // constructor(props) {
-    //   super(props);
-    //   this.createLeaderboard = this.createLeaderboard.bind(this);
-    // }
-
     value: function componentDidMount() {
       var self = this;
 
@@ -19389,25 +19189,13 @@ var App = function (_Component) {
     value: function render() {
       var _this2 = this;
 
-      // if(self.props.gameState.lives <= 0){
-      //   return(
-      //     <div>
-      //     <leaderboard
-      //     leaderboard = {this.props.leaderboard}
-      //     />
-      //   </div>
-      //   );
-      // }
-      // else {
-      //   console.log(this.props.email);
       return _react2.default.createElement(
         'div',
         null,
         _react2.default.createElement(_Canvas2.default, {
 
-          leaderboard: this.props.leaderboard
-          // angle={this.props.angle}
-          , x: this.props.x,
+          leaderboard: this.props.leaderboard,
+          x: this.props.x,
           y: this.props.y,
           r: this.props.r,
           score: this.props.score,
@@ -19417,8 +19205,7 @@ var App = function (_Component) {
             return _this2.trackMouse(event);
           },
           email: this.props.email
-          // width={this.props.width}
-          // height={this.props.height}
+
         })
       );
     }
@@ -19478,24 +19265,16 @@ var Arena = function Arena(props) {
   };
   var arenaWidth = 4000;
   var gameHeight = 1200;
-  // const transform2 = `position(${props.position}, 0, 0)`
-  return (
-    // <g transform2={transform2}>
-    _react2.default.createElement('rect', {
-      style: arenaStyle,
-      x: arenaWidth / -2,
-      y: gameHeight / -2,
-      width: arenaWidth,
-      height: gameHeight
-    })
-    // </g>
-
-  );
+  return _react2.default.createElement('rect', {
+    style: arenaStyle,
+    x: arenaWidth / -2,
+    y: gameHeight / -2,
+    width: arenaWidth,
+    height: gameHeight
+  });
 };
 
-Arena.propTypes = {
-  // position: PropTypes.number.isRequired,
-};
+Arena.propTypes = {};
 
 exports.default = Arena;
 
@@ -19599,7 +19378,6 @@ var CurrentScore = function CurrentScore(props) {
     fontSize: 80,
     fill: '#ffffba'
   };
-  // console.log(props.score);
 
   return _react2.default.createElement(
     'g',
@@ -19671,7 +19449,7 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _templateObject = _taggedTemplateLiteral(['\n  0% {\n    transform: translateY(0);\n  }\n  // 50%{\n  //   transform: translate(', 'px,', 'px);\n  // }\n  100% {\n    transform: translateY(', 'px);\n  }\n'], ['\n  0% {\n    transform: translateY(0);\n  }\n  // 50%{\n  //   transform: translate(', 'px,', 'px);\n  // }\n  100% {\n    transform: translateY(', 'px);\n  }\n']),
+var _templateObject = _taggedTemplateLiteral(['\n  0% {\n    transform: translateY(0);\n  }\n \n  100% {\n    transform: translateY(', 'px);\n  }\n'], ['\n  0% {\n    transform: translateY(0);\n  }\n \n  100% {\n    transform: translateY(', 'px);\n  }\n']),
     _templateObject2 = _taggedTemplateLiteral(['\n  animation: ', ' 8s linear;\n'], ['\n  animation: ', ' 8s linear;\n']);
 
 var _react = __webpack_require__(1);
@@ -19692,7 +19470,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 function _taggedTemplateLiteral(strings, raw) { return Object.freeze(Object.defineProperties(strings, { raw: { value: Object.freeze(raw) } })); }
 
-var moveVertically = (0, _styledComponents.keyframes)(_templateObject, _constants.gameHeight, _constants.gameWidth, _constants.gameHeight);
+var moveVertically = (0, _styledComponents.keyframes)(_templateObject, _constants.gameHeight);
 
 var Move = _styledComponents2.default.g(_templateObject2, moveVertically);
 
@@ -19740,97 +19518,7 @@ FlyingObjectBase.propTypes = {
 exports.default = FlyingObject;
 
 /***/ }),
-/* 232 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-
-var _react = __webpack_require__(1);
-
-var _react2 = _interopRequireDefault(_react);
-
-var _propTypes = __webpack_require__(5);
-
-var _propTypes2 = _interopRequireDefault(_propTypes);
-
-var _formulas = __webpack_require__(30);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-var Heart = function Heart(props) {
-  var heartStyle = {
-    fill: '#da0d15',
-    stroke: '#a51708',
-    strokeWidth: '2px'
-  };
-
-  var leftSide = {
-    initialAxis: {
-      x: -800,
-      y: 500
-    },
-    initialControlPoint: {
-      x: -20,
-      y: -20
-    },
-    endingControlPoint: {
-      x: -40,
-      y: 10
-    },
-    endingAxis: {
-      x: 0,
-      y: 40
-    }
-  };
-
-  var rightSide = {
-    initialAxis: {
-      x: -800,
-      y: 500
-    },
-    initialControlPoint: {
-      x: 20,
-      y: -20
-    },
-    endingControlPoint: {
-      x: 40,
-      y: 10
-    },
-    endingAxis: {
-      x: 0,
-      y: 40
-    }
-  };
-
-  return _react2.default.createElement(
-    'g',
-    { filter: 'url(#shadow)' },
-    _react2.default.createElement('path', {
-      style: heartStyle,
-      d: (0, _formulas.pathFromBezierCurve)(leftSide)
-    }),
-    _react2.default.createElement('path', {
-      style: heartStyle,
-      d: (0, _formulas.pathFromBezierCurve)(rightSide)
-    })
-  );
-};
-
-Heart.propTypes = {
-  position: _propTypes2.default.shape({
-    x: _propTypes2.default.number.isRequired,
-    y: _propTypes2.default.number.isRequired
-  }).isRequired
-};
-
-exports.default = Heart;
-
-/***/ }),
+/* 232 */,
 /* 233 */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -20105,12 +19793,12 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 var StartGame = function StartGame(props) {
   var button = {
-    x: _constants.gameWidth / -2, // half width
-    y: -280, // minus means up (above 0)
+    x: _constants.gameWidth / -2,
+    y: -280,
     width: _constants.gameWidth,
     height: 200,
-    rx: 10, // border radius
-    ry: 10, // border radius
+    rx: 10,
+    ry: 10,
     style: {
       fill: 'transparent',
       cursor: 'pointer'
@@ -20119,9 +19807,9 @@ var StartGame = function StartGame(props) {
   };
 
   var text = {
-    textAnchor: 'middle', // center
-    x: 0, // center relative to X axis
-    y: 200, // 150 up
+    textAnchor: 'middle',
+    x: 0,
+    y: 200,
     style: {
       fontFamily: '"Eater", cursive',
       fontSize: 60,
@@ -20324,13 +20012,9 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 var SignUpPage = function (_React$Component) {
   _inherits(SignUpPage, _React$Component);
 
-  /**
-   * Class constructor.
-   */
   function SignUpPage(props, context) {
     _classCallCheck(this, SignUpPage);
 
-    // set the initial component state
     var _this = _possibleConstructorReturn(this, (SignUpPage.__proto__ || Object.getPrototypeOf(SignUpPage)).call(this, props, context));
 
     _this.state = {
@@ -20347,48 +20031,33 @@ var SignUpPage = function (_React$Component) {
     return _this;
   }
 
-  /**
-   * Process the form.
-   *
-   * @param {object} event - the JavaScript event object
-   */
-
-
   _createClass(SignUpPage, [{
     key: 'processForm',
     value: function processForm(event) {
       var _this2 = this;
 
-      // prevent default action. in this case, action is the form submission event
       event.preventDefault();
 
-      // create a string for an HTTP body message
       var name = encodeURIComponent(this.state.user.name);
       var email = encodeURIComponent(this.state.user.email);
       var password = encodeURIComponent(this.state.user.password);
       var formData = 'name=' + name + '&email=' + email + '&password=' + password;
 
-      // create an AJAX request
       var xhr = new XMLHttpRequest();
       xhr.open('post', '/auth/signup');
       xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
       xhr.responseType = 'json';
       xhr.addEventListener('load', function () {
         if (xhr.status === 200) {
-          // success
 
-          // change the component-container state
           _this2.setState({
             errors: {}
           });
 
-          // set a message
           localStorage.setItem('successMessage', xhr.response.message);
 
-          // make a redirect
           _this2.context.router.replace('/login');
         } else {
-          // failure
 
           var errors = xhr.response.errors ? xhr.response.errors : {};
           errors.summary = xhr.response.message;
@@ -20400,13 +20069,6 @@ var SignUpPage = function (_React$Component) {
       });
       xhr.send(formData);
     }
-
-    /**
-     * Change the user object.
-     *
-     * @param {object} event - the JavaScript event object
-     */
-
   }, {
     key: 'changeUser',
     value: function changeUser(event) {
@@ -20418,11 +20080,6 @@ var SignUpPage = function (_React$Component) {
         user: user
       });
     }
-
-    /**
-     * Render the component.
-     */
-
   }, {
     key: 'render',
     value: function render() {
@@ -20476,7 +20133,7 @@ var checkBadCollisions = function checkBadCollisions(self, opps) {
     y1: self.y - self.r,
     x2: self.x + self.r,
     y2: self.y + self.r
-    // color: self.color,
+
   };
   opps.forEach(function (opp) {
     var currentLifeTime = new Date().getTime() - opp.createdAt;
@@ -20486,7 +20143,6 @@ var checkBadCollisions = function checkBadCollisions(self, opps) {
     };
 
     var calculatedColor = opp.color;
-    // const circleRadius = self.r;
 
     var rectA = {
       x1: calculatedPosition.x - 40,
@@ -20495,9 +20151,9 @@ var checkBadCollisions = function checkBadCollisions(self, opps) {
       y2: calculatedPosition.y + 10,
       rectclr: calculatedColor
     };
-    // console.log(opp.id);
+
     if ((0, _formulas.checkBadCollision)(rectA, rectB)) {
-      // console.log("BAD BAD BAD");
+
       flag = true;
     }
   });
@@ -20538,7 +20194,7 @@ var checkCollisions = function checkCollisions(self, opps) {
     y1: self.y - self.r,
     x2: self.x + self.r,
     y2: self.y + self.r
-    // color: self.color,
+
   };
   opps.forEach(function (opp) {
     var currentLifeTime = new Date().getTime() - opp.createdAt;
@@ -20548,7 +20204,6 @@ var checkCollisions = function checkCollisions(self, opps) {
     };
 
     var calculatedColor = opp.color;
-    // const circleRadius = self.r;
 
     var rectA = {
       x1: calculatedPosition.x - 10,
@@ -20557,23 +20212,14 @@ var checkCollisions = function checkCollisions(self, opps) {
       y2: calculatedPosition.y + 10,
       rectclr: calculatedColor
     };
-    // console.log(opp.id);
+
     if ((0, _formulas.checkCollision)(rectA, rectB)) {
 
-      // console.log("COLLISION: ");
-      // console.log(opp.id);
-
-      // if (calculatedColor = "red"){
       objectsDestroyed.push({
         oppId: opp.id
       });
       self.r += 1;
       self.score += 1;
-
-      // console.log(self.score);
-
-
-      // console.log(objectsDestroyed[0]);
     };
   });
   return objectsDestroyed;
@@ -20599,7 +20245,7 @@ var _constants = __webpack_require__(58);
 function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
 
 exports.default = function (state) {
-  if (!state.gameState.started) return state; // game not running
+  if (!state.gameState.started) return state;
 
   var now = new Date().getTime();
   var _state$gameState = state.gameState,
@@ -20608,12 +20254,10 @@ exports.default = function (state) {
 
   var createNewObject = now - lastObjectCreatedAt.getTime() > _constants.createInterval && flyingObjects.length < _constants.maxFlyingObjects;
 
-  if (!createNewObject) return state; // no need to create objects now
-
+  if (!createNewObject) return state;
   var id = new Date().getTime();
   var predefinedPosition = Math.floor(Math.random() * 60);
   var flyingObjectPosition = _constants.flyingObjectsStarterPositions[predefinedPosition];
-  //broke cursor circle when I changed this:
   var numberOfColors = Math.floor(Math.random() * 3);
   var flyingObjectsColor = _constants.flyingObjectsColors[numberOfColors];
   var newFlyingObject = {
@@ -20625,8 +20269,6 @@ exports.default = function (state) {
     createdAt: new Date().getTime(),
     id: id
   };
-  // const stateGameState = state.gameState;
-  // const stateGameStateFlyingObjects = state.gameState.flyingObjects;
 
   return _extends({}, state, {
     gameState: _extends({}, state.gameState, {
@@ -20648,8 +20290,6 @@ Object.defineProperty(exports, "__esModule", {
 });
 
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
-// import { PropTypes } from 'react'
-
 
 var _Canvas = __webpack_require__(86);
 
@@ -20663,24 +20303,14 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 function onCollide(state, action) {
   if (!action.mousePosition) return state;
-  // if (!action.collide) return state;
-  // const { x, y } = action.mousePosition;
+
   var _action$mousePosition = action.mousePosition,
       x = _action$mousePosition.x,
       y = _action$mousePosition.y;
 
   var currx = { x: x };
-  // console.log(vx);
-  // const r = radius1 + radius2;
 
-  // console.log(circles.length);
-  for (var i = 0; i < _Canvas2.default.length; i++) {
-    // console.log(circles[i]);
-    // if(circles[i].x === currx){
-    //   console.log("HIT");
-    //   //
-    // }
-  }
+  for (var i = 0; i < _Canvas2.default.length; i++) {}
   return _extends({}, state);
 }
 
@@ -20719,30 +20349,14 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.default = register;
 exports.unregister = unregister;
-// In production, we register a service worker to serve assets from local cache.
 
-// This lets the app load faster on subsequent visits in production, and gives
-// it offline capabilities. However, it also means that developers (and users)
-// will only see deployed updates on the "N+1" visit to a page, since previously
-// cached resources are updated in the background.
-
-// To learn more about the benefits of this model, read https://goo.gl/KwvDNy.
-// This link also includes instructions on opting out of this behavior.
-
-var isLocalhost = Boolean(window.location.hostname === 'localhost' ||
-// [::1] is the IPv6 localhost address.
-window.location.hostname === '[::1]' ||
-// 127.0.0.1/8 is considered localhost for IPv4.
-window.location.hostname.match(/^127(?:\.(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)){3}$/));
+var isLocalhost = Boolean(window.location.hostname === 'localhost' || window.location.hostname === '[::1]' || window.location.hostname.match(/^127(?:\.(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)){3}$/));
 
 function register() {
   if (process.env.NODE_ENV === 'production' && 'serviceWorker' in navigator) {
-    // The URL constructor is available in all browsers that support SW.
     var publicUrl = new URL(process.env.PUBLIC_URL, window.location);
     if (publicUrl.origin !== window.location.origin) {
-      // Our service worker won't work if PUBLIC_URL is on a different origin
-      // from what our page is served on. This might happen if a CDN is used to
-      // serve assets; see https://github.com/facebookincubator/create-react-app/issues/2374
+
       return;
     }
 
@@ -20750,16 +20364,11 @@ function register() {
       var swUrl = process.env.PUBLIC_URL + '/service-worker.js';
 
       if (isLocalhost) {
-        // This is running on localhost. Lets check if a service worker still exists or not.
         checkValidServiceWorker(swUrl);
-
-        // Add some additional logging to localhost, pointing developers to the
-        // service worker/PWA documentation.
         navigator.serviceWorker.ready.then(function () {
           console.log('This web app is being served cache-first by a service ' + 'worker. To learn more, visit https://goo.gl/SC7cgQ');
         });
       } else {
-        // Is not local host. Just register service worker
         registerValidSW(swUrl);
       }
     });
@@ -20773,15 +20382,10 @@ function registerValidSW(swUrl) {
       installingWorker.onstatechange = function () {
         if (installingWorker.state === 'installed') {
           if (navigator.serviceWorker.controller) {
-            // At this point, the old content will have been purged and
-            // the fresh content will have been added to the cache.
-            // It's the perfect time to display a "New content is
-            // available; please refresh." message in your web app.
+
             console.log('New content is available; please refresh.');
           } else {
-            // At this point, everything has been precached.
-            // It's the perfect time to display a
-            // "Content is cached for offline use." message.
+
             console.log('Content is cached for offline use.');
           }
         }
@@ -20793,18 +20397,18 @@ function registerValidSW(swUrl) {
 }
 
 function checkValidServiceWorker(swUrl) {
-  // Check if the service worker can be found. If it can't reload the page.
+
   fetch(swUrl).then(function (response) {
-    // Ensure service worker exists, and that we really are getting a JS file.
+
     if (response.status === 404 || response.headers.get('content-type').indexOf('javascript') === -1) {
-      // No service worker found. Probably a different app. Reload the page.
+
       navigator.serviceWorker.ready.then(function (registration) {
         registration.unregister().then(function () {
           window.location.reload();
         });
       });
     } else {
-      // Service worker found. Proceed as normal.
+
       registerValidSW(swUrl);
     }
   }).catch(function () {
@@ -52432,7 +52036,6 @@ var _routes2 = _interopRequireDefault(_routes);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-// remove tap delay, essential for MaterialUI to work properly
 (0, _reactTapEventPlugin2.default)();
 
 _reactDom2.default.render(_react2.default.createElement(

@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 function Opponents = (props) => {
   const enemystyle = {
     fill: "yellow"
-    // transition: 5s
+  
   };
   return {circles.map((circle)=>{return <Circle position={circle.position} radius={{r:circle.r}} />;})}
 }

@@ -7,8 +7,7 @@ const CurrentScore = (props) => {
     fontSize: 80,
     fill: '#ffffba',
   };
-  // console.log(props.score);
-
+ 
   return (
     <g filter="url(#shadow)">
       <text style={scoreStyle} x="800" y="500">

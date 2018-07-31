@@ -9,9 +9,7 @@ const moveVertically = keyframes`
   0% {
     transform: translateY(0);
   }
-  // 50%{
-  //   transform: translate(${gameHeight}px,${gameWidth}px);
-  // }
+ 
   100% {
     transform: translateY(${gameHeight}px);
   }

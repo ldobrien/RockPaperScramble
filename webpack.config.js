@@ -2,10 +2,10 @@ const path = require('path');
 const ObjectRestSpreadPlugin = require('@sucrase/webpack-object-rest-spread-plugin');
 
 module.exports = {
-  // the entry file for the bundle
+
   entry: path.join(__dirname, '/client/src/app.jsx'),
 
-  // the bundle file we will get in the result
+ 
   output: {
     path: path.join(__dirname, '/client/dist/js'),
     filename: 'app.js',
@@ -13,7 +13,7 @@ module.exports = {
 
   module: {
 
-    // apply loaders to files that meet given conditions
+
     loaders: [{
       test: /\.jsx?$/,
       include: path.join(__dirname, '/client/src'),
@@ -25,6 +25,5 @@ module.exports = {
   },
 
 
-  // start Webpack in a watch mode, so Webpack will rebuild the bundle on changes
   watch: true
 };

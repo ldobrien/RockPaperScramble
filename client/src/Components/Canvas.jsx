@@ -8,7 +8,7 @@ import DashboardPage from '../containers/DashboardPage.jsx';
 
 import CurrentScore from './CurrentScore.jsx';
 import FlyingObject from './FlyingObject.jsx';
-import Heart from './Heart.jsx';
+//import Heart from './Heart.jsx';
 import StartGame from './StartGame.jsx';
 import Title from './Title.jsx';
 import Leaderboard from './LeaderBoard.jsx';
@@ -30,8 +30,7 @@ const Canvas = (props) => {
   const leaderboard = props.leaderboard;
 
   let lives = props.gameState.lives;
-  // console.log(lives);
-  //   console.log(LoginPage.user.email);
+
     if (lives === 0){
         var str = localStorage.getItem('email');
         var strNew = str.replace("%40","@");    
@@ -49,13 +48,12 @@ const Canvas = (props) => {
         currScore = json
         console.log("DB SCORE:", currScore.maxScore);
         if (currScore.maxScore < props.score){
-            fetch('/api/users/topscores/' + strNew /*localStorage.getItem('email')*/, {
+            fetch('/api/users/topscores/' + strNew, {
             method: 'PUT',
             headers: { 'Authorization': `bearer ${Auth.getToken()}`,
                 'Content-Type': 'application/json' },
             body: JSON.stringify({
-                //email: localStorage.getItem('email'),
-                // email: "sean@sean.com",
+             
                 score: props.score,
             })
 
@@ -65,27 +63,10 @@ const Canvas = (props) => {
         });
         
 
-        // console.log("CURR SCORE:", currScore.maxScore);
+    
         console.log("GAME SCORE:", props.score);
 
-      // if (props.score > currScore.maxScore) {
-        
-      // // call server to update score using
-      //   console.log('stored email:', strNew /*localStorage.getItem('email')*/);
-      // //   console.log('score', props.score);
-      //   fetch('/api/users/topscores/' + strNew /*localStorage.getItem('email')*/, {
-      //       method: 'PUT',
-      //       headers: { 'Authorization': `bearer ${Auth.getToken()}`,
-      //           'Content-Type': 'application/json' },
-      //       body: JSON.stringify({
-      //           //email: localStorage.getItem('email'),
-      //           // email: "sean@sean.com",
-      //           score: props.score,
-      //       })
 
-      //   })
-      //   .then(res => res.json());
-      // } 
 
         return(
             <Leaderboard currentPlayer={leaderboard[3]} leaderboard={leaderboard} />
@@ -100,7 +81,7 @@ const Canvas = (props) => {
       return (
         <svg
           id="RockPaperScramble"
-          // preserveAspectRatio="xMaxYMax none"
+      
           onMouseMove={props.trackMouse}
           viewBox={viewBox}
         >
@@ -116,7 +97,6 @@ const Canvas = (props) => {
 
 
          <CurrentScore score={props.score}/>
-          <Heart position={{x: -600, y: 35}} />
         
 
           { ! props.gameState.started &&
@@ -139,11 +119,7 @@ const Canvas = (props) => {
     }
 };
 
-// LoginPage.Proptypes = {
-//   user: PropTypes.shape({
-//       email: PropTypes.string.isRequired,
-//   }).isRequired
-// };
+
 Canvas.propTypes = {
   x: PropTypes.number.isRequired,
   y: PropTypes.number.isRequired,
@@ -169,4 +145,4 @@ Canvas.propTypes = {
 
 
 export default Canvas;
-// export {circles};
+

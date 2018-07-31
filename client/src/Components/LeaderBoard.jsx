@@ -7,39 +7,37 @@ const Leaderboard = (props) => {
   const style = {
     fill: 'transparent',
     stroke: 'blue',
-    strokeDasharray: '14',   //container it lives in
+    strokeDasharray: '14',  
     x: -1050,
     y: -200
-    // x: "-350",
-    // y: "-600"
+  
   };
 
-  //what it will look like
+  
   const leaderboardTitle = {
     fontFamily: 'Times New Roman, Arial',
     fontSize: 50,
     fill: '#ffe6ff',
     cursor: 'default',
-    // x:"-150",
-    // y:"-630"
+ 
 
   };
 
-  let leaderboard = props.leaderboard || [];  //Sorting the top score on top
+  let leaderboard = props.leaderboard || [];  
   leaderboard = leaderboard.sort((prev, next) => {
-    //sort by name if tied
+
     if (prev.maxScore === next.maxScore) {
       return prev.name <= next.name ? 1 : -1;
     }
     return prev.maxScore < next.maxScore ? 1 : -1;
   })
-// Calling map to show player flag and highlight ranking of active player
+
   .map((member, index) => ({
     ...member,
     rank: index + 1,
     currentPlayer: member.id === props.currentPlayer.id,
   }))
-// Remove from view players who are in the top 3
+
   .filter((member, index) => {
     if (index < 4) return member;
     return null;
@@ -76,9 +74,6 @@ Leaderboard.propTypes = {
   })),
 };
 //
-// Leaderboard.defaultProps = {
-//   currentPlayer: null,
-//   leaderboard: null,
-// };
+
 
 export default Leaderboard;

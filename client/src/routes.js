@@ -7,7 +7,6 @@ import Auth from './modules/Auth';
 
 
 const routes = {
-  // base component (wrapper for the whole application).
   component: Base,
   childRoutes: [
 
@@ -37,7 +36,6 @@ const routes = {
       onEnter: (nextState, replace) => {
         Auth.deauthenticateUser();
 
-        // change the current URL to /
         replace('/');
       }
     }

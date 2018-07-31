@@ -1,18 +1,13 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
-// import { PropTypes } from 'react'
 import { getCanvasPosition } from './utils/formulas';
 import Canvas from './Components/Canvas.jsx';
 import Circle from './Components/Circle.jsx';
 
-//const 
 
 
 class App extends Component {
-  // constructor(props) {
-  //   super(props);
-  //   this.createLeaderboard = this.createLeaderboard.bind(this);
-  // }
+
 
 	componentDidMount() {
     const self = this;
@@ -41,23 +36,12 @@ class App extends Component {
   }
 
   render() {
-    // if(self.props.gameState.lives <= 0){
-    //   return(
-    //     <div>
-    //     <leaderboard
-    //     leaderboard = {this.props.leaderboard}
-    //     />
-    //   </div>
-    //   );
-    // }
-    // else {
-    //   console.log(this.props.email);
+
       return (
         <div>
           <Canvas 
 
           leaderboard = {this.props.leaderboard}
-          	// angle={this.props.angle}
           	x={this.props.x}
           	y={this.props.y}
             r={this.props.r}
@@ -66,8 +50,7 @@ class App extends Component {
             startGame={this.props.startGame}
           	trackMouse={event => (this.trackMouse(event))}
             email={this.props.email}
-            // width={this.props.width}
-            // height={this.props.height}
+        
           />
 
         </div>

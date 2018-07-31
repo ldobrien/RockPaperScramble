@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 const Circle = (props) => {
 	const circleStyle = {
     fill: 'red',
-    // animation-delay: 2s;
+   
   };
   return (
     <circle
@@ -12,7 +12,7 @@ const Circle = (props) => {
       cx={props.position.x}
       cy={props.position.y}
       r={props.radius.r}
-      //clr="blue"
+ 
     />
   );
 };

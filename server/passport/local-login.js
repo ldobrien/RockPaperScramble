@@ -4,9 +4,6 @@ const PassportLocalStrategy = require('passport-local').Strategy;
 const config = require('../../config');
 
 
-/**
- * Return the Passport Local Strategy object.
- */
 module.exports = new PassportLocalStrategy({
   usernameField: 'email',
   passwordField: 'password',
@@ -18,7 +15,6 @@ module.exports = new PassportLocalStrategy({
     password: password.trim()
   };
 
-  // find a user by email address
   return User.findOne({ email: userData.email }, (err, user) => {
     if (err) { return done(err); }
 
@@ -29,7 +25,6 @@ module.exports = new PassportLocalStrategy({
       return done(error);
     }
 
-    // check if a hashed user's password is equal to a value saved in the database
     return user.comparePassword(userData.password, (passwordErr, isMatch) => {
       if (err) { return done(err); }
 
@@ -44,7 +39,6 @@ module.exports = new PassportLocalStrategy({
         sub: user._id
       };
 
-      // create a token string
       const token = jwt.sign(payload, config.jwtSecret);
       const data = {
         name: user.name

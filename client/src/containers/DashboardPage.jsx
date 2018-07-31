@@ -18,14 +18,12 @@ import LeaderBoard from '../Components/LeaderBoard.jsx';
 
 
 
-var store = createStore(reducer, /* preloadedState, */
+var store = createStore(reducer,
     window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__(),);
 
 class DashboardPage extends React.Component {
   
-  /**
-   * Class constructor.
-   */
+
   constructor(props) {
     super(props);
 
@@ -35,15 +33,13 @@ class DashboardPage extends React.Component {
     };
   }
 
-  /**
-   * This method will be executed after initial rendering.
-   */
+  
   componentDidMount(props) {
-    // const self = this;
+    
     const xhr = new XMLHttpRequest();
     xhr.open('get', '/api/dashboard');
     xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
-    // set the authorization HTTP header
+
     xhr.setRequestHeader('Authorization', `bearer ${Auth.getToken()}`);
     xhr.responseType = 'json';
     xhr.addEventListener('load', () => {
@@ -62,56 +58,17 @@ class DashboardPage extends React.Component {
     }) 
     .then(res => res.json())
     .then(json => {
-      // console.log("THE HIG JSON", json);
+     
       this.setState({
         userHighScores: json
       });
-      });
+      }); 
 
-    
-
-
-      
-      
-    // const self = this;
-
-    // setInterval(() => {
-    //     self.props.moveObjects(self.canvasMousePosition);
-    // }, 10);
-    // setInterval(() => {
-    //     self.props.onCollide(self.canvasMousePosition);
-    // }, 1);
-
-    // window.onresize = () => {
-    //   const cnv = document.getElementById('RockPaperScramble');
-    //   cnv.style.width = `${window.innerWidth}px`;
-    //   cnv.style.height = `${window.innerHeight}px`;
-    // };
-    // window.onresize();
   }
 
-  // trackMouse(event) {
-  //   this.canvasMousePosition = getCanvasPosition(event);
-  // }
-  /**
-   * Render the component.
-   */
 
   render() {
-  //   // export default function configureStore(initialState) {
-  //   const store = createStore(reducer, /* preloadedState, */
-  //   window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__(),);
-  //   if (module.hot) {
-  //   // Enable Webpack hot module replacement for reducers
-  //   module.hot.accept('../reducers', () => {
-  //     const nextRootReducer = require('../reducers/index');
-  //     store.replaceReducer(nextRootReducer);
-  //   });
-  // }
-    
-//     reducer, /* preloadedState, */
-//     window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__(),
-// );
+ 
     return (
       <div>
         <Provider store={store}>

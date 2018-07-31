@@ -11,7 +11,7 @@ const checkBadCollisions = (self, opps) => {
     y1: self.y - self.r,
     x2: self.x + self.r,
     y2: self.y + self.r,
-   // color: self.color,
+
   };
   opps.forEach((opp) => {
     const currentLifeTime = (new Date()).getTime() - opp.createdAt;
@@ -21,7 +21,7 @@ const checkBadCollisions = (self, opps) => {
     };
 
     const calculatedColor = opp.color;
-   // const circleRadius = self.r;
+ 
     
     const rectA = {
       x1: calculatedPosition.x - 40,
@@ -30,9 +30,9 @@ const checkBadCollisions = (self, opps) => {
       y2: calculatedPosition.y + 10,
       rectclr:calculatedColor,
     };
-    // console.log(opp.id);
+
     if (checkBadCollision(rectA, rectB)){
-      // console.log("BAD BAD BAD");
+   
       flag = true;
     }
   });
