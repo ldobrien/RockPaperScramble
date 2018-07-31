@@ -48,7 +48,9 @@ const Leaderboard = (props) => {
   return (
     <g>
       <text filter="url(#shadow)" style={leaderboardTitle} x="-900" y="-220">Leaderboard</text>
-      <rect style={style} width={700} height="330" />
+
+      <rect style={style} width="700" height="330" />
+
       {
         props.currentPlayer && leaderboard.map((player, idx) => {
           const position = {

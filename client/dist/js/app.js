@@ -10782,6 +10782,10 @@ var _moveObjects2 = _interopRequireDefault(_moveObjects);
 
 __webpack_require__(535);
 
+var _LeaderBoard = __webpack_require__(231);
+
+var _LeaderBoard2 = _interopRequireDefault(_LeaderBoard);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -19422,7 +19426,7 @@ var Base = function Base(_ref) {
         _react2.default.createElement(
           _reactRouter.IndexLink,
           { to: '/' },
-          'React App'
+          'Rock Paper Scramble'
         )
       ),
       _Auth2.default.isUserAuthenticated() ? _react2.default.createElement(
@@ -19739,7 +19743,7 @@ var HomePage = function HomePage() {
   return _react2.default.createElement(
     _Card.Card,
     { className: 'container' },
-    _react2.default.createElement(_Card.CardTitle, { title: 'React Application', subtitle: 'This is the home page.' })
+    _react2.default.createElement(_Card.CardTitle, { title: 'Rock Paper Scramble', subtitle: 'A classic game in living circles.' })
   );
 };
 
@@ -19825,7 +19829,11 @@ var Leaderboard = function Leaderboard(props) {
       { filter: 'url(#shadow)', style: leaderboardTitle, x: '-900', y: '-220' },
       'Leaderboard'
     ),
+<<<<<<< HEAD
     _react2.default.createElement('rect', { style: style, width: 700, height: '330' }),
+=======
+    _react2.default.createElement('rect', { style: style, width: '700', height: '330' }),
+>>>>>>> stylez
     props.currentPlayer && leaderboard.map(function (player, idx) {
       var position = {
         x: -800,
