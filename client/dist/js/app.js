@@ -2777,6 +2777,10 @@ module.exports = __webpack_require__(409);
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
+exports.getCanvasPosition = exports.collide = exports.pathFromBezierCurve = undefined;
+
+var _constants = __webpack_require__(58);
+
 var pathFromBezierCurve = exports.pathFromBezierCurve = function pathFromBezierCurve(cubicBezierCurve) {
   var initialAxis = cubicBezierCurve.initialAxis,
       initialControlPoint = cubicBezierCurve.initialControlPoint,
@@ -2786,12 +2790,39 @@ var pathFromBezierCurve = exports.pathFromBezierCurve = function pathFromBezierC
   return "\n    M" + initialAxis.x + " " + initialAxis.y + "\n    c " + initialControlPoint.x + " " + initialControlPoint.y + "\n    " + endingControlPoint.x + " " + endingControlPoint.y + "\n    " + endingAxis.x + " " + endingAxis.y + "\n  ";
 };
 
-var checkCollision = exports.checkCollision = function checkCollision(rectA, rectB) {
-  return rectA.x1 < rectB.x2 && rectA.x2 > rectB.x1 && rectA.y1 < rectB.y2 && rectA.y2 > rectB.y1 && (rectA.rectclr == "blue" || rectA.rectclr == "red");
-};
+// returns 2 for successful collision
+// returns 1 for bad collision (dead)
+// returns 0 for no collision
+var collide = exports.collide = function collide(self, opp) {
+  var rectB = {
+    x1: self.x - self.r,
+    y1: self.y - self.r,
+    x2: self.x + self.r,
+    y2: self.y + self.r
 
-var checkBadCollision = exports.checkBadCollision = function checkBadCollision(rectA, rectB) {
-  return rectA.x1 < rectB.x2 && rectA.x2 > rectB.x1 && rectA.y1 < rectB.y2 && rectA.y2 > rectB.y1 && rectA.rectclr == "green";
+  };
+  var currentLifeTime = new Date().getTime() - opp.createdAt;
+  var calculatedPosition = {
+    x: opp.position.x,
+    y: opp.position.y + currentLifeTime / 8000 * _constants.gameHeight
+  };
+  var calculatedColor = opp.color;
+  var rectA = {
+    x1: calculatedPosition.x - 10,
+    y1: calculatedPosition.y - 10,
+    x2: calculatedPosition.x + 10,
+    y2: calculatedPosition.y + 10,
+    rectclr: calculatedColor
+  };
+
+  if (rectA.x1 < rectB.x2 && rectA.x2 > rectB.x1 && rectA.y1 < rectB.y2 && rectA.y2 > rectB.y1) {
+    if (rectA.rectclr === "blue" || rectA.rectclr === "red") {
+      return 2;
+    } else {
+      return 1;
+    }
+  }
+  return 0;
 };
 
 var getCanvasPosition = exports.getCanvasPosition = function getCanvasPosition(event) {
@@ -11089,8 +11120,10 @@ function moveObjects(state, action) {
     return now - object.createdAt < 8000;
   });
   var lives = state.gameState.lives;
+
   var endGame = (0, _checkBadCollisions2.default)(state, flyingObjects);
   var objectsDestroyed = (0, _checkCollisions2.default)(state, flyingObjects);
+
   var flyingDiscsDestroyed = objectsDestroyed.map(function (object) {
     return object.oppId;
   });
@@ -19882,37 +19915,12 @@ var _react2 = _interopRequireDefault(_react);
 
 var _formulas = __webpack_require__(37);
 
-var _constants = __webpack_require__(58);
-
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var checkBadCollisions = function checkBadCollisions(self, opps) {
   var flag = false;
-  var rectB = {
-    x1: self.x - self.r,
-    y1: self.y - self.r,
-    x2: self.x + self.r,
-    y2: self.y + self.r
-
-  };
   opps.forEach(function (opp) {
-    var currentLifeTime = new Date().getTime() - opp.createdAt;
-    var calculatedPosition = {
-      x: opp.position.x,
-      y: opp.position.y + currentLifeTime / 8000 * _constants.gameHeight
-    };
-
-    var calculatedColor = opp.color;
-
-    var rectA = {
-      x1: calculatedPosition.x - 10,
-      y1: calculatedPosition.y - 10,
-      x2: calculatedPosition.x + 10,
-      y2: calculatedPosition.y + 10,
-      rectclr: calculatedColor
-    };
-
-    if ((0, _formulas.checkBadCollision)(rectA, rectB)) {
+    if ((0, _formulas.collide)(self, opp) === 1) {
       flag = true;
     }
   });
@@ -19938,43 +19946,18 @@ var _react2 = _interopRequireDefault(_react);
 
 var _formulas = __webpack_require__(37);
 
-var _constants = __webpack_require__(58);
-
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var checkCollisions = function checkCollisions(self, opps) {
   var objectsDestroyed = [];
-  var rectB = {
-    x1: self.x - self.r,
-    y1: self.y - self.r,
-    x2: self.x + self.r,
-    y2: self.y + self.r
-
-  };
   opps.forEach(function (opp) {
-    var currentLifeTime = new Date().getTime() - opp.createdAt;
-    var calculatedPosition = {
-      x: opp.position.x,
-      y: opp.position.y + currentLifeTime / 8000 * _constants.gameHeight
-    };
-
-    var calculatedColor = opp.color;
-
-    var rectA = {
-      x1: calculatedPosition.x - 10,
-      y1: calculatedPosition.y - 10,
-      x2: calculatedPosition.x + 10,
-      y2: calculatedPosition.y + 10,
-      rectclr: calculatedColor
-    };
-
-    if ((0, _formulas.checkCollision)(rectA, rectB)) {
+    if ((0, _formulas.collide)(self, opp) === 2) {
       objectsDestroyed.push({
         oppId: opp.id
       });
       self.r += 1;
       self.score += 1;
-    };
+    }
   });
   return objectsDestroyed;
 };
@@ -20006,13 +19989,10 @@ exports.default = function (state) {
       flyingObjects = _state$gameState.flyingObjects;
 
   var createNewObject = now - lastObjectCreatedAt.getTime() > _constants.createInterval && flyingObjects.length < _constants.maxFlyingObjects;
-
   if (!createNewObject) return state;
   var id = new Date().getTime();
-  var predefinedPosition = Math.floor(Math.random() * 60);
-  var flyingObjectPosition = _constants.flyingObjectsStarterPositions[predefinedPosition];
-  var numberOfColors = Math.floor(Math.random() * 3);
-  var flyingObjectsColor = _constants.flyingObjectsColors[numberOfColors];
+  var flyingObjectPosition = _constants.flyingObjectsStarterPositions[Math.floor(Math.random() * 60)];
+  var flyingObjectsColor = _constants.flyingObjectsColors[Math.floor(Math.random() * 3)];
   var newFlyingObject = {
     position: {
       x: flyingObjectPosition,

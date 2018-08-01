@@ -12,13 +12,10 @@ export default (state) => {
     now - (lastObjectCreatedAt).getTime() > createInterval &&
     flyingObjects.length < maxFlyingObjects
   );
-
   if ( ! createNewObject) return state; 
   const id = (new Date()).getTime();
-  const predefinedPosition = Math.floor(Math.random() * (60));
-  const flyingObjectPosition = flyingObjectsStarterPositions[predefinedPosition];
-  const numberOfColors = Math.floor(Math.random() * (3));
-  const flyingObjectsColor = flyingObjectsColors[numberOfColors];
+  const flyingObjectPosition = flyingObjectsStarterPositions[Math.floor(Math.random() * (60))];
+  const flyingObjectsColor = flyingObjectsColors[Math.floor(Math.random() * (3))];
   const newFlyingObject = {
     position: {
       x: flyingObjectPosition,

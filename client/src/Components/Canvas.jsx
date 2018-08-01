@@ -27,7 +27,7 @@ const Canvas = (props) => {
       }) 
       .then(res => res.json())
       .then(json => {
-        currScore = json
+        currScore = json;
         if (currScore.maxScore < props.score){
             fetch('/api/users/topscores/' + strNew, {
             method: 'PUT',

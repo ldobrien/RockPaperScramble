@@ -1,3 +1,5 @@
+import {gameHeight} from "./constants";
+
 export const pathFromBezierCurve = (cubicBezierCurve) => {
   const {
     initialAxis, initialControlPoint, endingControlPoint, endingAxis,
@@ -10,17 +12,42 @@ export const pathFromBezierCurve = (cubicBezierCurve) => {
   `;
 };
 
-export const checkCollision = (rectA, rectB) => (
-  rectA.x1 < rectB.x2 && rectA.x2 > rectB.x1 &&
-  rectA.y1 < rectB.y2 && rectA.y2 > rectB.y1 
- && (rectA.rectclr == "blue" ||rectA.rectclr == "red")
-);
+// returns 2 for successful collision
+// returns 1 for bad collision (dead)
+// returns 0 for no collision
+export const collide = (self, opp) => {
+    const rectB = {
+        x1: self.x - self.r,
+        y1: self.y - self.r,
+        x2: self.x + self.r,
+        y2: self.y + self.r,
 
-export const checkBadCollision = (rectA, rectB) => (
-  rectA.x1 < rectB.x2 && rectA.x2 > rectB.x1 &&
-  rectA.y1 < rectB.y2 && rectA.y2 > rectB.y1 
- && (rectA.rectclr == "green")
-);
+    };
+    const currentLifeTime = (new Date()).getTime() - opp.createdAt;
+    const calculatedPosition = {
+        x: opp.position.x,
+        y: opp.position.y + ((currentLifeTime / 8000) * gameHeight),
+    };
+    const calculatedColor = opp.color;
+    const rectA = {
+        x1: calculatedPosition.x - 10,
+        y1: calculatedPosition.y - 10,
+        x2: calculatedPosition.x + 10,
+        y2: calculatedPosition.y + 10,
+        rectclr:calculatedColor,
+    };
+
+    if(rectA.x1 < rectB.x2 && rectA.x2 > rectB.x1 && rectA.y1 < rectB.y2 && rectA.y2 > rectB.y1){
+      if(rectA.rectclr === "blue" || rectA.rectclr === "red"){
+          return 2;
+      }
+      else {
+        return 1;
+      }
+    }
+    return 0;
+
+};
 
 export const getCanvasPosition = (event) => {
 

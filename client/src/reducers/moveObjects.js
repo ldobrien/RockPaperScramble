@@ -13,8 +13,10 @@ function moveObjects(state, action) {
     (now - object.createdAt) < 8000
   ));
   let lives = state.gameState.lives;
+
   const endGame = checkBadCollisions(state, flyingObjects);
   const objectsDestroyed = checkCollisions(state, flyingObjects);
+
   const flyingDiscsDestroyed = objectsDestroyed.map(object => (object.oppId));
   
   if (endGame === true) { 
