@@ -21,7 +21,6 @@ const initialState = {
     email: "",
 };
 
-
 function reducer(state = initialState, action) {
   switch (action.type) {
     case MOVE_OBJECTS:

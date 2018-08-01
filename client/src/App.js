@@ -8,7 +8,6 @@ import Circle from './Components/Circle.jsx';
 
 class App extends Component {
 
-
 	componentDidMount() {
     const self = this;
 
@@ -29,10 +28,6 @@ class App extends Component {
 
   trackMouse(event) {
     this.canvasMousePosition = getCanvasPosition(event);
-  }
-
-  createLeaderboard(id) {
-    
   }
 
   render() {

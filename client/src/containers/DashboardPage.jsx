@@ -51,8 +51,7 @@ class DashboardPage extends React.Component {
       this.setState({
         userHighScores: json
       });
-      }); 
-
+      });
   }
 
   render() {
@@ -62,8 +61,6 @@ class DashboardPage extends React.Component {
         <Provider store={store}>
             <Game leaderboard={this.state.userHighScores}/>
         </Provider>,
-        <Dashboard leaderboard={this.state.userHighScores}/>
-
       </div>);
     registerServiceWorker();
 

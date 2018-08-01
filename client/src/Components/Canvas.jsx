@@ -8,6 +8,7 @@ import StartGame from './StartGame.jsx';
 import Title from './Title.jsx';
 import Leaderboard from './LeaderBoard.jsx';
 import Auth from "../modules/Auth";
+import initialState from "../reducers/initialState";
 
 const Canvas = (props) => {
   const gameHeight = innerHeight;
@@ -26,7 +27,7 @@ const Canvas = (props) => {
         method: 'GET',
         headers: { 'Authorization': `bearer ${Auth.getToken()}`,
         'Content-Type': 'application/json' }
-      }) 
+      })
       .then(res => res.json())
       .then(json => {
         currScore = json;
@@ -49,12 +50,13 @@ const Canvas = (props) => {
             <Leaderboard currentPlayer={leaderboard[3]} leaderboard={leaderboard} />
         );
     }
-    else if (lives < 0){
-        return(
-            <div></div>
-        );
+    else if (lives < 0) {
+        props.gameState.started = false;
+        // ask call a parent function that can change the props
+        // props.rx = 30;
+        // props.score = 0;
+        // props.gameState.lives = 1;
     }
-    else{
       return (
         <svg
           id="RockPaperScramble"
@@ -86,7 +88,7 @@ const Canvas = (props) => {
           ))}
         </svg>
       );
-    }
+
 };
 
 
