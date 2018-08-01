@@ -1,6 +1,4 @@
 import React from 'react';
-import PropTypes from 'prop-types';
-import { checkCollision } from '../utils/formulas';
 import { checkBadCollision } from '../utils/formulas';
 import { gameHeight } from '../utils/constants';
 
@@ -21,18 +19,16 @@ const checkBadCollisions = (self, opps) => {
     };
 
     const calculatedColor = opp.color;
- 
-    
+
     const rectA = {
-      x1: calculatedPosition.x - 40,
+      x1: calculatedPosition.x - 10,
       y1: calculatedPosition.y - 10,
-      x2: calculatedPosition.x + 40,
+      x2: calculatedPosition.x + 10,
       y2: calculatedPosition.y + 10,
       rectclr:calculatedColor,
     };
 
     if (checkBadCollision(rectA, rectB)){
-   
       flag = true;
     }
   });

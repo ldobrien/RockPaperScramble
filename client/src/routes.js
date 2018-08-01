@@ -1,4 +1,4 @@
-import Base from './Components/Base.jsx';
+import NavBar from './Components/NavBar.jsx';
 import HomePage from './Components/HomePage.jsx';
 import DashboardPage from './containers/DashboardPage.jsx';
 import LoginPage from './containers/LoginPage.jsx';
@@ -7,7 +7,7 @@ import Auth from './modules/Auth';
 
 
 const routes = {
-  component: Base,
+  component: NavBar,
   childRoutes: [
 
     {

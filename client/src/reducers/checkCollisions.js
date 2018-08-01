@@ -1,7 +1,5 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import { checkCollision } from '../utils/formulas';
-import { checkBadCollision } from '../utils/formulas';
 import { gameHeight } from '../utils/constants';
 
 const checkCollisions = (self, opps) => {
@@ -32,15 +30,11 @@ const checkCollisions = (self, opps) => {
     };
  
     if (checkCollision(rectA, rectB)) {
-
-   
         objectsDestroyed.push({
           oppId: opp.id,
         });
         self.r += 1;
         self.score += 1;
-
-   
     };
 
   });

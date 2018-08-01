@@ -2,7 +2,7 @@ const express = require('express');
 
 const router = new express.Router();
 
-const mongoose = require('mongoose');
+// const mongoose = require('mongoose');
 
 
 
@@ -39,9 +39,7 @@ router.get('/users/topscores', (req, res) => {
 });
 
 router.get('/users/topscores/:email', (req,res) => {
-    // console.log("PUT");
-    console.log(req.body);
-    
+
     User.findOne(
         {
             'email': req.params.email
@@ -54,7 +52,6 @@ router.get('/users/topscores/:email', (req,res) => {
             if (err) {
                 res.send(err);
             } else {
-                console.log(current);
                 res.json(current);
             }
     }
@@ -62,9 +59,6 @@ router.get('/users/topscores/:email', (req,res) => {
 });
 
 router.put('/users/topscores/:email', (req,res) => {
-    // console.log("PUT");
-    console.log(req.body);
-
     User.findOneAndUpdate({'email': req.params.email}, {maxScore: req.body.score},
         function(err,score) {
             if (err) {

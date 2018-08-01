@@ -2,14 +2,11 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styled, { keyframes } from 'styled-components';
 import { gameHeight } from '../utils/constants';
-import { gameWidth } from '../utils/constants';
-
 
 const moveVertically = keyframes`
   0% {
     transform: translateY(0);
   }
- 
   100% {
     transform: translateY(${gameHeight}px);
   }
@@ -25,8 +22,6 @@ const FlyingObject = props => (
   </Move>
 );
 
-
-
 FlyingObject.propTypes = {
   position: PropTypes.shape({
     x: PropTypes.number.isRequired,
@@ -35,14 +30,7 @@ FlyingObject.propTypes = {
   color: PropTypes.string.isRequired,
 };
 
-
 const FlyingObjectBase = (props) => {
-
-  const style = {
-    fill: 'green',
-    stroke: '#5c5c5c',
-  };
-
   return (
     <ellipse
       cx={props.position.x}

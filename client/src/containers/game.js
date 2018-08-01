@@ -1,7 +1,6 @@
 import { connect } from 'react-redux';
 import App from '../App';
 import {onCollide} from '../actions/index';
-import {LoginSuccess} from '../actions/index';
 import { moveObjects, startGame } from '../actions/index';
 
 const mapStateToProps = state => ({

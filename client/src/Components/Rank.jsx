@@ -5,12 +5,6 @@ const Rank = (props) => {
   const { x, y } = props.position;
 
   const rectId = 'rect' + props.player.rank;
-  const clipId = 'clip' + props.player.rank;
-
-  const pictureStyle = {
-    height: 60,
-    width: 60,
-  };
 
   const textStyle = {
     fontFamily: 'Times New Roman, Arial',
@@ -20,8 +14,6 @@ const Rank = (props) => {
   };
 
   if (props.player.currentPlayer) textStyle.fill = '#e9ea64';
-
-
 
   return (
     <g>

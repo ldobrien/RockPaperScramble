@@ -1,13 +1,11 @@
 import React from 'react';
-import PropTypes from 'prop-types';
-import { pathFromBezierCurve } from '../utils/formulas';
 
-const Arena = (props) => {
+const Arena = () => {
   const arenaStyle = {
     fill: '#e1bee7',
   };
-  const arenaWidth = 4000;
-  const gameHeight = 1200;
+  const arenaWidth = innerWidth;
+  const gameHeight = innerHeight;
   return (
     <rect
       style={arenaStyle}
@@ -17,9 +15,6 @@ const Arena = (props) => {
       height={gameHeight}
     />
   );
-};
-
-Arena.propTypes = {
 };
 
 export default Arena;

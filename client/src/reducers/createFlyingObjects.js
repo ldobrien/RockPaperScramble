@@ -5,8 +5,7 @@ import {
 } from '../utils/constants';
 
 export default (state) => {
-  if ( ! state.gameState.started) return state; 
-
+  if ( ! state.gameState.started) return state;
   const now = (new Date()).getTime();
   const { lastObjectCreatedAt, flyingObjects } = state.gameState;
   const createNewObject = (
@@ -29,7 +28,6 @@ export default (state) => {
     createdAt: (new Date()).getTime(),
     id,
   };
- 
 
   return {
     ...state,

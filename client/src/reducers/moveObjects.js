@@ -1,9 +1,6 @@
-import {calculateAngle} from '../utils/formulas';
 import createFlyingObjects from './createFlyingObjects';
-import { PropTypes } from 'react'
 import checkCollisions from './checkCollisions';
 import checkBadCollisions from './checkBadCollisions';
-import initialGameState from './index.js'
 
 function moveObjects(state, action) {
   const {x,y} = action.mousePosition || {
@@ -20,15 +17,11 @@ function moveObjects(state, action) {
   const objectsDestroyed = checkCollisions(state, flyingObjects);
   const flyingDiscsDestroyed = objectsDestroyed.map(object => (object.oppId));
   
-  
   if (endGame === true) { 
     lives--;
   }
 
-  
-  const bef = flyingObjects.length;
   flyingObjects = flyingObjects.filter(flyingDisc => (flyingDiscsDestroyed.indexOf(flyingDisc.id)));
-
 
   return {
     ...newState,
@@ -37,8 +30,6 @@ function moveObjects(state, action) {
       flyingObjects,
       lives,
     },
-
-
     x: x,
     y: y,
     r: state.r,

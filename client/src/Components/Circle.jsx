@@ -12,7 +12,6 @@ const Circle = (props) => {
       cx={props.position.x}
       cy={props.position.y}
       r={props.radius.r}
- 
     />
   );
 };

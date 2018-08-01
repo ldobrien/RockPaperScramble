@@ -2,8 +2,7 @@ import React, { PropTypes } from 'react';
 import { Link, IndexLink } from 'react-router';
 import Auth from '../modules/Auth';
 
-
-const Base = ({ children }) => (
+const NavBar = ({ children }) => (
   <div>
     <div className="top-bar">
       <div className="top-bar-left">
@@ -29,8 +28,8 @@ const Base = ({ children }) => (
   </div>
 );
 
-Base.propTypes = {
+NavBar.propTypes = {
   children: PropTypes.object.isRequired
 };
 
-export default Base;
+export default NavBar;

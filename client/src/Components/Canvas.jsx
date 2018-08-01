@@ -1,41 +1,24 @@
-
 import React from 'react';
 import Arena from './Arena.jsx';
 import Circle from './Circle.jsx';
 import PropTypes from 'prop-types';
-import DashboardPage from '../containers/DashboardPage.jsx';
-// import Login from './Login.jsx';
-
 import CurrentScore from './CurrentScore.jsx';
 import FlyingObject from './FlyingObject.jsx';
-//import Heart from './Heart.jsx';
 import StartGame from './StartGame.jsx';
 import Title from './Title.jsx';
 import Leaderboard from './LeaderBoard.jsx';
-import LoginPage from '../containers/LoginPage.jsx';
-import Rank from './Rank.jsx';
 import Auth from "../modules/Auth";
-import Game from "../containers/game";
-
-
-
-const opponents = 50;
-const width = window.innerWidth;
-const height = window.innerHeight;
-
 
 const Canvas = (props) => {
-  const gameHeight = 1200;
-  const viewBox = [window.innerWidth / -2, 600 - gameHeight, window.innerWidth, gameHeight];
+  const gameHeight = innerHeight;
+  const viewBox = [window.innerWidth / -2, 0, window.innerWidth, gameHeight / 4];
   const leaderboard = props.leaderboard;
 
   let lives = props.gameState.lives;
 
     if (lives === 0){
-        var str = localStorage.getItem('email');
-        var strNew = str.replace("%40","@");    
-        console.log(strNew);
-
+        const str = localStorage.getItem('email');
+        const strNew = str.replace("%40","@");
       let currScore = 0;
       fetch('/api/users/topscores/' + strNew, {
         method: 'GET',
@@ -44,16 +27,13 @@ const Canvas = (props) => {
       }) 
       .then(res => res.json())
       .then(json => {
-        console.log("THE HIG JSON:", json);
         currScore = json
-        console.log("DB SCORE:", currScore.maxScore);
         if (currScore.maxScore < props.score){
             fetch('/api/users/topscores/' + strNew, {
             method: 'PUT',
             headers: { 'Authorization': `bearer ${Auth.getToken()}`,
                 'Content-Type': 'application/json' },
             body: JSON.stringify({
-             
                 score: props.score,
             })
 
@@ -61,12 +41,6 @@ const Canvas = (props) => {
         .then(res => res.json());
         }
         });
-        
-
-    
-        console.log("GAME SCORE:", props.score);
-
-
 
         return(
             <Leaderboard currentPlayer={leaderboard[3]} leaderboard={leaderboard} />
@@ -81,7 +55,7 @@ const Canvas = (props) => {
       return (
         <svg
           id="RockPaperScramble"
-      
+            // preserveAspectRatio="XMaxYMax none"
           onMouseMove={props.trackMouse}
           viewBox={viewBox}
         >
@@ -90,15 +64,9 @@ const Canvas = (props) => {
             <feDropShadow dx="1" dy="1" stdDeviation="2" />
           </filter>
         </defs>
-          
-         <Arena position={{x: props.x, y: props.y}}/> 
-
+         <Arena position={{x: props.x, y: props.y}}/>
          <Circle position={{x: props.x, y: props.y}} radius={{r: props.r}}/>
-
-
          <CurrentScore score={props.score}/>
-        
-
           { ! props.gameState.started &&
           <g>
               <StartGame onClick={() => props.startGame()} />
@@ -106,7 +74,6 @@ const Canvas = (props) => {
             <Leaderboard currentPlayer={leaderboard[3]} leaderboard={leaderboard} />
           </g>
           }
-
           {props.gameState.flyingObjects.map(flyingObject => (
             <FlyingObject
               key={flyingObject.id}
@@ -141,8 +108,6 @@ Canvas.propTypes = {
   startGame: PropTypes.func.isRequired,
   email: PropTypes.string.isRequired
 };
-
-
 
 export default Canvas;
 

@@ -1,21 +1,12 @@
 import React from 'react';
 import Auth from '../modules/Auth';
 import Dashboard from '../Components/Dashboard.jsx';
-import PropTypes from 'prop-types';
-import { getCanvasPosition } from '../utils/formulas';
-import Canvas from '../Components/Canvas.jsx';
-import Circle from '../Components/Circle.jsx';
 import Game from './game.js';
 import { Provider } from 'react-redux';
 import { createStore } from 'redux';
 import reducer from '../reducers';
-import ReactDOM from 'react-dom';
 import registerServiceWorker from '../registerServiceWorker.js';
-import moveObjects from '../reducers/moveObjects';
 import 'whatwg-fetch';
-import LeaderBoard from '../Components/LeaderBoard.jsx';
-
-
 
 
 var store = createStore(reducer,
@@ -32,10 +23,8 @@ class DashboardPage extends React.Component {
       userHighScores: [],
     };
   }
-
   
   componentDidMount(props) {
-    
     const xhr = new XMLHttpRequest();
     xhr.open('get', '/api/dashboard');
     xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
@@ -65,7 +54,6 @@ class DashboardPage extends React.Component {
       }); 
 
   }
-
 
   render() {
  

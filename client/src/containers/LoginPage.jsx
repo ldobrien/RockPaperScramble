@@ -48,28 +48,19 @@ class LoginPage extends React.Component {
     xhr.responseType = 'json';
     xhr.addEventListener('load', () => {
       if (xhr.status === 200) {
-        
         this.setState({
           errors: {}
         });
-
         Auth.authenticateUser(xhr.response.token);
-
-
-       
         this.context.router.replace('/');
-
         var str = email;
         var strNew = str.replace("%40","@");
         console.log(email);
         console.log(strNew);
         localStorage.setItem('email', strNew);
-      
       } else {
-   
         const errors = xhr.response.errors ? xhr.response.errors : {};
         errors.summary = xhr.response.message;
-
         this.setState({
           errors
         });
@@ -77,7 +68,6 @@ class LoginPage extends React.Component {
     });
     xhr.send(formData);
   }
-
 
   changeUser(event) {
     const field = event.target.name;
@@ -88,7 +78,6 @@ class LoginPage extends React.Component {
       user
     });
   }
-
 
   render() {
     return (
