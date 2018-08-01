@@ -56,14 +56,13 @@ class DashboardPage extends React.Component {
   }
 
   render() {
- 
+
     return (
       <div>
         <Provider store={store}>
             <Game leaderboard={this.state.userHighScores}/>
         </Provider>,
-        // document.getElementById('root');
-        <Dashboard secretData={this.state.secretData} />
+        <Dashboard leaderboard={this.state.userHighScores}/>
 
       </div>);
     registerServiceWorker();

@@ -18,7 +18,9 @@ const Canvas = (props) => {
 
     if (lives === 0){
         const str = localStorage.getItem('email');
+        console.log("RAW: " + str);
         const strNew = str.replace("%40","@");
+        console.log("FORMAT: " + strNew);
       let currScore = 0;
       fetch('/api/users/topscores/' + strNew, {
         method: 'GET',
@@ -28,6 +30,7 @@ const Canvas = (props) => {
       .then(res => res.json())
       .then(json => {
         currScore = json;
+        console.log("DB SCORE: " + currScore.maxScore);
         if (currScore.maxScore < props.score){
             fetch('/api/users/topscores/' + strNew, {
             method: 'PUT',
@@ -48,7 +51,7 @@ const Canvas = (props) => {
     }
     else if (lives < 0){
         return(
-            <Leaderboard currentPlayer={leaderboard[3]} leaderboard={leaderboard} />
+            <div></div>
         );
     }
     else{
