@@ -3,7 +3,7 @@ import Arena from './Arena.jsx';
 import Circle from './Circle.jsx';
 import PropTypes from 'prop-types';
 import CurrentScore from './CurrentScore.jsx';
-import FlyingObject from './FlyingObject.jsx';
+import Opponents from './Opponents.jsx';
 import StartGame from './StartGame.jsx';
 import Title from './Title.jsx';
 import Leaderboard from './LeaderBoard.jsx';
@@ -12,7 +12,6 @@ import Auth from "../modules/Auth";
 const Canvas = (props) => {
   const viewBox = [window.innerWidth / -2, window.innerHeight / -2, window.innerWidth, window.innerHeight];
   const leaderboard = props.leaderboard;
-
   let lives = props.gameState.lives;
 
     if (lives === 0){
@@ -43,9 +42,9 @@ const Canvas = (props) => {
         .then(res => res.json());
         }
         });
-        return(
-            <Leaderboard currentPlayer={leaderboard[3]} leaderboard={leaderboard} />
-        );
+        setTimeout(function(){
+            window.location.reload(true);
+        }, 1);
     }
     else if (lives === -1) {
         setTimeout(function(){
@@ -55,6 +54,7 @@ const Canvas = (props) => {
     else if (lives > 0) {
 
         return (
+            <div >
             <svg
                 id="RockPaperScramble"
                 // preserveAspectRatio="xMidYMid meet"
@@ -78,13 +78,14 @@ const Canvas = (props) => {
                 </g>
                 }
                 {props.gameState.flyingObjects.map(flyingObject => (
-                    <FlyingObject
+                    <Opponents
                         key={flyingObject.id}
                         position={flyingObject.position}
                         color={flyingObject.color}
                     />
                 ))}
             </svg>
+            </div>
         );
     }
 

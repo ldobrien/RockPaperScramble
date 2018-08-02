@@ -10347,7 +10347,7 @@ function getMuiTheme(muiTheme) {
 
 
 Object.defineProperty(exports, "__esModule", {
-  value: true
+    value: true
 });
 
 var _App$propTypes;
@@ -10368,10 +10368,6 @@ var _Canvas = __webpack_require__(222);
 
 var _Canvas2 = _interopRequireDefault(_Canvas);
 
-var _Circle = __webpack_require__(135);
-
-var _Circle2 = _interopRequireDefault(_Circle);
-
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
@@ -10382,94 +10378,92 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
+// import './App.css';
+
 var App = function (_Component) {
-  _inherits(App, _Component);
+    _inherits(App, _Component);
 
-  function App() {
-    _classCallCheck(this, App);
+    function App() {
+        _classCallCheck(this, App);
 
-    return _possibleConstructorReturn(this, (App.__proto__ || Object.getPrototypeOf(App)).apply(this, arguments));
-  }
-
-  _createClass(App, [{
-    key: 'componentDidMount',
-    value: function componentDidMount() {
-      var self = this;
-
-      setInterval(function () {
-        self.props.moveObjects(self.canvasMousePosition);
-      }, 10);
-      setInterval(function () {
-        self.props.onCollide(self.canvasMousePosition);
-      }, 1);
-
-      window.onresize = function () {
-        var cnv = document.getElementById('RockPaperScramble');
-        cnv.style.width = window.innerWidth + 'px';
-        cnv.style.height = window.innerHeight + 'px';
-      };
-      window.onresize();
-    }
-  }, {
-    key: 'trackMouse',
-    value: function trackMouse(event) {
-      this.canvasMousePosition = (0, _formulas.getCanvasPosition)(event);
+        return _possibleConstructorReturn(this, (App.__proto__ || Object.getPrototypeOf(App)).apply(this, arguments));
     }
 
-    // reset () {
-    //     state.r = 30;
-    //     state.score = 0;
-    //     state.gameState.lives = 1;
-    // }
+    _createClass(App, [{
+        key: 'componentDidMount',
+        value: function componentDidMount() {
+            var self = this;
 
-  }, {
-    key: 'render',
-    value: function render() {
-      var _this2 = this;
+            setInterval(function () {
+                self.props.moveObjects(self.canvasMousePosition);
+            }, 10);
+            setInterval(function () {
+                self.props.onCollide(self.canvasMousePosition);
+            }, 1);
 
-      return _react2.default.createElement(
-        'div',
-        null,
-        _react2.default.createElement(_Canvas2.default, {
+            window.onresize = function () {
+                var cnv = document.getElementById('RockPaperScramble');
+                cnv.style.width = window.innerWidth + 'px';
+                cnv.style.height = window.innerHeight + 'px';
+            };
+            window.onresize();
+        }
+    }, {
+        key: 'trackMouse',
+        value: function trackMouse(event) {
+            this.canvasMousePosition = (0, _formulas.getCanvasPosition)(event);
+        }
+    }, {
+        key: 'render',
+        value: function render() {
+            var _this2 = this;
 
-          leaderboard: this.props.leaderboard,
-          x: this.props.x,
-          y: this.props.y,
-          r: this.props.r,
-          score: this.props.score,
-          gameState: this.props.gameState,
-          startGame: this.props.startGame,
-          trackMouse: function trackMouse(event) {
-            return _this2.trackMouse(event);
-          },
-          email: this.props.email
+            // const style= {
+            //     transform: 'scale(.50)',
+            // };
+            // style={style}
+            return _react2.default.createElement(
+                'div',
+                null,
+                _react2.default.createElement(_Canvas2.default, {
+                    leaderboard: this.props.leaderboard,
+                    x: this.props.x,
+                    y: this.props.y,
+                    r: this.props.r,
+                    score: this.props.score,
+                    gameState: this.props.gameState,
+                    startGame: this.props.startGame,
+                    trackMouse: function trackMouse(event) {
+                        return _this2.trackMouse(event);
+                    },
+                    email: this.props.email
+                })
+            );
+        }
+    }]);
 
-        })
-      );
-    }
-  }]);
-
-  return App;
+    return App;
 }(_react.Component);
+
 // }
 
 App.propTypes = (_App$propTypes = {
-  x: _propTypes2.default.number.isRequired,
-  y: _propTypes2.default.number.isRequired,
-  gameState: _propTypes2.default.shape({
-    started: _propTypes2.default.bool.isRequired,
-    kills: _propTypes2.default.number.isRequired,
-    lives: _propTypes2.default.number.isRequired,
-    flyingObjects: _propTypes2.default.arrayOf(_propTypes2.default.shape({
-      position: _propTypes2.default.shape({
-        x: _propTypes2.default.number.isRequired,
-        y: _propTypes2.default.number.isRequired
-      }).isRequired,
-      id: _propTypes2.default.number.isRequired
-    })).isRequired
-  }).isRequired,
-  moveObjects: _propTypes2.default.func.isRequired,
-  startGame: _propTypes2.default.func.isRequired
+    x: _propTypes2.default.number.isRequired,
+    y: _propTypes2.default.number.isRequired,
+    gameState: _propTypes2.default.shape({
+        started: _propTypes2.default.bool.isRequired,
+        kills: _propTypes2.default.number.isRequired,
+        lives: _propTypes2.default.number.isRequired,
+        flyingObjects: _propTypes2.default.arrayOf(_propTypes2.default.shape({
+            position: _propTypes2.default.shape({
+                x: _propTypes2.default.number.isRequired,
+                y: _propTypes2.default.number.isRequired
+            }).isRequired,
+            id: _propTypes2.default.number.isRequired
+        })).isRequired
+    }).isRequired,
+    moveObjects: _propTypes2.default.func.isRequired,
+    startGame: _propTypes2.default.func.isRequired
 }, _defineProperty(_App$propTypes, 'moveObjects', _propTypes2.default.func.isRequired), _defineProperty(_App$propTypes, 'email', _propTypes2.default.string.isRequired), _App$propTypes);
 
 exports.default = App;
@@ -18502,7 +18496,9 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 var Arena = function Arena() {
   var arenaStyle = {
     fill: '#e1bee7'
+
   };
+
   var arenaWidth = innerWidth;
   var gameHeight = innerHeight;
   return _react2.default.createElement('rect', {
@@ -18547,9 +18543,9 @@ var _CurrentScore = __webpack_require__(223);
 
 var _CurrentScore2 = _interopRequireDefault(_CurrentScore);
 
-var _FlyingObject = __webpack_require__(225);
+var _Opponents = __webpack_require__(535);
 
-var _FlyingObject2 = _interopRequireDefault(_FlyingObject);
+var _Opponents2 = _interopRequireDefault(_Opponents);
 
 var _StartGame = __webpack_require__(231);
 
@@ -18572,7 +18568,6 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 var Canvas = function Canvas(props) {
     var viewBox = [window.innerWidth / -2, window.innerHeight / -2, window.innerWidth, window.innerHeight];
     var leaderboard = props.leaderboard;
-
     var lives = props.gameState.lives;
 
     if (lives === 0) {
@@ -18604,7 +18599,9 @@ var Canvas = function Canvas(props) {
                 });
             }
         });
-        return _react2.default.createElement(_LeaderBoard2.default, { currentPlayer: leaderboard[3], leaderboard: leaderboard });
+        setTimeout(function () {
+            window.location.reload(true);
+        }, 1);
     } else if (lives === -1) {
         setTimeout(function () {
             window.location.reload(true);
@@ -18612,42 +18609,46 @@ var Canvas = function Canvas(props) {
     } else if (lives > 0) {
 
         return _react2.default.createElement(
-            'svg',
-            {
-                id: 'RockPaperScramble'
-                // preserveAspectRatio="xMidYMid meet"
-                // preserveAspectRatio="none"
-                , onMouseMove: props.trackMouse,
-                viewBox: viewBox
-            },
+            'div',
+            null,
             _react2.default.createElement(
-                'defs',
-                null,
+                'svg',
+                {
+                    id: 'RockPaperScramble'
+                    // preserveAspectRatio="xMidYMid meet"
+                    // preserveAspectRatio="none"
+                    , onMouseMove: props.trackMouse,
+                    viewBox: viewBox
+                },
                 _react2.default.createElement(
-                    'filter',
-                    { id: 'shadow' },
-                    _react2.default.createElement('feDropShadow', { dx: '1', dy: '1', stdDeviation: '2' })
-                )
-            ),
-            _react2.default.createElement(_Arena2.default, { position: { x: props.x, y: props.y } }),
-            _react2.default.createElement(_Circle2.default, { position: { x: props.x, y: props.y }, radius: { r: props.r } }),
-            _react2.default.createElement(_CurrentScore2.default, { score: props.score }),
-            !props.gameState.started && _react2.default.createElement(
-                'g',
-                null,
-                _react2.default.createElement(_StartGame2.default, { onClick: function onClick() {
-                        return props.startGame();
-                    } }),
-                _react2.default.createElement(_Title2.default, null),
-                _react2.default.createElement(_LeaderBoard2.default, { currentPlayer: leaderboard[3], leaderboard: leaderboard })
-            ),
-            props.gameState.flyingObjects.map(function (flyingObject) {
-                return _react2.default.createElement(_FlyingObject2.default, {
-                    key: flyingObject.id,
-                    position: flyingObject.position,
-                    color: flyingObject.color
-                });
-            })
+                    'defs',
+                    null,
+                    _react2.default.createElement(
+                        'filter',
+                        { id: 'shadow' },
+                        _react2.default.createElement('feDropShadow', { dx: '1', dy: '1', stdDeviation: '2' })
+                    )
+                ),
+                _react2.default.createElement(_Arena2.default, { position: { x: props.x, y: props.y } }),
+                _react2.default.createElement(_Circle2.default, { position: { x: props.x, y: props.y }, radius: { r: props.r } }),
+                _react2.default.createElement(_CurrentScore2.default, { score: props.score }),
+                !props.gameState.started && _react2.default.createElement(
+                    'g',
+                    null,
+                    _react2.default.createElement(_StartGame2.default, { onClick: function onClick() {
+                            return props.startGame();
+                        } }),
+                    _react2.default.createElement(_Title2.default, null),
+                    _react2.default.createElement(_LeaderBoard2.default, { currentPlayer: leaderboard[3], leaderboard: leaderboard })
+                ),
+                props.gameState.flyingObjects.map(function (flyingObject) {
+                    return _react2.default.createElement(_Opponents2.default, {
+                        key: flyingObject.id,
+                        position: flyingObject.position,
+                        color: flyingObject.color
+                    });
+                })
+            )
         );
     }
 };
@@ -18698,18 +18699,20 @@ var _propTypes2 = _interopRequireDefault(_propTypes);
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var CurrentScore = function CurrentScore(props) {
+  var width = window.innerWidth;
+  var height = window.innerHeight;
+
   var scoreStyle = {
     fontFamily: '"Joti One", cursive',
     fontSize: 80,
     fill: '#ffffba'
   };
-
   return _react2.default.createElement(
     'g',
     { filter: 'url(#shadow)' },
     _react2.default.createElement(
       'text',
-      { style: scoreStyle, x: '800', y: '500' },
+      { style: scoreStyle, x: width / 2 - 100, y: height / 2 - 200 },
       props.score
     )
   );
@@ -18767,79 +18770,7 @@ Dashboard.propTypes = {
 exports.default = Dashboard;
 
 /***/ }),
-/* 225 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-
-var _templateObject = _taggedTemplateLiteral(['\n  0% {\n    transform: translateY(0);\n  }\n  100% {\n    transform: translateY(', 'px);\n  }\n'], ['\n  0% {\n    transform: translateY(0);\n  }\n  100% {\n    transform: translateY(', 'px);\n  }\n']),
-    _templateObject2 = _taggedTemplateLiteral(['\n  animation: ', ' 8s linear;\n'], ['\n  animation: ', ' 8s linear;\n']);
-
-var _react = __webpack_require__(1);
-
-var _react2 = _interopRequireDefault(_react);
-
-var _propTypes = __webpack_require__(12);
-
-var _propTypes2 = _interopRequireDefault(_propTypes);
-
-var _styledComponents = __webpack_require__(525);
-
-var _styledComponents2 = _interopRequireDefault(_styledComponents);
-
-var _constants = __webpack_require__(66);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function _taggedTemplateLiteral(strings, raw) { return Object.freeze(Object.defineProperties(strings, { raw: { value: Object.freeze(raw) } })); }
-
-var moveVertically = (0, _styledComponents.keyframes)(_templateObject, _constants.gameHeight);
-
-var Move = _styledComponents2.default.g(_templateObject2, moveVertically);
-
-var FlyingObject = function FlyingObject(props) {
-  return _react2.default.createElement(
-    Move,
-    null,
-    _react2.default.createElement(FlyingObjectBase, { position: props.position, color: props.color })
-  );
-};
-
-FlyingObject.propTypes = {
-  position: _propTypes2.default.shape({
-    x: _propTypes2.default.number.isRequired,
-    y: _propTypes2.default.number.isRequired
-  }).isRequired,
-  color: _propTypes2.default.string.isRequired
-};
-
-var FlyingObjectBase = function FlyingObjectBase(props) {
-  return _react2.default.createElement('ellipse', {
-    cx: props.position.x,
-    cy: props.position.y,
-    rx: '10',
-    ry: '10',
-    fill: props.color,
-    stroke: 'black'
-  });
-};
-
-FlyingObjectBase.propTypes = {
-  position: _propTypes2.default.shape({
-    x: _propTypes2.default.number.isRequired,
-    y: _propTypes2.default.number.isRequired
-  }).isRequired,
-  color: _propTypes2.default.string.isRequired
-};
-
-exports.default = FlyingObject;
-
-/***/ }),
+/* 225 */,
 /* 226 */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -19327,24 +19258,26 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 var Title = function Title() {
   var textStyle = {
     fontFamily: '"Alfa Slab One", cursive',
-    fontSize: 120,
+    fontSize: 100,
     fill: '#baffc9'
   };
   var scrambleStyle = {
     fontFamily: '"Eater", cursive',
-    fontSize: 120,
+    fontSize: 100,
     fill: '#4dd0e1'
   };
   var paperStyle = {
     fontFamily: '"Gloria Hallelujah", cursive',
-    fontSize: 120,
+    fontSize: 100,
     fill: '#ffdfba'
   };
 
+  var width = window.innerWidth / 4 - 100;
+  var height = window.innerHeight;
   var RockLine = {
     initialAxis: {
-      x: -450,
-      y: -450
+      x: width,
+      y: height / -4
     },
     initialControlPoint: {
       x: 100,
@@ -19361,8 +19294,8 @@ var Title = function Title() {
   };
   var PaperLine = {
     initialAxis: {
-      x: -250,
-      y: -250
+      x: width,
+      y: height / -4 + 150
     },
     initialControlPoint: {
       x: 95,
@@ -19381,8 +19314,8 @@ var Title = function Title() {
   var ScrambleLine = {
     // ...PaperLine,
     initialAxis: {
-      x: 0,
-      y: -50
+      x: width - 100,
+      y: height / -4 + 300
     },
     initialControlPoint: {
       x: 125,
@@ -51826,6 +51759,79 @@ _reactDom2.default.render(_react2.default.createElement(
   { muiTheme: (0, _getMuiTheme2.default)() },
   _react2.default.createElement(_reactRouter.Router, { history: _reactRouter.browserHistory, routes: _routes2.default })
 ), document.getElementById('react-app'));
+
+/***/ }),
+/* 535 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _templateObject = _taggedTemplateLiteral(['\n  0% {\n    transform: translateY(0);\n  }\n  100% {\n    transform: translateY(', 'px);\n  }\n'], ['\n  0% {\n    transform: translateY(0);\n  }\n  100% {\n    transform: translateY(', 'px);\n  }\n']),
+    _templateObject2 = _taggedTemplateLiteral(['\n  animation: ', ' 8s linear;\n'], ['\n  animation: ', ' 8s linear;\n']);
+
+var _react = __webpack_require__(1);
+
+var _react2 = _interopRequireDefault(_react);
+
+var _propTypes = __webpack_require__(12);
+
+var _propTypes2 = _interopRequireDefault(_propTypes);
+
+var _styledComponents = __webpack_require__(525);
+
+var _styledComponents2 = _interopRequireDefault(_styledComponents);
+
+var _constants = __webpack_require__(66);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _taggedTemplateLiteral(strings, raw) { return Object.freeze(Object.defineProperties(strings, { raw: { value: Object.freeze(raw) } })); }
+
+var moveVertically = (0, _styledComponents.keyframes)(_templateObject, _constants.gameHeight);
+
+var Move = _styledComponents2.default.g(_templateObject2, moveVertically);
+
+var Opponents = function Opponents(props) {
+  return _react2.default.createElement(
+    Move,
+    null,
+    _react2.default.createElement(FlyingObjectBase, { position: props.position, color: props.color })
+  );
+};
+
+Opponents.propTypes = {
+  position: _propTypes2.default.shape({
+    x: _propTypes2.default.number.isRequired,
+    y: _propTypes2.default.number.isRequired
+  }).isRequired,
+  color: _propTypes2.default.string.isRequired
+};
+
+var FlyingObjectBase = function FlyingObjectBase(props) {
+  return _react2.default.createElement('ellipse', {
+    cx: props.position.x,
+    cy: props.position.y,
+    rx: '10',
+    ry: '10',
+    fill: props.color,
+    stroke: 'black'
+  });
+};
+
+FlyingObjectBase.propTypes = {
+  position: _propTypes2.default.shape({
+    x: _propTypes2.default.number.isRequired,
+    y: _propTypes2.default.number.isRequired
+  }).isRequired,
+  color: _propTypes2.default.string.isRequired
+};
+
+exports.default = Opponents;
 
 /***/ })
 /******/ ]);

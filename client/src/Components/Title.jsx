@@ -4,24 +4,26 @@ import { pathFromBezierCurve } from '../utils/formulas';
 const Title = () => {
   const textStyle = {
     fontFamily: '"Alfa Slab One", cursive',
-    fontSize: 120,
+    fontSize: 100,
     fill: '#baffc9',
   };
   const scrambleStyle = {
     fontFamily: '"Eater", cursive',
-    fontSize: 120,
+    fontSize: 100,
     fill: '#4dd0e1',
   };
   const paperStyle = {
     fontFamily: '"Gloria Hallelujah", cursive',
-    fontSize: 120,
+    fontSize: 100,
     fill: '#ffdfba',
   };
 
+  const width = window.innerWidth/4 - 100;
+  const height = window.innerHeight;
   const RockLine = {
     initialAxis: {
-      x: -450,
-      y: -450,
+      x: width,
+      y: height / -4,
     },
     initialControlPoint: {
       x: 100,
@@ -38,8 +40,8 @@ const Title = () => {
   };
   const PaperLine = {
     initialAxis: {
-      x: -250,
-      y: -250,
+      x: width,
+      y: height / -4 + 150,
     },
     initialControlPoint: {
       x: 95,
@@ -58,8 +60,8 @@ const Title = () => {
   const ScrambleLine = {
     // ...PaperLine,
     initialAxis: {
-      x: 0,
-      y: -50,
+      x: width - 100,
+      y: height / -4 + 300,
     },
     initialControlPoint: {
       x: 125,

@@ -16,13 +16,13 @@ const Move = styled.g`
   animation: ${moveVertically} 8s linear;
 `;
 
-const FlyingObject = props => (
+const Opponents = props => (
   <Move>
     <FlyingObjectBase position={props.position} color={props.color}/>
   </Move>
 );
 
-FlyingObject.propTypes = {
+Opponents.propTypes = {
   position: PropTypes.shape({
     x: PropTypes.number.isRequired,
     y: PropTypes.number.isRequired
@@ -51,4 +51,4 @@ FlyingObjectBase.propTypes = {
   color: PropTypes.string.isRequired,
 };
 
-export default FlyingObject;
+export default Opponents;
