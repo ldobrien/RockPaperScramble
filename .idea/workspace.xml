@@ -2,15 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="28777ba2-0a30-4e19-b2e5-ab66ad0010d4" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/dist/js/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/dist/js/app.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/App.css" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/App.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/client/src/App.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/App.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/Components/Arena.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/Components/Arena.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/Components/Canvas.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/Components/Canvas.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/Components/CurrentScore.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/Components/CurrentScore.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/Components/FlyingObject.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/Components/Opponents.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/Components/Title.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/Components/Title.jsx" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/client/dist/js/" />
     <ignored path="$PROJECT_DIR$/.tmp/" />
@@ -61,11 +53,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="App.js" pinned="false" current-in-tab="false">
+      <file leaf-file-name="App.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/client/src/App.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="480">
-              <caret line="32" selection-start-line="32" selection-end-line="35" selection-end-column="24" />
+            <state relative-caret-position="585">
+              <caret line="39" column="12" selection-start-line="39" selection-start-column="12" selection-end-line="39" selection-end-column="12" />
               <folding>
                 <element signature="e#0#39#0" expanded="true" />
               </folding>
@@ -73,10 +65,10 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="LeaderBoard.jsx" pinned="false" current-in-tab="true">
+      <file leaf-file-name="LeaderBoard.jsx" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/client/src/Components/LeaderBoard.jsx">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-51">
+            <state relative-caret-position="-197">
               <caret line="14" column="4" lean-forward="true" selection-start-line="14" selection-start-column="4" selection-end-line="14" selection-end-column="4" />
               <folding>
                 <element signature="e#0#26#0" expanded="true" />
@@ -139,10 +131,10 @@
         <option value="$PROJECT_DIR$/client/src/Components/Title.jsx" />
         <option value="$PROJECT_DIR$/client/src/Components/CurrentScore.jsx" />
         <option value="$PROJECT_DIR$/client/src/App.css" />
-        <option value="$PROJECT_DIR$/client/src/App.js" />
         <option value="$PROJECT_DIR$/client/src/Components/Arena.jsx" />
         <option value="$PROJECT_DIR$/client/src/app.jsx" />
         <option value="$PROJECT_DIR$/client/src/Components/Canvas.jsx" />
+        <option value="$PROJECT_DIR$/client/src/App.js" />
       </list>
     </option>
   </component>
@@ -294,12 +286,12 @@
       <workItem from="1532386683887" duration="6952000" />
       <workItem from="1532565371607" duration="5089000" />
       <workItem from="1533078938997" duration="10729000" />
-      <workItem from="1533172203613" duration="8642000" />
+      <workItem from="1533172203613" duration="9016000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="31412000" />
+    <option name="totallyTimeSpent" value="31786000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1440" height="900" extended-state="0" />
@@ -689,16 +681,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/client/src/App.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="480">
-          <caret line="32" selection-start-line="32" selection-end-line="35" selection-end-column="24" />
-          <folding>
-            <element signature="e#0#39#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/client/src/Components/Canvas.jsx">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="166">
@@ -731,10 +713,20 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/client/src/Components/LeaderBoard.jsx">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-51">
+        <state relative-caret-position="-197">
           <caret line="14" column="4" lean-forward="true" selection-start-line="14" selection-start-column="4" selection-end-line="14" selection-end-column="4" />
           <folding>
             <element signature="e#0#26#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/client/src/App.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="585">
+          <caret line="39" column="12" selection-start-line="39" selection-start-column="12" selection-end-line="39" selection-end-column="12" />
+          <folding>
+            <element signature="e#0#39#0" expanded="true" />
           </folding>
         </state>
       </provider>

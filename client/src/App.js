@@ -35,7 +35,9 @@ class App extends Component {
         // };
         // style={style}
         return (
-            <div>
+            <div
+                // style={style}
+            >
                 <Canvas
                     leaderboard={this.props.leaderboard}
                     x={this.props.x}
