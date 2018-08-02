@@ -10548,12 +10548,14 @@ var _Rank2 = _interopRequireDefault(_Rank);
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var Leaderboard = function Leaderboard(props) {
+  var xPos = 14 * window.innerHeight / 16;
+  var yPos = 3 * window.innerWidth / 16;
   var style = {
     fill: 'transparent',
     stroke: 'blue',
     strokeDasharray: '14',
-    x: -1050,
-    y: -200
+    x: -xPos,
+    y: -yPos
   };
 
   var leaderboardTitle = {
@@ -10584,14 +10586,14 @@ var Leaderboard = function Leaderboard(props) {
     null,
     _react2.default.createElement(
       'text',
-      { filter: 'url(#shadow)', style: leaderboardTitle, x: '-900', y: '-220' },
+      { filter: 'url(#shadow)', style: leaderboardTitle, x: -xPos, y: -yPos - 10 },
       'Leaderboard'
     ),
     _react2.default.createElement('rect', { style: style, width: '700', height: '330' }),
     props.currentPlayer && leaderboard.map(function (player, idx) {
       var position = {
-        x: -800,
-        y: -130 + 70 * idx
+        x: -xPos + 250,
+        y: -yPos + 70 + 70 * idx
       };
       return _react2.default.createElement(_Rank2.default, { key: player.rank, player: player, position: position });
     })
@@ -18565,21 +18567,10 @@ var _Auth = __webpack_require__(56);
 
 var _Auth2 = _interopRequireDefault(_Auth);
 
-var _initialState = __webpack_require__(137);
-
-var _initialState2 = _interopRequireDefault(_initialState);
-
-var _App = __webpack_require__(134);
-
-var _App2 = _interopRequireDefault(_App);
-
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-// import reset from '../App';
-
 var Canvas = function Canvas(props) {
-    var gameHeight = innerHeight;
-    var viewBox = [window.innerWidth / -2, 0, window.innerWidth, gameHeight / 4];
+    var viewBox = [window.innerWidth / -2, window.innerHeight / -2, window.innerWidth, window.innerHeight];
     var leaderboard = props.leaderboard;
 
     var lives = props.gameState.lives;
@@ -18613,22 +18604,19 @@ var Canvas = function Canvas(props) {
                 });
             }
         });
-        // window.location.reload(true);
         return _react2.default.createElement(_LeaderBoard2.default, { currentPlayer: leaderboard[3], leaderboard: leaderboard });
     } else if (lives === -1) {
-        // props.gameState.started = false;
-        // props.r = 30;
         setTimeout(function () {
             window.location.reload(true);
-            //     window.location.href = 'https://rockpaperscramble.herokuapp.com/';
         }, 5);
-        // window.location.reload();
     } else if (lives > 0) {
+
         return _react2.default.createElement(
             'svg',
             {
                 id: 'RockPaperScramble'
-                // preserveAspectRatio="XMaxYMax none"
+                // preserveAspectRatio="xMidYMid meet"
+                // preserveAspectRatio="none"
                 , onMouseMove: props.trackMouse,
                 viewBox: viewBox
             },

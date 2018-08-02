@@ -4,12 +4,14 @@ import PropTypes from 'prop-types';
 import Rank from "./Rank.jsx";
 
 const Leaderboard = (props) => {
+  const xPos = 14*window.innerHeight / 16;
+  const yPos = 3*window.innerWidth / 16;
   const style = {
     fill: 'transparent',
     stroke: 'blue',
     strokeDasharray: '14',  
-    x: -1050,
-    y: -200
+    x: -xPos,
+    y: -yPos
   };
 
   const leaderboardTitle = {
@@ -38,13 +40,13 @@ const Leaderboard = (props) => {
 
   return (
     <g>
-      <text filter="url(#shadow)" style={leaderboardTitle} x="-900" y="-220">Leaderboard</text>
+      <text filter="url(#shadow)" style={leaderboardTitle} x={-xPos} y={-yPos - 10}>Leaderboard</text>
       <rect style={style} width="700" height="330" />
       {
         props.currentPlayer && leaderboard.map((player, idx) => {
           const position = {
-            x: -800,
-            y: -130 + (70 * idx)
+            x: -xPos +250,
+            y: -yPos + 70 + (70 * idx)
           };
           return <Rank key={player.rank} player={player} position={position}/>
         })

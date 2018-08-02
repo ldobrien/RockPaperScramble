@@ -8,13 +8,9 @@ import StartGame from './StartGame.jsx';
 import Title from './Title.jsx';
 import Leaderboard from './LeaderBoard.jsx';
 import Auth from "../modules/Auth";
-import initialState from "../reducers/initialState";
-import App from '../App';
-// import reset from '../App';
 
 const Canvas = (props) => {
-  const gameHeight = innerHeight;
-  const viewBox = [window.innerWidth / -2, 0, window.innerWidth, gameHeight / 4];
+  const viewBox = [window.innerWidth / -2, window.innerHeight / -2, window.innerWidth, window.innerHeight];
   const leaderboard = props.leaderboard;
 
   let lives = props.gameState.lives;
@@ -47,26 +43,22 @@ const Canvas = (props) => {
         .then(res => res.json());
         }
         });
-        // window.location.reload(true);
         return(
             <Leaderboard currentPlayer={leaderboard[3]} leaderboard={leaderboard} />
         );
     }
     else if (lives === -1) {
-        // props.gameState.started = false;
-        // props.r = 30;
         setTimeout(function(){
-        window.location.reload(true);
-        //     window.location.href = 'https://rockpaperscramble.herokuapp.com/';
+            window.location.reload(true);
         }, 5);
-        // window.location.reload();
-
     }
     else if (lives > 0) {
+
         return (
             <svg
                 id="RockPaperScramble"
-                // preserveAspectRatio="XMaxYMax none"
+                // preserveAspectRatio="xMidYMid meet"
+                // preserveAspectRatio="none"
                 onMouseMove={props.trackMouse}
                 viewBox={viewBox}
             >
