@@ -52,47 +52,49 @@ const Canvas = (props) => {
             <Leaderboard currentPlayer={leaderboard[3]} leaderboard={leaderboard} />
         );
     }
-    else if (lives < 0) {
+    else if (lives === -1) {
         // props.gameState.started = false;
-        // ask call a parent function that can change the props
         // props.r = 30;
         setTimeout(function(){
-            window.location.href = 'https://rockpaperscramble.herokuapp.com/';
+        window.location.reload(true);
+        //     window.location.href = 'https://rockpaperscramble.herokuapp.com/';
         }, 5);
         // window.location.reload();
 
     }
-      return (
-        <svg
-          id="RockPaperScramble"
-            // preserveAspectRatio="XMaxYMax none"
-          onMouseMove={props.trackMouse}
-          viewBox={viewBox}
-        >
-        <defs>
-          <filter id="shadow">
-            <feDropShadow dx="1" dy="1" stdDeviation="2" />
-          </filter>
-        </defs>
-         <Arena position={{x: props.x, y: props.y}}/>
-         <Circle position={{x: props.x, y: props.y}} radius={{r: props.r}}/>
-         <CurrentScore score={props.score}/>
-          { ! props.gameState.started &&
-          <g>
-              <StartGame onClick={() => props.startGame()} />
-              <Title />
-            <Leaderboard currentPlayer={leaderboard[3]} leaderboard={leaderboard} />
-          </g>
-          }
-          {props.gameState.flyingObjects.map(flyingObject => (
-            <FlyingObject
-              key={flyingObject.id}
-              position={flyingObject.position}
-              color={flyingObject.color}
-            />
-          ))}
-        </svg>
-      );
+    else if (lives > 0) {
+        return (
+            <svg
+                id="RockPaperScramble"
+                // preserveAspectRatio="XMaxYMax none"
+                onMouseMove={props.trackMouse}
+                viewBox={viewBox}
+            >
+                <defs>
+                    <filter id="shadow">
+                        <feDropShadow dx="1" dy="1" stdDeviation="2"/>
+                    </filter>
+                </defs>
+                <Arena position={{x: props.x, y: props.y}}/>
+                <Circle position={{x: props.x, y: props.y}} radius={{r: props.r}}/>
+                <CurrentScore score={props.score}/>
+                {!props.gameState.started &&
+                <g>
+                    <StartGame onClick={() => props.startGame()}/>
+                    <Title/>
+                    <Leaderboard currentPlayer={leaderboard[3]} leaderboard={leaderboard}/>
+                </g>
+                }
+                {props.gameState.flyingObjects.map(flyingObject => (
+                    <FlyingObject
+                        key={flyingObject.id}
+                        position={flyingObject.position}
+                        color={flyingObject.color}
+                    />
+                ))}
+            </svg>
+        );
+    }
 
 };
 

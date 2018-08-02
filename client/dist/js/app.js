@@ -18522,7 +18522,7 @@ exports.default = Arena;
 
 
 Object.defineProperty(exports, "__esModule", {
-  value: true
+    value: true
 });
 
 var _react = __webpack_require__(1);
@@ -18578,111 +18578,112 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 // import reset from '../App';
 
 var Canvas = function Canvas(props) {
-  var gameHeight = innerHeight;
-  var viewBox = [window.innerWidth / -2, 0, window.innerWidth, gameHeight / 4];
-  var leaderboard = props.leaderboard;
+    var gameHeight = innerHeight;
+    var viewBox = [window.innerWidth / -2, 0, window.innerWidth, gameHeight / 4];
+    var leaderboard = props.leaderboard;
 
-  var lives = props.gameState.lives;
+    var lives = props.gameState.lives;
 
-  if (lives === 0) {
-    var str = localStorage.getItem('email');
-    console.log("RAW: " + str);
-    var strNew = str.replace("%40", "@");
-    console.log("FORMAT: " + strNew);
-    var currScore = 0;
-    fetch('/api/users/topscores/' + strNew, {
-      method: 'GET',
-      headers: { 'Authorization': 'bearer ' + _Auth2.default.getToken(),
-        'Content-Type': 'application/json' }
-    }).then(function (res) {
-      return res.json();
-    }).then(function (json) {
-      currScore = json;
-      console.log("DB SCORE: " + currScore.maxScore);
-      if (currScore.maxScore < props.score) {
+    if (lives === 0) {
+        var str = localStorage.getItem('email');
+        console.log("RAW: " + str);
+        var strNew = str.replace("%40", "@");
+        console.log("FORMAT: " + strNew);
+        var currScore = 0;
         fetch('/api/users/topscores/' + strNew, {
-          method: 'PUT',
-          headers: { 'Authorization': 'bearer ' + _Auth2.default.getToken(),
-            'Content-Type': 'application/json' },
-          body: JSON.stringify({
-            score: props.score
-          })
-
+            method: 'GET',
+            headers: { 'Authorization': 'bearer ' + _Auth2.default.getToken(),
+                'Content-Type': 'application/json' }
         }).then(function (res) {
-          return res.json();
+            return res.json();
+        }).then(function (json) {
+            currScore = json;
+            console.log("DB SCORE: " + currScore.maxScore);
+            if (currScore.maxScore < props.score) {
+                fetch('/api/users/topscores/' + strNew, {
+                    method: 'PUT',
+                    headers: { 'Authorization': 'bearer ' + _Auth2.default.getToken(),
+                        'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        score: props.score
+                    })
+
+                }).then(function (res) {
+                    return res.json();
+                });
+            }
         });
-      }
-    });
-    // window.location.reload(true);
-    return _react2.default.createElement(_LeaderBoard2.default, { currentPlayer: leaderboard[3], leaderboard: leaderboard });
-  } else if (lives < 0) {
-    // props.gameState.started = false;
-    // ask call a parent function that can change the props
-    // props.r = 30;
-    setTimeout(function () {
-      window.location.href = 'https://rockpaperscramble.herokuapp.com/';
-    }, 5);
-    // window.location.reload();
-  }
-  return _react2.default.createElement(
-    'svg',
-    {
-      id: 'RockPaperScramble'
-      // preserveAspectRatio="XMaxYMax none"
-      , onMouseMove: props.trackMouse,
-      viewBox: viewBox
-    },
-    _react2.default.createElement(
-      'defs',
-      null,
-      _react2.default.createElement(
-        'filter',
-        { id: 'shadow' },
-        _react2.default.createElement('feDropShadow', { dx: '1', dy: '1', stdDeviation: '2' })
-      )
-    ),
-    _react2.default.createElement(_Arena2.default, { position: { x: props.x, y: props.y } }),
-    _react2.default.createElement(_Circle2.default, { position: { x: props.x, y: props.y }, radius: { r: props.r } }),
-    _react2.default.createElement(_CurrentScore2.default, { score: props.score }),
-    !props.gameState.started && _react2.default.createElement(
-      'g',
-      null,
-      _react2.default.createElement(_StartGame2.default, { onClick: function onClick() {
-          return props.startGame();
-        } }),
-      _react2.default.createElement(_Title2.default, null),
-      _react2.default.createElement(_LeaderBoard2.default, { currentPlayer: leaderboard[3], leaderboard: leaderboard })
-    ),
-    props.gameState.flyingObjects.map(function (flyingObject) {
-      return _react2.default.createElement(_FlyingObject2.default, {
-        key: flyingObject.id,
-        position: flyingObject.position,
-        color: flyingObject.color
-      });
-    })
-  );
+        // window.location.reload(true);
+        return _react2.default.createElement(_LeaderBoard2.default, { currentPlayer: leaderboard[3], leaderboard: leaderboard });
+    } else if (lives === -1) {
+        // props.gameState.started = false;
+        // props.r = 30;
+        setTimeout(function () {
+            window.location.reload(true);
+            //     window.location.href = 'https://rockpaperscramble.herokuapp.com/';
+        }, 5);
+        // window.location.reload();
+    } else if (lives > 0) {
+        return _react2.default.createElement(
+            'svg',
+            {
+                id: 'RockPaperScramble'
+                // preserveAspectRatio="XMaxYMax none"
+                , onMouseMove: props.trackMouse,
+                viewBox: viewBox
+            },
+            _react2.default.createElement(
+                'defs',
+                null,
+                _react2.default.createElement(
+                    'filter',
+                    { id: 'shadow' },
+                    _react2.default.createElement('feDropShadow', { dx: '1', dy: '1', stdDeviation: '2' })
+                )
+            ),
+            _react2.default.createElement(_Arena2.default, { position: { x: props.x, y: props.y } }),
+            _react2.default.createElement(_Circle2.default, { position: { x: props.x, y: props.y }, radius: { r: props.r } }),
+            _react2.default.createElement(_CurrentScore2.default, { score: props.score }),
+            !props.gameState.started && _react2.default.createElement(
+                'g',
+                null,
+                _react2.default.createElement(_StartGame2.default, { onClick: function onClick() {
+                        return props.startGame();
+                    } }),
+                _react2.default.createElement(_Title2.default, null),
+                _react2.default.createElement(_LeaderBoard2.default, { currentPlayer: leaderboard[3], leaderboard: leaderboard })
+            ),
+            props.gameState.flyingObjects.map(function (flyingObject) {
+                return _react2.default.createElement(_FlyingObject2.default, {
+                    key: flyingObject.id,
+                    position: flyingObject.position,
+                    color: flyingObject.color
+                });
+            })
+        );
+    }
 };
 
 Canvas.propTypes = {
-  x: _propTypes2.default.number.isRequired,
-  y: _propTypes2.default.number.isRequired,
-  score: _propTypes2.default.number.isRequired,
-  gameState: _propTypes2.default.shape({
-    started: _propTypes2.default.bool.isRequired,
-    kills: _propTypes2.default.number.isRequired,
-    lives: _propTypes2.default.number.isRequired,
-    flyingObjects: _propTypes2.default.arrayOf(_propTypes2.default.shape({
-      position: _propTypes2.default.shape({
-        x: _propTypes2.default.number.isRequired,
-        y: _propTypes2.default.number.isRequired
-      }).isRequired,
-      color: _propTypes2.default.string.isRequired,
-      id: _propTypes2.default.number.isRequired
-    })).isRequired
-  }).isRequired,
-  trackMouse: _propTypes2.default.func.isRequired,
-  startGame: _propTypes2.default.func.isRequired,
-  email: _propTypes2.default.string.isRequired
+    x: _propTypes2.default.number.isRequired,
+    y: _propTypes2.default.number.isRequired,
+    score: _propTypes2.default.number.isRequired,
+    gameState: _propTypes2.default.shape({
+        started: _propTypes2.default.bool.isRequired,
+        kills: _propTypes2.default.number.isRequired,
+        lives: _propTypes2.default.number.isRequired,
+        flyingObjects: _propTypes2.default.arrayOf(_propTypes2.default.shape({
+            position: _propTypes2.default.shape({
+                x: _propTypes2.default.number.isRequired,
+                y: _propTypes2.default.number.isRequired
+            }).isRequired,
+            color: _propTypes2.default.string.isRequired,
+            id: _propTypes2.default.number.isRequired
+        })).isRequired
+    }).isRequired,
+    trackMouse: _propTypes2.default.func.isRequired,
+    startGame: _propTypes2.default.func.isRequired,
+    email: _propTypes2.default.string.isRequired
 };
 
 exports.default = Canvas;
@@ -20108,6 +20109,9 @@ function moveObjects(state, action) {
   });
 
   if (endGame === true) {
+    if (lives === -2) {
+      return;
+    }
     lives--;
   }
 
