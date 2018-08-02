@@ -18613,14 +18613,14 @@ var Canvas = function Canvas(props) {
         });
       }
     });
-    window.location.reload(true);
+    // window.location.reload(true);
     return _react2.default.createElement(_LeaderBoard2.default, { currentPlayer: leaderboard[3], leaderboard: leaderboard });
   } else if (lives < 0) {
     // props.gameState.started = false;
     // ask call a parent function that can change the props
     // props.r = 30;
     setTimeout(function () {
-      location.reload(true);
+      window.location.href = 'https://rockpaperscramble.herokuapp.com/';
     }, 5);
     // window.location.reload();
   }

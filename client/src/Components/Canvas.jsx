@@ -47,7 +47,7 @@ const Canvas = (props) => {
         .then(res => res.json());
         }
         });
-        window.location.reload(true);
+        // window.location.reload(true);
         return(
             <Leaderboard currentPlayer={leaderboard[3]} leaderboard={leaderboard} />
         );
@@ -57,7 +57,7 @@ const Canvas = (props) => {
         // ask call a parent function that can change the props
         // props.r = 30;
         setTimeout(function(){
-            location.reload(true);
+            window.location.href = 'https://rockpaperscramble.herokuapp.com/';
         }, 5);
         // window.location.reload();
 
