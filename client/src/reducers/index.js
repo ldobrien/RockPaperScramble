@@ -11,7 +11,6 @@ const initialGameState = {
   lastObjectCreatedAt: new Date(),
 };
 const initialState = {
-	
     x: 0,
     y: 0,
     r: 30,

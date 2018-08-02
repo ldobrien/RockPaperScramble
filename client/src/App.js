@@ -30,6 +30,11 @@ class App extends Component {
     this.canvasMousePosition = getCanvasPosition(event);
   }
 
+  // reset () {
+  //     state.r = 30;
+  //     state.score = 0;
+  //     state.gameState.lives = 1;
+  // }
   render() {
 
       return (
@@ -76,4 +81,4 @@ App.propTypes = {
 };
 
 export default App;
-
+// export default {reset};

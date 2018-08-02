@@ -9,6 +9,8 @@ import Title from './Title.jsx';
 import Leaderboard from './LeaderBoard.jsx';
 import Auth from "../modules/Auth";
 import initialState from "../reducers/initialState";
+import App from '../App';
+// import reset from '../App';
 
 const Canvas = (props) => {
   const gameHeight = innerHeight;
@@ -51,11 +53,14 @@ const Canvas = (props) => {
         );
     }
     else if (lives < 0) {
-        props.gameState.started = false;
+        // props.gameState.started = false;
         // ask call a parent function that can change the props
-        // props.rx = 30;
-        // props.score = 0;
-        // props.gameState.lives = 1;
+        // props.r = 30;
+        // setTimeout(function(){
+            window.location.reload();
+        // }, 5000);
+        // window.location.reload();
+
     }
       return (
         <svg
