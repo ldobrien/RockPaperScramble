@@ -18619,9 +18619,9 @@ var Canvas = function Canvas(props) {
     // props.gameState.started = false;
     // ask call a parent function that can change the props
     // props.r = 30;
-    // setTimeout(function(){
-    window.location.reload();
-    // }, 5000);
+    setTimeout(function () {
+      window.location.reload(1);
+    }, 5);
     // window.location.reload();
   }
   return _react2.default.createElement(
