@@ -1,6 +1,8 @@
 import React, { PropTypes } from 'react';
 import { Card, CardTitle, CardText } from 'material-ui/Card';
-import Leaderboard from "./LeaderBoard.jsx";
+import App from '../App.js';
+import CurrentScore from './CurrentScore.jsx';
+
 
 const Dashboard = (props) => (
 
@@ -10,14 +12,10 @@ const Dashboard = (props) => (
       title="GAME OVER"
       subtitle="Thanks for playing!"
     />
+      <div>Score: {localStorage.getItem('score')}</div>
 
   </Card>
-        <Leaderboard currentPlayer={props.leaderboard[3]} leaderboard={props.leaderboard}/>
     </div>
 );
-
-Dashboard.propTypes = {
-  // leaderboard: PropTypes.string.isRequired
-};
 
 export default Dashboard;

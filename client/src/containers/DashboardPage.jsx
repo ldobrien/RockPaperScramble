@@ -13,8 +13,6 @@ var store = createStore(reducer,
     window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__(),);
 
 class DashboardPage extends React.Component {
-  
-
   constructor(props) {
     super(props);
 
@@ -55,13 +53,15 @@ class DashboardPage extends React.Component {
   }
 
   render() {
-
     return (
-      <div>
+        <div>
         <Provider store={store}>
             <Game leaderboard={this.state.userHighScores}/>
         </Provider>,
-      </div>);
+            {/*<Dashboard score={6}/>*/}
+        </div>
+
+);
     registerServiceWorker();
 
 }

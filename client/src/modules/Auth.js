@@ -16,6 +16,9 @@ class Auth {
   static getToken() {
     return localStorage.getItem('token');
   }
+  static getEmail(){
+    return localStorage.getItem('email');
+  }
 
 }
 

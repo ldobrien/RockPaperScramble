@@ -3,7 +3,6 @@ import React, { PropTypes } from 'react';
 import Auth from '../modules/Auth';
 import LoginForm from '../Components/LoginForm.jsx';
 import {LoginSuccess} from '../actions/index';
-import {moveObjects, onCollide} from "../actions";
 
 class LoginPage extends React.Component {
 

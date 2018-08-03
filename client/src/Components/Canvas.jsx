@@ -8,18 +8,20 @@ import StartGame from './StartGame.jsx';
 import Title from './Title.jsx';
 import Leaderboard from './LeaderBoard.jsx';
 import Auth from "../modules/Auth";
+import LoginPage from "../containers/LoginPage.jsx";
+import Dashboard from './Dashboard.jsx';
 
 const Canvas = (props) => {
   const viewBox = [window.innerWidth / -2, window.innerHeight / -2, window.innerWidth, window.innerHeight];
   const leaderboard = props.leaderboard;
   let lives = props.gameState.lives;
-
+  let currScore = 0;
+    localStorage.setItem('score', JSON.stringify(props.score));
     if (lives === 0){
         const str = localStorage.getItem('email');
-        console.log("RAW: " + str);
         const strNew = str.replace("%40","@");
-        console.log("FORMAT: " + strNew);
-      let currScore = 0;
+        // console.log(Auth.getEmail());
+
       fetch('/api/users/topscores/' + strNew, {
         method: 'GET',
         headers: { 'Authorization': `bearer ${Auth.getToken()}`,
@@ -28,7 +30,6 @@ const Canvas = (props) => {
       .then(res => res.json())
       .then(json => {
         currScore = json;
-        console.log("DB SCORE: " + currScore.maxScore);
         if (currScore.maxScore < props.score){
             fetch('/api/users/topscores/' + strNew, {
             method: 'PUT',
@@ -42,14 +43,19 @@ const Canvas = (props) => {
         .then(res => res.json());
         }
         });
+
+        console.log("local score: " + localStorage.getItem('score'));
+
+
+            // window.location.reload(true);
+
         setTimeout(function(){
             window.location.reload(true);
-        }, 1);
-    }
-    else if (lives === -1) {
-        setTimeout(function(){
-            window.location.reload(true);
-        }, 5);
+        }, 10000);
+        return(
+            <Dashboard score={props.score}/>
+        );
+
     }
     else if (lives > 0) {
 
@@ -57,8 +63,6 @@ const Canvas = (props) => {
             <div >
             <svg
                 id="RockPaperScramble"
-                // preserveAspectRatio="xMidYMid meet"
-                // preserveAspectRatio="none"
                 onMouseMove={props.trackMouse}
                 viewBox={viewBox}
             >
@@ -87,6 +91,10 @@ const Canvas = (props) => {
             </svg>
             </div>
         );
+    }
+    else {
+        props.gameState.started = false;
+        return(<Dashboard score={props.score}/>);
     }
 
 };

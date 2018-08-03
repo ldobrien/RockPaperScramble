@@ -20,9 +20,6 @@ function moveObjects(state, action) {
   const flyingDiscsDestroyed = objectsDestroyed.map(object => (object.oppId));
   
   if (endGame === true) {
-    if(lives === -2){
-      return;
-    }
     lives--;
   }
 
