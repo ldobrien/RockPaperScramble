@@ -5007,69 +5007,66 @@ var flyingObjectsStarterPositions = exports.flyingObjectsStarterPositions = [-50
 
 
 Object.defineProperty(exports, "__esModule", {
-  value: true
+    value: true
 });
 exports.getCanvasPosition = exports.collide = exports.pathFromBezierCurve = undefined;
 
 var _constants = __webpack_require__(65);
 
 var pathFromBezierCurve = exports.pathFromBezierCurve = function pathFromBezierCurve(cubicBezierCurve) {
-  var initialAxis = cubicBezierCurve.initialAxis,
-      initialControlPoint = cubicBezierCurve.initialControlPoint,
-      endingControlPoint = cubicBezierCurve.endingControlPoint,
-      endingAxis = cubicBezierCurve.endingAxis;
+    var initialAxis = cubicBezierCurve.initialAxis,
+        initialControlPoint = cubicBezierCurve.initialControlPoint,
+        endingControlPoint = cubicBezierCurve.endingControlPoint,
+        endingAxis = cubicBezierCurve.endingAxis;
 
-  return "\n    M" + initialAxis.x + " " + initialAxis.y + "\n    c " + initialControlPoint.x + " " + initialControlPoint.y + "\n    " + endingControlPoint.x + " " + endingControlPoint.y + "\n    " + endingAxis.x + " " + endingAxis.y + "\n  ";
+    return "\n    M" + initialAxis.x + " " + initialAxis.y + "\n    c " + initialControlPoint.x + " " + initialControlPoint.y + "\n    " + endingControlPoint.x + " " + endingControlPoint.y + "\n    " + endingAxis.x + " " + endingAxis.y + "\n  ";
 };
 
 // returns 2 for successful collision
 // returns 1 for bad collision (dead)
 // returns 0 for no collision
 var collide = exports.collide = function collide(self, opp) {
-  var rectB = {
-    x1: self.x - self.r,
-    y1: self.y - self.r,
-    x2: self.x + self.r,
-    y2: self.y + self.r
-
-  };
-  var currentLifeTime = new Date().getTime() - opp.createdAt;
-  var calculatedPosition = {
-    x: opp.position.x,
-    y: opp.position.y + currentLifeTime / 8000 * _constants.gameHeight
-  };
-  var calculatedColor = opp.color;
-  var rectA = {
-    x1: calculatedPosition.x - 10,
-    y1: calculatedPosition.y - 10,
-    x2: calculatedPosition.x + 10,
-    y2: calculatedPosition.y + 10,
-    rectclr: calculatedColor
-  };
-
-  if (rectA.x1 < rectB.x2 && rectA.x2 > rectB.x1 && rectA.y1 < rectB.y2 && rectA.y2 > rectB.y1) {
-    if (rectA.rectclr === "blue" || rectA.rectclr === "red") {
-      return 2;
-    } else {
-      return 1;
+    var rectB = {
+        x: self.x,
+        y: self.y,
+        r: self.r
+    };
+    var currentLifeTime = new Date().getTime() - opp.createdAt;
+    var calculatedPosition = {
+        x: opp.position.x,
+        y: opp.position.y + currentLifeTime / 8000 * _constants.gameHeight
+    };
+    var calculatedColor = opp.color;
+    var rectA = {
+        x: calculatedPosition.x,
+        y: calculatedPosition.y,
+        r: 10,
+        rectclr: calculatedColor
+    };
+    var dist = Math.sqrt((rectB.x - rectA.x) * (rectB.x - rectA.x) + (rectB.y - rectA.y) * (rectB.y - rectA.y));
+    if (dist <= rectB.r + rectA.r / 2) {
+        if (rectA.rectclr === "blue" || rectA.rectclr === "red") {
+            return 2;
+        } else {
+            return 1;
+        }
     }
-  }
-  return 0;
+    return 0;
 };
 
 var getCanvasPosition = exports.getCanvasPosition = function getCanvasPosition(event) {
 
-  var svg = document.getElementById('RockPaperScramble');
-  var point = svg.createSVGPoint();
+    var svg = document.getElementById('RockPaperScramble');
+    var point = svg.createSVGPoint();
 
-  point.x = event.clientX;
-  point.y = event.clientY;
+    point.x = event.clientX;
+    point.y = event.clientY;
 
-  var _point$matrixTransfor = point.matrixTransform(svg.getScreenCTM().inverse()),
-      x = _point$matrixTransfor.x,
-      y = _point$matrixTransfor.y;
+    var _point$matrixTransfor = point.matrixTransform(svg.getScreenCTM().inverse()),
+        x = _point$matrixTransfor.x,
+        y = _point$matrixTransfor.y;
 
-  return { x: x, y: y };
+    return { x: x, y: y };
 };
 
 /***/ }),

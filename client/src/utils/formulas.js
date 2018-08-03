@@ -17,11 +17,9 @@ export const pathFromBezierCurve = (cubicBezierCurve) => {
 // returns 0 for no collision
 export const collide = (self, opp) => {
     const rectB = {
-        x1: self.x - self.r,
-        y1: self.y - self.r,
-        x2: self.x + self.r,
-        y2: self.y + self.r,
-
+        x: self.x,
+        y: self.y,
+        r: self.r,
     };
     const currentLifeTime = (new Date()).getTime() - opp.createdAt;
     const calculatedPosition = {
@@ -30,20 +28,19 @@ export const collide = (self, opp) => {
     };
     const calculatedColor = opp.color;
     const rectA = {
-        x1: calculatedPosition.x - 10,
-        y1: calculatedPosition.y - 10,
-        x2: calculatedPosition.x + 10,
-        y2: calculatedPosition.y + 10,
+        x: calculatedPosition.x,
+        y: calculatedPosition.y,
+        r: 10,
         rectclr:calculatedColor,
     };
-
-    if(rectA.x1 < rectB.x2 && rectA.x2 > rectB.x1 && rectA.y1 < rectB.y2 && rectA.y2 > rectB.y1){
-      if(rectA.rectclr === "blue" || rectA.rectclr === "red"){
-          return 2;
-      }
-      else {
-        return 1;
-      }
+    const dist = Math.sqrt((rectB.x - rectA.x)*(rectB.x - rectA.x) +(rectB.y - rectA.y)*(rectB.y - rectA.y));
+    if(dist <= (rectB.r + (rectA.r / 2))){
+        if(rectA.rectclr === "blue" || rectA.rectclr === "red"){
+            return 2;
+        }
+        else {
+            return 1;
+        }
     }
     return 0;
 
