@@ -35,7 +35,7 @@ export const collide = (self, opp) => {
     };
     const dist = Math.sqrt((rectB.x - rectA.x)*(rectB.x - rectA.x) +(rectB.y - rectA.y)*(rectB.y - rectA.y));
     if(dist <= (rectB.r + (rectA.r / 2))){
-        if(rectA.rectclr === "blue" || rectA.rectclr === "red"){
+        if(rectA.rectclr === "yellow" || rectA.rectclr === "green"){
             return 2;
         }
         else {

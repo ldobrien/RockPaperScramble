@@ -4995,7 +4995,7 @@ var gameHeight = exports.gameHeight = 1200;
 
 var flyingObjectsStarterYAxis = exports.flyingObjectsStarterYAxis = -600;
 
-var flyingObjectsColors = exports.flyingObjectsColors = ["red", "green", "blue"];
+var flyingObjectsColors = exports.flyingObjectsColors = ["red", "green", "yellow"];
 
 var flyingObjectsStarterPositions = exports.flyingObjectsStarterPositions = [-500, 500, 300, 130, -40, 1000, 2200, -800, -1300, 1234, -1601, -190, -622, -2087, -266, -958, 1155, -1573, -1777, -1896, -1535, -580, 1231, 527, 1484, 1367, -685, -454, -1071, -1171, 641, 1076, 938, -1772, -1120, -54, -1184, 67, -1909, 976, -376, 594, 2318, -279, 957, -1075, 2087, 2371, -261, 796, -1746, -1377, -1039, -1585, -1490, -1627, 743, -787, 686, -1272, -3000];
 
@@ -5045,7 +5045,7 @@ var collide = exports.collide = function collide(self, opp) {
     };
     var dist = Math.sqrt((rectB.x - rectA.x) * (rectB.x - rectA.x) + (rectB.y - rectA.y) * (rectB.y - rectA.y));
     if (dist <= rectB.r + rectA.r / 2) {
-        if (rectA.rectclr === "blue" || rectA.rectclr === "red") {
+        if (rectA.rectclr === "yellow" || rectA.rectclr === "green") {
             return 2;
         } else {
             return 1;
@@ -18600,6 +18600,10 @@ var _Dashboard = __webpack_require__(134);
 
 var _Dashboard2 = _interopRequireDefault(_Dashboard);
 
+var _Labels = __webpack_require__(535);
+
+var _Labels2 = _interopRequireDefault(_Labels);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var Canvas = function Canvas(props) {
@@ -18667,6 +18671,11 @@ var Canvas = function Canvas(props) {
                 ),
                 _react2.default.createElement(_Arena2.default, { position: { x: props.x, y: props.y } }),
                 _react2.default.createElement(_Circle2.default, { position: { x: props.x, y: props.y }, radius: { r: props.r } }),
+                _react2.default.createElement(
+                    'text',
+                    { textAnchor: 'middle', x: props.x, y: props.y },
+                    'PAPER'
+                ),
                 _react2.default.createElement(_CurrentScore2.default, { score: props.score }),
                 !props.gameState.started && _react2.default.createElement(
                     'g',
@@ -18739,7 +18748,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 var Circle = function Circle(props) {
   var circleStyle = {
-    fill: 'red'
+    fill: 'yellow'
 
   };
   return _react2.default.createElement('circle', {
@@ -19157,23 +19166,70 @@ var Opponents = function Opponents(props) {
   );
 };
 
+var FlyingObjectBase = function FlyingObjectBase(props) {
+  if (props.color === "green") {
+    return _react2.default.createElement(
+      'g',
+      null,
+      _react2.default.createElement('ellipse', {
+        cx: props.position.x,
+        cy: props.position.y,
+        rx: '10',
+        ry: '10',
+        fill: props.color,
+        stroke: 'black'
+      }),
+      _react2.default.createElement(
+        'text',
+        { textAnchor: 'middle', x: props.position.x, y: props.position.y },
+        'ROCK'
+      )
+    );
+  }
+  if (props.color === "yellow") {
+    return _react2.default.createElement(
+      'g',
+      null,
+      _react2.default.createElement('ellipse', {
+        cx: props.position.x,
+        cy: props.position.y,
+        rx: '10',
+        ry: '10',
+        fill: props.color,
+        stroke: 'black'
+      }),
+      _react2.default.createElement(
+        'text',
+        { textAnchor: 'middle', x: props.position.x, y: props.position.y },
+        'PAPER'
+      )
+    );
+  }
+  return _react2.default.createElement(
+    'g',
+    null,
+    _react2.default.createElement('ellipse', {
+      cx: props.position.x,
+      cy: props.position.y,
+      rx: '10',
+      ry: '10',
+      fill: props.color,
+      stroke: 'black'
+    }),
+    _react2.default.createElement(
+      'text',
+      { textAnchor: 'middle', x: props.position.x, y: props.position.y },
+      'SCRAMBLE'
+    )
+  );
+};
+
 Opponents.propTypes = {
   position: _propTypes2.default.shape({
     x: _propTypes2.default.number.isRequired,
     y: _propTypes2.default.number.isRequired
   }).isRequired,
   color: _propTypes2.default.string.isRequired
-};
-
-var FlyingObjectBase = function FlyingObjectBase(props) {
-  return _react2.default.createElement('ellipse', {
-    cx: props.position.x,
-    cy: props.position.y,
-    rx: '10',
-    ry: '10',
-    fill: props.color,
-    stroke: 'black'
-  });
 };
 
 FlyingObjectBase.propTypes = {
@@ -51842,6 +51898,72 @@ _reactDom2.default.render(_react2.default.createElement(
   { muiTheme: (0, _getMuiTheme2.default)() },
   _react2.default.createElement(_reactRouter.Router, { history: _reactRouter.browserHistory, routes: _routes2.default })
 ), document.getElementById('react-app'));
+
+/***/ }),
+/* 535 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
+var _templateObject = _taggedTemplateLiteral(['\n  0% {\n    transform: translateY(0);\n  }\n  100% {\n    transform: translateY(', 'px);\n  }\n'], ['\n  0% {\n    transform: translateY(0);\n  }\n  100% {\n    transform: translateY(', 'px);\n  }\n']),
+    _templateObject2 = _taggedTemplateLiteral(['\n  animation: ', ' 8s linear;\n'], ['\n  animation: ', ' 8s linear;\n']);
+
+var _react = __webpack_require__(1);
+
+var _react2 = _interopRequireDefault(_react);
+
+var _propTypes = __webpack_require__(12);
+
+var _propTypes2 = _interopRequireDefault(_propTypes);
+
+var _styledComponents = __webpack_require__(525);
+
+var _styledComponents2 = _interopRequireDefault(_styledComponents);
+
+var _constants = __webpack_require__(65);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _taggedTemplateLiteral(strings, raw) { return Object.freeze(Object.defineProperties(strings, { raw: { value: Object.freeze(raw) } })); }
+
+var moveVertically = (0, _styledComponents.keyframes)(_templateObject, _constants.gameHeight);
+
+var Move = _styledComponents2.default.g(_templateObject2, moveVertically);
+
+var Labels = function Labels(props) {
+    return _react2.default.createElement(
+        Move,
+        null,
+        _react2.default.createElement(
+            'pos',
+            { x: props.position.x, y: props.position.y, color: props.color },
+            'COL'
+        )
+    );
+};
+
+var pos = function pos(props) {
+    return _react2.default.createElement('text', {
+        x: props.x,
+        y: props.y,
+        textRendering: abcsde
+    });
+};
+
+Labels.propTypes = {
+    position: _propTypes2.default.shape({
+        x: _propTypes2.default.number.isRequired,
+        y: _propTypes2.default.number.isRequired
+    }).isRequired
+    // color: PropTypes.string.isRequired,
+};
+
+exports.default = Labels;
 
 /***/ })
 /******/ ]);

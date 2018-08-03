@@ -10,6 +10,7 @@ import Leaderboard from './LeaderBoard.jsx';
 import Auth from "../modules/Auth";
 import LoginPage from "../containers/LoginPage.jsx";
 import Dashboard from './Dashboard.jsx';
+import Labels from './Labels.jsx';
 
 const Canvas = (props) => {
   const viewBox = [window.innerWidth / -2, window.innerHeight / -2, window.innerWidth, window.innerHeight];
@@ -73,6 +74,7 @@ const Canvas = (props) => {
                 </defs>
                 <Arena position={{x: props.x, y: props.y}}/>
                 <Circle position={{x: props.x, y: props.y}} radius={{r: props.r}}/>
+                <text textAnchor="middle" x={props.x} y={props.y}>PAPER</text>
                 <CurrentScore score={props.score}/>
                 {!props.gameState.started &&
                 <g>
