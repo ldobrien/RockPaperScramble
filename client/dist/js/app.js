@@ -19181,8 +19181,8 @@ var FlyingObjectBase = function FlyingObjectBase(props) {
       }),
       _react2.default.createElement(
         'text',
-        { textAnchor: 'middle', x: props.position.x, y: props.position.y },
-        'ROCK'
+        { textAnchor: 'middle', dy: '.4em', x: props.position.x, y: props.position.y },
+        'R'
       )
     );
   }
@@ -19200,8 +19200,8 @@ var FlyingObjectBase = function FlyingObjectBase(props) {
       }),
       _react2.default.createElement(
         'text',
-        { textAnchor: 'middle', x: props.position.x, y: props.position.y },
-        'PAPER'
+        { textAnchor: 'middle', dy: '.4em', x: props.position.x, y: props.position.y },
+        'P'
       )
     );
   }
@@ -19218,8 +19218,8 @@ var FlyingObjectBase = function FlyingObjectBase(props) {
     }),
     _react2.default.createElement(
       'text',
-      { textAnchor: 'middle', x: props.position.x, y: props.position.y },
-      'SCRAMBLE'
+      { textAnchor: 'middle', dy: '.4em', x: props.position.x, y: props.position.y },
+      'S'
     )
   );
 };

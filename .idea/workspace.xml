@@ -2,13 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="28777ba2-0a30-4e19-b2e5-ab66ad0010d4" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/dist/js/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/dist/js/app.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/Components/Canvas.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/Components/Canvas.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/Components/Circle.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/Components/Circle.jsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/client/src/Components/Opponents.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/Components/Opponents.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/utils/constants.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/utils/constants.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/utils/formulas.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/utils/formulas.js" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/client/dist/js/" />
     <ignored path="$PROJECT_DIR$/.tmp/" />
@@ -77,7 +71,7 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Canvas.jsx" pinned="false" current-in-tab="true">
+      <file leaf-file-name="Canvas.jsx" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/client/src/Components/Canvas.jsx">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="289">
@@ -89,11 +83,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Opponents.jsx" pinned="false" current-in-tab="false">
+      <file leaf-file-name="Opponents.jsx" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/client/src/Components/Opponents.jsx">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="646">
-              <caret line="65" column="84" selection-start-line="65" selection-start-column="84" selection-end-line="65" selection-end-column="84" />
+              <caret line="65" column="44" selection-start-line="65" selection-start-column="44" selection-end-line="65" selection-end-column="44" />
               <folding>
                 <element signature="e#0#26#0" expanded="true" />
               </folding>
@@ -159,9 +153,9 @@
         <option value="$PROJECT_DIR$/client/src/utils/constants.js" />
         <option value="$PROJECT_DIR$/client/src/utils/formulas.js" />
         <option value="$PROJECT_DIR$/client/src/Components/Labels.jsx" />
-        <option value="$PROJECT_DIR$/client/src/Components/Opponents.jsx" />
         <option value="$PROJECT_DIR$/client/src/Components/Circle.jsx" />
         <option value="$PROJECT_DIR$/client/src/Components/Canvas.jsx" />
+        <option value="$PROJECT_DIR$/client/src/Components/Opponents.jsx" />
       </list>
     </option>
   </component>
@@ -314,12 +308,12 @@
       <workItem from="1532565371607" duration="5089000" />
       <workItem from="1533078938997" duration="10729000" />
       <workItem from="1533172203613" duration="9016000" />
-      <workItem from="1533249225460" duration="10455000" />
+      <workItem from="1533249225460" duration="10700000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="42241000" />
+    <option name="totallyTimeSpent" value="42486000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1440" height="900" extended-state="0" />
@@ -726,16 +720,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/client/src/Components/Opponents.jsx">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="646">
-          <caret line="65" column="84" selection-start-line="65" selection-start-column="84" selection-end-line="65" selection-end-column="84" />
-          <folding>
-            <element signature="e#0#26#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/client/src/Components/Circle.jsx">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="75">
@@ -750,6 +734,16 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="289">
           <caret line="76" column="71" selection-start-line="76" selection-start-column="71" selection-end-line="76" selection-end-column="71" />
+          <folding>
+            <element signature="e#0#26#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/client/src/Components/Opponents.jsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="646">
+          <caret line="65" column="44" selection-start-line="65" selection-start-column="44" selection-end-line="65" selection-end-column="44" />
           <folding>
             <element signature="e#0#26#0" expanded="true" />
           </folding>

@@ -34,7 +34,7 @@ const FlyingObjectBase = (props) => {
                   fill ={props.color}
                   stroke = 'black'
               />
-              <text textAnchor="middle" x={props.position.x} y={props.position.y}>ROCK</text>
+              <text textAnchor="middle" dy=".4em" x={props.position.x} y={props.position.y}>R</text>
           </g>
       );
   }
@@ -49,7 +49,7 @@ const FlyingObjectBase = (props) => {
                     fill ={props.color}
                     stroke = 'black'
                 />
-                <text textAnchor="middle" x={props.position.x} y={props.position.y}>PAPER</text>
+                <text textAnchor="middle" dy=".4em" x={props.position.x} y={props.position.y}>P</text>
             </g>
         );
     }
@@ -63,7 +63,7 @@ const FlyingObjectBase = (props) => {
       fill ={props.color}
       stroke = 'black'
     />
-        <text textAnchor="middle" x={props.position.x} y={props.position.y}>SCRAMBLE</text>
+        <text textAnchor="middle" dy=".4em" x={props.position.x} y={props.position.y}>S</text>
       </g>
   );
 };
