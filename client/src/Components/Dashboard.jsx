@@ -1,10 +1,7 @@
-import React, { PropTypes } from 'react';
-import { Card, CardTitle, CardText } from 'material-ui/Card';
-import App from '../App.js';
-import CurrentScore from './CurrentScore.jsx';
+import React from 'react';
+import { Card, CardTitle } from 'material-ui/Card';
 
-
-const Dashboard = (props) => (
+const Dashboard = () => (
 
     <div>
   <Card className="container">

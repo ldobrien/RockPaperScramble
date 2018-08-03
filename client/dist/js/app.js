@@ -10358,17 +10358,9 @@ var _react2 = _interopRequireDefault(_react);
 
 var _Card = __webpack_require__(75);
 
-var _App = __webpack_require__(219);
-
-var _App2 = _interopRequireDefault(_App);
-
-var _CurrentScore = __webpack_require__(223);
-
-var _CurrentScore2 = _interopRequireDefault(_CurrentScore);
-
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var Dashboard = function Dashboard(props) {
+var Dashboard = function Dashboard() {
   return _react2.default.createElement(
     'div',
     null,
@@ -18842,7 +18834,7 @@ var HomePage = function HomePage() {
     _react2.default.createElement(
       'text',
       null,
-      'Follows the rules of Rock Paper Scissors - You start as paper, so paper and rocks are safe to eat - don\'t get destoryed by the scissors though!'
+      'Click on the \u201CTap to Start\u201D text to begin the game. Your yellow player circle will follow your mouse cursor. Move your cursor around to move your circle to places you\u2019d like to go. Collide with yellow (Paper) and green (Rock) circles to improve your score. Stay away from the red circles (Scissors), the game will end when you collide with one. Once the game is over, click on the \u201CTap to Start\u201D text to play again.'
     )
   );
 };
