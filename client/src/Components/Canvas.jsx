@@ -21,8 +21,6 @@ const Canvas = (props) => {
     if (lives === 0){
         const str = localStorage.getItem('email');
         const strNew = str.replace("%40","@");
-        // console.log(Auth.getEmail());
-
       fetch('/api/users/topscores/' + strNew, {
         method: 'GET',
         headers: { 'Authorization': `bearer ${Auth.getToken()}`,
@@ -44,17 +42,11 @@ const Canvas = (props) => {
         .then(res => res.json());
         }
         });
-
-        console.log("local score: " + localStorage.getItem('score'));
-
-
-            // window.location.reload(true);
-
         setTimeout(function(){
             window.location.reload(true);
         }, 10000);
         return(
-            <Dashboard score={props.score}/>
+            <Dashboard score={localStorage.getItem('score')}/>
         );
 
     }
@@ -96,7 +88,7 @@ const Canvas = (props) => {
     }
     else {
         props.gameState.started = false;
-        return(<Dashboard score={props.score}/>);
+        return(<Dashboard score={localStorage.getItem('score')}/>);
     }
 
 };

@@ -18607,8 +18607,6 @@ var Canvas = function Canvas(props) {
     if (lives === 0) {
         var str = localStorage.getItem('email');
         var strNew = str.replace("%40", "@");
-        // console.log(Auth.getEmail());
-
         fetch('/api/users/topscores/' + strNew, {
             method: 'GET',
             headers: { 'Authorization': 'bearer ' + _Auth2.default.getToken(),
@@ -18631,15 +18629,10 @@ var Canvas = function Canvas(props) {
                 });
             }
         });
-
-        console.log("local score: " + localStorage.getItem('score'));
-
-        // window.location.reload(true);
-
         setTimeout(function () {
             window.location.reload(true);
         }, 10000);
-        return _react2.default.createElement(_Dashboard2.default, { score: props.score });
+        return _react2.default.createElement(_Dashboard2.default, { score: localStorage.getItem('score') });
     } else if (lives > 0) {
 
         return _react2.default.createElement(
@@ -18689,7 +18682,7 @@ var Canvas = function Canvas(props) {
         );
     } else {
         props.gameState.started = false;
-        return _react2.default.createElement(_Dashboard2.default, { score: props.score });
+        return _react2.default.createElement(_Dashboard2.default, { score: localStorage.getItem('score') });
     }
 };
 
