@@ -19980,7 +19980,9 @@ var checkCollisions = function checkCollisions(self, opps) {
         oppId: opp.id
       });
       self.r += 1;
-      self.score += 1;
+      if (self.gameState.lives > 0) {
+        self.score += 1;
+      }
     }
   });
   return objectsDestroyed;
